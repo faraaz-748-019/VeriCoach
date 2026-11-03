@@ -1,0 +1,28 @@
+# Root ruff + black configuration (shared by app/ and qa/)
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "RUF", # ruff-specific
+]
+ignore = [
+    "E501",  # line too long - handled by black
+    "B008",  # function calls in default args (FastAPI pattern)
+    "UP042", # StrEnum backcompat - keep str+Enum for pydantic-settings
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app", "qa"]
+
+[tool.black]
+target-version = ["py311"]
+line-length = 88
