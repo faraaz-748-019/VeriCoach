@@ -28,3 +28,4 @@ packages = ["tests"]
 testpaths = ["tests"]
 asyncio_mode = "auto"
 addopts = "-v --tb=short"
+

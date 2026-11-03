@@ -96,15 +96,21 @@ class FinanceAssistant:
 
     # ── Query ────────────────────────────────────────────────────────────
 
-    def ask(self, question: str, top_k: int | None = None) -> LLMResponse:
+    def ask(
+        self,
+        question: str,
+        locale: Locale | None = None,
+        top_k: int | None = None,
+    ) -> LLMResponse:
         """
         Answer *question* using RAG over indexed documents.
 
         If no documents are indexed, returns a polite no-context message.
         """
+        target_locale = locale or self.locale
         if len(self._retriever) == 0:
             return LLMResponse(
-                text=t("no_context", self.locale),
+                text=t("no_context", target_locale),
                 provider=self._provider.provider_name,
                 model="n/a",
             )
@@ -114,7 +120,7 @@ class FinanceAssistant:
 
         from app.i18n.translator import LOCALE_NAMES
 
-        locale_name = LOCALE_NAMES.get(self.locale, "English")
+        locale_name = LOCALE_NAMES.get(target_locale, "English")
 
         prompt = _PROMPT_TEMPLATE.format(
             locale_name=locale_name,

@@ -10,3 +10,4 @@ def test_qa_package_importable() -> None:
 def test_placeholder_always_passes() -> None:
     """Placeholder until real QA tests are added."""
     assert 1 + 1 == 2
+

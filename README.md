@@ -47,3 +47,4 @@ black --check app/ tests/
 ## Docs
 
 - [Known failures](docs/KNOWN_FAILURES.md)
+
