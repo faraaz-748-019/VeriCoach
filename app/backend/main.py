@@ -510,3 +510,16 @@ def legacy_index_document(
 def legacy_clear_documents(store: ChromaRAGStore = Depends(get_rag_store)):
     store.clear()
     return {"status": "cleared"}
+
+
+# Mount static frontend build if present
+import pathlib
+
+frontend_dist = pathlib.Path(__file__).resolve().parent.parent / "frontend" / "dist"
+if frontend_dist.is_dir():
+    from fastapi.staticfiles import StaticFiles
+
+    app.mount(
+        "/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend"
+    )
+
