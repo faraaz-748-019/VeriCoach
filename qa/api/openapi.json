@@ -1,0 +1,1023 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "VeriCoach API",
+    "description": "Multilingual (English, Hindi, Telugu) Personal-Finance Assistant Backend powered by RAG, Chroma vector database, and baseline safety guardrails.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/health": {
+      "get": {
+        "tags": [
+          "Feedback & Observability"
+        ],
+        "summary": "System Health & Configuration",
+        "description": "Returns system status, active LLM provider, and total documents indexed.",
+        "operationId": "get_health_v1_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponseV1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chat": {
+      "post": {
+        "tags": [
+          "Assistant"
+        ],
+        "summary": "Ask a financial question",
+        "description": "Multilingual financial query endpoint.\n- Validates question length (1-1000 chars)\n- Enforces baseline guardrails (refuses personalised advice and guaranteed returns)\n- Masks PII before sending text to LLM\n- Retrieves top-k documents from Chroma vector store\n- Constructs system prompt treating context as untrusted data",
+        "operationId": "chat_v1_v1_chat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequestV1"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponseV1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/documents": {
+      "get": {
+        "tags": [
+          "Knowledge Base"
+        ],
+        "summary": "List all indexed educational documents",
+        "description": "Returns all 30 financial educational documents in the knowledge base.",
+        "operationId": "list_documents_v1_v1_documents_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentListResponseV1"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/documents/{id}": {
+      "get": {
+        "tags": [
+          "Knowledge Base"
+        ],
+        "summary": "Get a document by ID",
+        "description": "Fetch a single document by doc_id.",
+        "operationId": "get_document_v1_v1_documents__id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Document unique identifier",
+              "examples": [
+                "upi_pin_rules"
+              ],
+              "title": "Id"
+            },
+            "description": "Document unique identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentItemV1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/feedback": {
+      "post": {
+        "tags": [
+          "Feedback & Observability"
+        ],
+        "summary": "Submit user feedback on assistant answer",
+        "description": "Submit quality or satisfaction rating (1-5) for a given trace_id.",
+        "operationId": "submit_feedback_v1_v1_feedback_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackRequestV1"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedbackResponseV1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/v1/metrics": {
+      "get": {
+        "tags": [
+          "Feedback & Observability"
+        ],
+        "summary": "Operational and RAG metrics",
+        "description": "Retrieve operational latency, refusal rates, and user satisfaction metrics.",
+        "operationId": "get_metrics_v1_v1_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricsResponseV1"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Compatibility"
+        ],
+        "summary": "Legacy Health",
+        "operationId": "legacy_health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chat": {
+      "post": {
+        "tags": [
+          "Compatibility"
+        ],
+        "summary": "Legacy Chat",
+        "operationId": "legacy_chat_api_v1_chat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/synthetic-user": {
+      "get": {
+        "tags": [
+          "Compatibility"
+        ],
+        "summary": "Legacy Synthetic User",
+        "operationId": "legacy_synthetic_user_api_v1_synthetic_user_get",
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "en",
+              "title": "Locale"
+            }
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Seed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bootstrap-synthetic": {
+      "post": {
+        "tags": [
+          "Compatibility"
+        ],
+        "summary": "Legacy Bootstrap Synthetic",
+        "operationId": "legacy_bootstrap_synthetic_api_v1_bootstrap_synthetic_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents": {
+      "post": {
+        "tags": [
+          "Compatibility"
+        ],
+        "summary": "Legacy Index Document",
+        "operationId": "legacy_index_document_api_v1_documents_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Compatibility"
+        ],
+        "summary": "Legacy Clear Documents",
+        "operationId": "legacy_clear_documents_api_v1_documents_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChatRequestV1": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Question",
+            "description": "User financial query in English, Hindi, or Telugu (1-1000 characters)",
+            "examples": [
+              "Do I need to enter my UPI PIN to receive money?"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "hi",
+              "te",
+              "auto"
+            ],
+            "title": "Language",
+            "description": "Target language code: 'en' (English), 'hi' (Hindi), 'te' (Telugu), or 'auto'",
+            "default": "auto",
+            "examples": [
+              "en"
+            ]
+          },
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id",
+            "description": "Optional session tracking ID for multi-turn dialogue",
+            "examples": [
+              "sess_abc123"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "ChatRequestV1",
+        "example": {
+          "language": "en",
+          "question": "Do I need to enter my UPI PIN to receive money?",
+          "session_id": "sess_user_456"
+        }
+      },
+      "ChatResponseV1": {
+        "properties": {
+          "answer": {
+            "type": "string",
+            "title": "Answer",
+            "description": "Educational answer grounded in retrieved verified financial documents",
+            "examples": [
+              "No, you never need to enter your UPI PIN to receive money. UPI PIN is only needed for sending payments."
+            ]
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "description": "Detected or target language code",
+            "examples": [
+              "en"
+            ]
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceCitation"
+            },
+            "type": "array",
+            "title": "Sources",
+            "description": "Ranked list of top retrieved document citations (up to top-k=4)"
+          },
+          "refused": {
+            "type": "boolean",
+            "title": "Refused",
+            "description": "Whether the query was refused due to safety or guardrail rules",
+            "examples": [
+              false
+            ]
+          },
+          "refusal_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Refusal Reason",
+            "description": "Specific reason code if query was refused (e.g. guaranteed_returns_prohibited)",
+            "examples": [
+              null
+            ]
+          },
+          "trace_id": {
+            "type": "string",
+            "title": "Trace Id",
+            "description": "Unique request tracing ID for logging, auditing, and feedback",
+            "examples": [
+              "b74d6fb2-3784-4861-b4cf-e94025a17684"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "answer",
+          "language",
+          "refused",
+          "trace_id"
+        ],
+        "title": "ChatResponseV1",
+        "example": {
+          "answer": "No, you never need to enter your UPI PIN to receive money. A UPI PIN is only required when authorizing a debit from your account.",
+          "language": "en",
+          "refused": false,
+          "sources": [
+            {
+              "doc_id": "upi_pin_rules",
+              "score": 0.94,
+              "snippet": "A UPI PIN is required ONLY when sending money or checking your balance. You NEVER need PIN to receive money.",
+              "title": "UPI PIN Usage Rules and Receiving Money"
+            }
+          ],
+          "trace_id": "b74d6fb2-3784-4861-b4cf-e94025a17684"
+        }
+      },
+      "DocumentItemV1": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Document identifier",
+            "examples": [
+              "upi_pin_rules"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "Document title",
+            "examples": [
+              "UPI PIN Usage Rules and Receiving Money"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "Financial category",
+            "examples": [
+              "UPI Safety"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "Document full text content",
+            "examples": [
+              "A UPI PIN is required ONLY when sending money..."
+            ]
+          },
+          "keywords": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Keywords",
+            "description": "Associated cross-lingual search keywords",
+            "examples": [
+              [
+                "upi",
+                "pin",
+                "qr code",
+                "यूपीआई",
+                "పిన్"
+              ]
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "category",
+          "content"
+        ],
+        "title": "DocumentItemV1",
+        "example": {
+          "category": "UPI Safety",
+          "content": "A UPI PIN is required ONLY when sending money or checking your account balance...",
+          "id": "upi_pin_rules",
+          "keywords": [
+            "upi",
+            "pin",
+            "qr code",
+            "यूपीआई",
+            "పిన్"
+          ],
+          "title": "UPI PIN Usage Rules and Receiving Money"
+        }
+      },
+      "DocumentListResponseV1": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "Total number of documents",
+            "examples": [
+              30
+            ]
+          },
+          "documents": {
+            "items": {
+              "$ref": "#/components/schemas/DocumentItemV1"
+            },
+            "type": "array",
+            "title": "Documents",
+            "description": "List of indexed documents"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "documents"
+        ],
+        "title": "DocumentListResponseV1",
+        "example": {
+          "documents": [
+            {
+              "category": "UPI Safety",
+              "content": "A UPI PIN is required ONLY when sending money...",
+              "id": "upi_pin_rules",
+              "keywords": [
+                "upi",
+                "pin"
+              ],
+              "title": "UPI PIN Usage Rules and Receiving Money"
+            }
+          ],
+          "total": 30
+        }
+      },
+      "FeedbackRequestV1": {
+        "properties": {
+          "trace_id": {
+            "type": "string",
+            "title": "Trace Id",
+            "description": "Trace ID of the chat turn",
+            "examples": [
+              "b74d6fb2-3784-4861-b4cf-e94025a17684"
+            ]
+          },
+          "rating": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Rating",
+            "description": "Satisfaction rating from 1 (poor) to 5 (excellent)",
+            "examples": [
+              5
+            ]
+          },
+          "comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Comment",
+            "description": "Optional user commentary",
+            "examples": [
+              "Very clear answer on UPI safety!"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "trace_id",
+          "rating"
+        ],
+        "title": "FeedbackRequestV1",
+        "example": {
+          "comment": "Very clear answer on UPI safety!",
+          "rating": 5,
+          "trace_id": "b74d6fb2-3784-4861-b4cf-e94025a17684"
+        }
+      },
+      "FeedbackResponseV1": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "examples": [
+              "feedback_recorded"
+            ]
+          },
+          "trace_id": {
+            "type": "string",
+            "title": "Trace Id",
+            "examples": [
+              "b74d6fb2-3784-4861-b4cf-e94025a17684"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "trace_id"
+        ],
+        "title": "FeedbackResponseV1",
+        "example": {
+          "status": "feedback_recorded",
+          "trace_id": "b74d6fb2-3784-4861-b4cf-e94025a17684"
+        }
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponseV1": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "Service status",
+            "examples": [
+              "healthy"
+            ]
+          },
+          "version": {
+            "type": "string",
+            "title": "Version",
+            "description": "API version",
+            "examples": [
+              "1.0.0"
+            ]
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider",
+            "description": "Active LLM provider (mock, gemini, ollama)",
+            "examples": [
+              "mock"
+            ]
+          },
+          "documents_indexed": {
+            "type": "integer",
+            "title": "Documents Indexed",
+            "description": "Total financial documents currently indexed in Chroma",
+            "examples": [
+              30
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "version",
+          "provider",
+          "documents_indexed"
+        ],
+        "title": "HealthResponseV1",
+        "example": {
+          "documents_indexed": 30,
+          "provider": "mock",
+          "status": "healthy",
+          "version": "1.0.0"
+        }
+      },
+      "MetricsResponseV1": {
+        "properties": {
+          "total_chat_requests": {
+            "type": "integer",
+            "title": "Total Chat Requests",
+            "description": "Total processed chat requests",
+            "examples": [
+              124
+            ]
+          },
+          "total_refusals": {
+            "type": "integer",
+            "title": "Total Refusals",
+            "description": "Total safety guardrail refusals",
+            "examples": [
+              6
+            ]
+          },
+          "refusal_rate": {
+            "type": "number",
+            "title": "Refusal Rate",
+            "description": "Ratio of refused requests to total",
+            "examples": [
+              0.0484
+            ]
+          },
+          "avg_latency_ms": {
+            "type": "number",
+            "title": "Avg Latency Ms",
+            "description": "Average processing latency in milliseconds",
+            "examples": [
+              42.5
+            ]
+          },
+          "feedback_count": {
+            "type": "integer",
+            "title": "Feedback Count",
+            "description": "Total feedback items received",
+            "examples": [
+              18
+            ]
+          },
+          "average_feedback_rating": {
+            "type": "number",
+            "title": "Average Feedback Rating",
+            "description": "Average satisfaction rating (1-5)",
+            "examples": [
+              4.7
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "total_chat_requests",
+          "total_refusals",
+          "refusal_rate",
+          "avg_latency_ms",
+          "feedback_count",
+          "average_feedback_rating"
+        ],
+        "title": "MetricsResponseV1",
+        "example": {
+          "average_feedback_rating": 4.7,
+          "avg_latency_ms": 42.5,
+          "feedback_count": 18,
+          "refusal_rate": 0.0484,
+          "total_chat_requests": 124,
+          "total_refusals": 6
+        }
+      },
+      "SourceCitation": {
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "title": "Doc Id",
+            "description": "Unique ID of the retrieved document",
+            "examples": [
+              "upi_pin_rules"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "Document title",
+            "examples": [
+              "UPI PIN Usage Rules and Receiving Money"
+            ]
+          },
+          "snippet": {
+            "type": "string",
+            "title": "Snippet",
+            "description": "Text snippet from the matched chunk",
+            "examples": [
+              "A UPI PIN is required ONLY when sending money... You NEVER need to enter PIN to receive money."
+            ]
+          },
+          "score": {
+            "type": "number",
+            "title": "Score",
+            "description": "Relevance similarity score (0.0 to 1.0)",
+            "examples": [
+              0.92
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "doc_id",
+          "title",
+          "snippet",
+          "score"
+        ],
+        "title": "SourceCitation",
+        "example": {
+          "doc_id": "upi_pin_rules",
+          "score": 0.92,
+          "snippet": "A UPI PIN is required ONLY when sending money... You NEVER need to enter PIN to receive money.",
+          "title": "UPI PIN Usage Rules and Receiving Money"
+        }
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Assistant",
+      "description": "Conversational RAG endpoints"
+    },
+    {
+      "name": "Knowledge Base",
+      "description": "Educational document corpus management"
+    },
+    {
+      "name": "Feedback & Observability",
+      "description": "Metrics, feedback, and system health"
+    }
+  ]
+}

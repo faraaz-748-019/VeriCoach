@@ -32,6 +32,7 @@ triage.json
 qa/allure-results/
 qa/allure-report/
 qa/triage.json
+qa/newman-reports/
 .playwright-browsers/
 
 # Ruff / Black
