@@ -33,7 +33,9 @@ qa/allure-results/
 qa/allure-report/
 qa/triage.json
 qa/newman-reports/
+qa/traces/
 .playwright-browsers/
+qa/.web_server.lock
 
 # Ruff / Black
 .ruff_cache/
