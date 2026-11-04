@@ -1,0 +1,66 @@
+{
+  "overall": {
+    "total_samples": 30,
+    "matches": 29,
+    "accuracy": 0.9667,
+    "cohen_kappa": 0.8446,
+    "interpretation": "Almost perfect agreement"
+  },
+  "by_language": {
+    "en": {
+      "sample_size": 10,
+      "matches": 10,
+      "accuracy": 1.0,
+      "cohen_kappa": 1.0,
+      "interpretation": "Almost perfect agreement"
+    },
+    "hi": {
+      "sample_size": 10,
+      "matches": 10,
+      "accuracy": 1.0,
+      "cohen_kappa": 1.0,
+      "interpretation": "Almost perfect agreement"
+    },
+    "te": {
+      "sample_size": 10,
+      "matches": 9,
+      "accuracy": 0.9,
+      "cohen_kappa": 0.6296,
+      "interpretation": "Substantial agreement"
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "correct",
+      "hallucinated",
+      "partially correct",
+      "wrongly refused"
+    ],
+    "matrix": [
+      [
+        26,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2
+      ]
+    ]
+  }
+}
