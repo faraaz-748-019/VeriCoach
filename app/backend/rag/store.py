@@ -9,7 +9,11 @@ from typing import Any
 import chromadb
 from chromadb.config import Settings as ChromaSettings
 
-from backend.corpus.documents import DOCUMENTS_CORPUS, FinancialDocument
+from backend.corpus.documents import (
+    DOCUMENTS_CORPUS,
+    POISONED_DOCUMENT,
+    FinancialDocument,
+)
 from backend.providers.base import BaseLLMProvider
 from backend.rag.chunker import DocumentChunk, TextChunker
 from backend.rag.embeddings import MultilingualEmbedder
@@ -60,9 +64,12 @@ class ChromaRAGStore:
         # Cache of indexed documents for GET /v1/documents
         self._documents_by_id: dict[str, FinancialDocument] = {}
 
-    def bootstrap_default_corpus(self) -> int:
-        """Load and index the 30 original documents corpus."""
-        return self.index_documents(DOCUMENTS_CORPUS)
+    def bootstrap_default_corpus(self, include_poisoned: bool = False) -> int:
+        """Load and index the 30 original documents corpus, optionally adding test-only poisoned document."""
+        docs = list(DOCUMENTS_CORPUS)
+        if include_poisoned:
+            docs.append(POISONED_DOCUMENT)
+        return self.index_documents(docs)
 
     def index_documents(self, documents: list[FinancialDocument]) -> int:
         """Chunk, embed, and store financial documents."""

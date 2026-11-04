@@ -46,6 +46,7 @@ class BackendSettings(BaseSettings):
     rag_top_k: int = 4
     chunk_size: int = 500
     chunk_overlap: int = 50
+    enable_poisoned_corpus: bool = False  # Test-only mode: injects adversarial document
 
     # Logging
     log_level: str = "INFO"
