@@ -1,0 +1,80 @@
+name: Web UI Tests
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-tests:
+    name: Playwright & Selenium Web Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "./app[dev]"
+          pip install -e "./qa[dev]"
+
+      - name: Install Playwright Browsers and System Dependencies
+        run: |
+          python -m playwright install --with-deps chromium firefox
+
+      - name: Install Chrome and ChromeDriver for Selenium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable chromium-chromedriver
+
+      - name: Start Mock Backend Server
+        env:
+          LLM_PROVIDER: mock
+          REQUIRE_API_KEY: "false"
+          PYTHONPATH: app
+        run: |
+          python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 &
+          sleep 4
+
+      - name: Run Playwright Web UI Tests
+        env:
+          HEADLESS: "true"
+          TARGET_URL: "http://127.0.0.1:8000"
+          LLM_PROVIDER: mock
+        run: |
+          pytest qa/tests/web -v --alluredir=qa/allure-results
+
+      - name: Run Selenium Smoke Tests
+        env:
+          HEADLESS: "true"
+          TARGET_URL: "http://127.0.0.1:8000"
+          LLM_PROVIDER: mock
+        run: |
+          pytest qa/tests/web_selenium -v --alluredir=qa/allure-results
+
+      - name: Upload Web Test Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-test-artifacts
+          path: |
+            qa/allure-results/
+            qa/traces/
+          retention-days: 7

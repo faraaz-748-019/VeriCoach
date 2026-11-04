@@ -1,5 +1,12 @@
 # VeriCoach
 
+[![CI](https://github.com/vericoach/vericoach/actions/workflows/ci.yml/badge.svg)](https://github.com/vericoach/vericoach/actions/workflows/ci.yml)
+[![Web UI Tests](https://github.com/vericoach/vericoach/actions/workflows/web.yml/badge.svg)](https://github.com/vericoach/vericoach/actions/workflows/web.yml)
+[![LLM Quality & Safety](https://github.com/vericoach/vericoach/actions/workflows/eval.yml/badge.svg)](https://github.com/vericoach/vericoach/actions/workflows/eval.yml)
+[![Mobile Automation](https://github.com/vericoach/vericoach/actions/workflows/mobile.yml/badge.svg)](https://github.com/vericoach/vericoach/actions/workflows/mobile.yml)
+[![Allure Report](https://img.shields.io/badge/Allure_Report-GitHub_Pages-2980b9?style=flat&logo=allure)](https://vericoach.github.io/vericoach/allure-report/)
+[![Quality Gate](https://img.shields.io/badge/Quality_Gate-Passing-10b981?style=flat&logo=checkmarx)](scripts/quality_gate.py)
+
 A multilingual (**English · हिन्दी · తెలుగు**) personal-finance assistant with RAG, and an automated quality-engineering platform that tests it.
 
 ## Monorepo Architecture

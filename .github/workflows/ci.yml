@@ -1,0 +1,230 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint & Code Style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv, ruff, black
+        run: |
+          python -m pip install --upgrade pip uv ruff black
+
+      - name: Check code formatting with black
+        run: |
+          black --check app qa scripts
+
+      - name: Lint codebase with ruff
+        run: |
+          ruff check app qa scripts
+
+  unit-tests:
+    name: App & Framework Unit Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "./app[dev]"
+          pip install -e "./qa[dev]"
+
+      - name: Run App Backend Unit Tests
+        env:
+          LLM_PROVIDER: mock
+          REQUIRE_API_KEY: "false"
+        run: |
+          pytest app/tests -v --alluredir=allure-results
+
+      - name: Run QA Framework & Gatekeeper Unit Tests
+        env:
+          LLM_PROVIDER: mock
+        run: |
+          pytest qa/tests/sample qa/tests/test_quality_gate.py -v --alluredir=allure-results
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-allure-results
+          path: allure-results/
+          retention-days: 7
+
+  api-tests:
+    name: API Contract & Security Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "./app[dev]"
+          pip install -e "./qa[dev]"
+
+      - name: Run API & OpenAPI Contract Tests
+        env:
+          LLM_PROVIDER: mock
+          REQUIRE_API_KEY: "true"
+          API_KEYS: "vc-test-key-12345,vc-test-key-67890"
+        run: |
+          pytest qa/tests/api qa/tests/test_pii_guards.py qa/tests/security -v --alluredir=allure-results
+
+      - name: Upload API Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-allure-results
+          path: allure-results/
+          retention-days: 7
+
+  newman-tests:
+    name: Newman Postman Collection Suite
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Newman and htmlextra reporter
+        run: |
+          npm install -g newman newman-reporter-htmlextra
+
+      - name: Install Backend Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "./app[dev]"
+
+      - name: Start FastAPI server and run Newman suite
+        env:
+          LLM_PROVIDER: mock
+          REQUIRE_API_KEY: "true"
+          API_KEYS: "vc-test-key-12345,vc-test-key-67890"
+          PYTHONPATH: app
+        run: |
+          python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 &
+          sleep 4
+          newman run qa/api/vericoach.postman_collection.json \
+            -e qa/api/vericoach_ci.postman_environment.json \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export qa/newman-reports/newman_report.html
+
+      - name: Upload Newman Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-report
+          path: qa/newman-reports/
+          retention-days: 7
+
+  quality-gate-and-allure:
+    name: Quality Gate & Allure Report Publishing
+    runs-on: ubuntu-latest
+    needs: [unit-tests, api-tests, newman-tests]
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "./app[dev]"
+          pip install -e "./qa[dev]"
+          npm install -g allure-commandline
+
+      - name: Download all Allure raw results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-allure-results"
+          path: combined-allure-results/
+          merge-multiple: true
+
+      - name: Generate Allure HTML Report
+        run: |
+          mkdir -p combined-allure-results
+          allure generate combined-allure-results -o allure-report --clean || npx allure-commandline generate combined-allure-results -o allure-report --clean
+
+      - name: Run Quality Gate Script
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          python scripts/quality_gate.py \
+            --gates qa/config/gates.yaml \
+            --history-file results/history.csv \
+            --chart-file results/trend_chart.png
+
+      - name: Upload Trend Chart & History Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-history-and-trend
+          path: |
+            results/history.csv
+            results/trend_chart.png
+          retention-days: 30
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          destination_dir: allure-report
