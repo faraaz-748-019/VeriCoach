@@ -6,6 +6,7 @@ PII redaction, structured JSON logging, and API key authentication.
 
 from __future__ import annotations
 
+import pathlib
 import time
 import uuid
 from contextlib import asynccontextmanager
@@ -67,7 +68,9 @@ def get_rag_store(
             chunk_size=settings.chunk_size,
             chunk_overlap=settings.chunk_overlap,
         )
-        _rag_store.bootstrap_default_corpus()
+        _rag_store.bootstrap_default_corpus(
+            include_poisoned=settings.enable_poisoned_corpus
+        )
     return _rag_store
 
 
@@ -141,6 +144,27 @@ async def log_requests(request: Request, call_next):
         },
     )
     return response
+
+
+# Global Exception Shield preventing internal tracebacks or stack frame disclosure
+@app.exception_handler(Exception)
+async def global_exception_shield(request: Request, exc: Exception):
+    """Sanitize all unhandled exceptions to prevent stack trace and internal path leaks."""
+    from fastapi.responses import JSONResponse
+
+    trace_id = getattr(request.state, "trace_id", str(uuid.uuid4()))
+    logger.error(
+        f"Unhandled server error on {request.method} {request.url.path}: {mask_pii(str(exc))}",
+        exc_info=exc,
+        extra={"trace_id": trace_id},
+    )
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "detail": "An internal server error occurred. Please try again later.",
+            "trace_id": trace_id,
+        },
+    )
 
 
 # ── Version 1 Endpoints ───────────────────────────────────────────────────────
@@ -261,7 +285,7 @@ def chat_v1(
     ]
 
     return ChatResponseV1(
-        answer=llm_resp.text,
+        answer=mask_pii(llm_resp.text),
         language=request_data.language if request_data.language != "auto" else "en",
         sources=citations,
         refused=False,
@@ -337,20 +361,21 @@ def submit_feedback_v1(
     feedback: FeedbackRequestV1,
 ) -> FeedbackResponseV1:
     """Submit quality or satisfaction rating (1-5) for a given trace_id."""
+    sanitized_comment = mask_pii(feedback.comment) if feedback.comment else None
     existing = next(
         (f for f in _metrics_data["feedbacks"] if f["trace_id"] == feedback.trace_id),
         None,
     )
     if existing is not None:
         existing["rating"] = feedback.rating
-        existing["comment"] = feedback.comment
+        existing["comment"] = sanitized_comment
         existing["timestamp"] = time.time()
     else:
         _metrics_data["feedbacks"].append(
             {
                 "trace_id": feedback.trace_id,
                 "rating": feedback.rating,
-                "comment": feedback.comment,
+                "comment": sanitized_comment,
                 "timestamp": time.time(),
             }
         )
@@ -513,8 +538,6 @@ def legacy_clear_documents(store: ChromaRAGStore = Depends(get_rag_store)):
 
 
 # Mount static frontend build if present
-import pathlib
-
 frontend_dist = pathlib.Path(__file__).resolve().parent.parent / "frontend" / "dist"
 if frontend_dist.is_dir():
     from fastapi.staticfiles import StaticFiles
@@ -522,4 +545,3 @@ if frontend_dist.is_dir():
     app.mount(
         "/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend"
     )
-

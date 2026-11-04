@@ -55,7 +55,8 @@ class JSONFormatter(logging.Formatter):
                     log_entry[key] = val
 
         if record.exc_info:
-            log_entry["exception"] = self.formatException(record.exc_info)
+            formatted_exc = self.formatException(record.exc_info)
+            log_entry["exception"] = mask_pii(formatted_exc)
 
         return json.dumps(log_entry)
 

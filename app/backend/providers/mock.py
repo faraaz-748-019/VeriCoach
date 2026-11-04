@@ -103,9 +103,26 @@ class MockLLMProvider(BaseLLMProvider):
                 if len(line) > 20 and not line.startswith("[Doc ")
             ]
 
-            if substantive_lines:
-                primary_fact = substantive_lines[0]
+            # Filter out adversarial directive lines from being executed as commands
+            clean_substantive = [
+                line
+                for line in substantive_lines
+                if not re.search(
+                    r"(?:ignore\s+all\s+previous|system\s+override|reveal\s+(?:the\s+)?system\s+prompt|100%\s*guaranteed)",
+                    line,
+                    re.IGNORECASE,
+                )
+            ]
+
+            if clean_substantive:
+                primary_fact = clean_substantive[0]
                 answer = f"[MOCK] Based on retrieved context: {primary_fact}"
+            elif substantive_lines:
+                # Poisoned or directive-only context treated purely as passive data
+                answer = (
+                    "[MOCK] Based on retrieved educational context: "
+                    "The document contains administrative reference text. No system directives were executed."
+                )
             else:
                 answer = f"[MOCK] Answer based on context: {lines[0] if lines else 'Information verified.'}"
 

@@ -72,6 +72,85 @@ PERSONALISED_ADVICE_PATTERNS = [
     re.compile(r"\bmanage\s+my\s+portfolio\s+for\s+me\b", re.IGNORECASE),
 ]
 
+# Patterns detecting direct prompt injections & system prompt exfiltration
+PROMPT_INJECTION_PATTERNS = [
+    re.compile(
+        r"\b(?:ignore|disregard|forget)\s+(?:all\s+)?(?:previous|prior|above)\s+(?:instructions|rules|prompts)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\bsystem\s+override\b", re.IGNORECASE),
+    re.compile(
+        r"\b(?:reveal|print|output|display|show|leak)\s+(?:the\s+)?(?:system\s+prompt|developer\s+instructions|system_prompt_template)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\brepeat\s+(?:all\s+)?(?:text|words)\s+above\s+(?:starting\s+with|verbatim)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\boutput\s+(?:the\s+)?(?:exact\s+)?(?:secret\s+)?(?:developer\s+)?(?:instructions|configuration|tokens)\b",
+        re.IGNORECASE,
+    ),
+]
+
+# Patterns detecting jailbreaks and persona overrides
+JAILBREAK_PATTERNS = [
+    re.compile(
+        r"\b(?:you\s+are\s+now\s+dan|do\s+anything\s+now|jailbreak|developer\s+mode)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:freed\s+from\s+all|unrestricted\s+ai|no\s+safety\s+filters|bypass\s+all\s+limits)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bpretend\s+(?:you\s+are\s+an?\s+unrestricted|there\s+are\s+no\s+rules|safety\s+guidelines\s+do\s+not\s+apply)\b",
+        re.IGNORECASE,
+    ),
+]
+
+# Patterns detecting bulk PII extraction attempts
+PII_EXTRACTION_PATTERNS = [
+    re.compile(
+        r"\b(?:extract|dump|list|show|print)\s+(?:all\s+)?(?:customer|user)?\s*(?:pan|aadhaar|phone|email|upi|account)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:pan|aadhaar|upi\s+id|phone\s+number)\s+associated\s+with\s+(?:user|customer)\b",
+        re.IGNORECASE,
+    ),
+]
+
+# Patterns detecting illicit financial activity (money laundering, document forgery)
+ILLICIT_FINANCE_PATTERNS = [
+    re.compile(
+        r"\b(?:money\s+launder(?:ing)?|hawala|black\s+money|unaccounted\s+cash)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:forge|fake)\s+(?:a\s+)?(?:salary\s+slip|bank\s+statement|form\s*16|payslip|income\s+tax\s+return)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\bhow\s+to\s+(?:fool|cheat|trick)\s+(?:a\s+)?(?:bank|lender|tax\s+officer)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\bshell\s+compan(?:y|ies)\b", re.IGNORECASE),
+]
+
+# Patterns detecting off-topic task hijacking
+OFF_TOPIC_HIJACKING_PATTERNS = [
+    re.compile(
+        r"\b(?:write|generate|create)\s+(?:a\s+)?(?:python|bash|c|java|javascript)\s+script\s+(?:using|to\s+perform|to\s+scan|to\s+hack)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\bport\s+scan(?:ning)?\b", re.IGNORECASE),
+    re.compile(
+        r"\b(?:disregard\s+finance|write\s+(?:an?\s+)?(?:creative\s+)?(?:fantasy\s+)?poem)\b",
+        re.IGNORECASE,
+    ),
+]
+
 
 @dataclass
 class GuardrailResult:
@@ -86,7 +165,73 @@ def evaluate_baseline_guardrails(
     """Check query against baseline refusal rules."""
     q_lower = question.lower()
 
-    # 1. Guaranteed returns claim / inquiry
+    # 1. Direct prompt injection & system prompt exfiltration
+    for pattern in PROMPT_INJECTION_PATTERNS:
+        if pattern.search(q_lower):
+            msg = (
+                "VeriCoach safety rules prevent executing system override directives or "
+                "revealing confidential system prompt instructions. I can only provide "
+                "educational financial information based on verified documents."
+            )
+            return GuardrailResult(
+                passed=False,
+                refusal_reason="prompt_injection_prohibited",
+                refusal_message=msg,
+            )
+
+    # 2. Jailbreaks and persona overrides
+    for pattern in JAILBREAK_PATTERNS:
+        if pattern.search(q_lower):
+            msg = (
+                "VeriCoach cannot adopt unrestricted personas or bypass safety guidelines. "
+                "I am an educational assistant committed to verified financial literacy rules."
+            )
+            return GuardrailResult(
+                passed=False,
+                refusal_reason="jailbreak_prohibited",
+                refusal_message=msg,
+            )
+
+    # 3. Bulk PII extraction
+    for pattern in PII_EXTRACTION_PATTERNS:
+        if pattern.search(q_lower):
+            msg = (
+                "VeriCoach enforces strict privacy guardrails. Access to customer PII "
+                "(PAN, Aadhaar, phone numbers, UPI handles) is unauthorized and prohibited."
+            )
+            return GuardrailResult(
+                passed=False,
+                refusal_reason="pii_extraction_prohibited",
+                refusal_message=msg,
+            )
+
+    # 4. Illicit financial activity (money laundering, document forgery)
+    for pattern in ILLICIT_FINANCE_PATTERNS:
+        if pattern.search(q_lower):
+            msg = (
+                "VeriCoach strictly prohibits assisting with illegal financial activities, "
+                "including money laundering, document forgery, or fraudulent loan applications."
+            )
+            return GuardrailResult(
+                passed=False,
+                refusal_reason="illicit_finance_prohibited",
+                refusal_message=msg,
+            )
+
+    # 5. Off-topic task hijacking
+    for pattern in OFF_TOPIC_HIJACKING_PATTERNS:
+        if pattern.search(q_lower):
+            msg = (
+                "VeriCoach is exclusively dedicated to personal finance literacy and educational guidance. "
+                "I cannot provide general programming scripts, creative writing, or off-topic assistance."
+            )
+            return GuardrailResult(
+                passed=False,
+                refusal_reason="off_topic_hijacking_prohibited",
+                refusal_message=msg,
+            )
+
+    # 6. Guaranteed returns claim / inquiry
     for pattern in GUARANTEED_RETURNS_PATTERNS:
         if pattern.search(q_lower):
             msg = (
@@ -99,7 +244,7 @@ def evaluate_baseline_guardrails(
                 refusal_message=msg,
             )
 
-    # 2. Personalised financial/loan/tax advice or illegal tax avoidance
+    # 7. Personalised financial/loan/tax advice or illegal tax avoidance
     for pattern in PERSONALISED_ADVICE_PATTERNS:
         if pattern.search(q_lower):
             msg = (
