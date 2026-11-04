@@ -1,0 +1,53 @@
+# VeriCoach Test Automation Framework - Containerized Test Runner
+FROM python:3.11-slim
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    TEST_PROFILE=ci \
+    TEST_HEADLESS=true \
+    LLM_PROVIDER=mock \
+    EMBEDDING_PROVIDER=mock
+
+WORKDIR /app
+
+# Install system dependencies, OpenJDK (for Allure), and Node.js
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    git \
+    default-jre-headless \
+    nodejs \
+    npm \
+    libnss3 \
+    libnspr4 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libpango-1.0-0 \
+    libcairo2 \
+    libasound2 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g allure-commandline
+
+COPY app /app/app
+COPY qa/pyproject.toml /app/qa/pyproject.toml
+COPY pyproject.toml /app/pyproject.toml
+
+RUN pip install --no-cache-dir uv && \
+    uv pip install --system -e ./app && \
+    uv pip install --system -e ./qa[dev] && \
+    playwright install chromium
+
+COPY . /app
+
+WORKDIR /app/qa
+
+CMD ["sh", "-c", "pytest tests/sample -v --reruns 1 --alluredir=allure-results && npx allure-commandline generate allure-results -o allure-report --clean"]

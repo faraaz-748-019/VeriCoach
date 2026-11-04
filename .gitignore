@@ -26,6 +26,13 @@ uv.lock
 htmlcov/
 .tox/
 *.log
+allure-results/
+allure-report/
+triage.json
+qa/allure-results/
+qa/allure-report/
+qa/triage.json
+.playwright-browsers/
 
 # Ruff / Black
 .ruff_cache/
