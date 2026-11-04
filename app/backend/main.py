@@ -11,7 +11,7 @@ import uuid
 from contextlib import asynccontextmanager
 from typing import Any
 
-from fastapi import Depends, FastAPI, HTTPException, Request, status
+from fastapi import Depends, FastAPI, HTTPException, Path, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.auth import verify_api_key
@@ -303,7 +303,11 @@ def list_documents_v1(
     dependencies=[Depends(verify_api_key)],
 )
 def get_document_v1(
-    id: str,
+    id: str = Path(
+        ...,
+        description="Document unique identifier",
+        examples=["upi_pin_rules"],
+    ),
     store: ChromaRAGStore = Depends(get_rag_store),
 ) -> DocumentItemV1:
     """Fetch a single document by doc_id."""
@@ -333,14 +337,23 @@ def submit_feedback_v1(
     feedback: FeedbackRequestV1,
 ) -> FeedbackResponseV1:
     """Submit quality or satisfaction rating (1-5) for a given trace_id."""
-    _metrics_data["feedbacks"].append(
-        {
-            "trace_id": feedback.trace_id,
-            "rating": feedback.rating,
-            "comment": feedback.comment,
-            "timestamp": time.time(),
-        }
+    existing = next(
+        (f for f in _metrics_data["feedbacks"] if f["trace_id"] == feedback.trace_id),
+        None,
     )
+    if existing is not None:
+        existing["rating"] = feedback.rating
+        existing["comment"] = feedback.comment
+        existing["timestamp"] = time.time()
+    else:
+        _metrics_data["feedbacks"].append(
+            {
+                "trace_id": feedback.trace_id,
+                "rating": feedback.rating,
+                "comment": feedback.comment,
+                "timestamp": time.time(),
+            }
+        )
     return FeedbackResponseV1(
         status="feedback_recorded",
         trace_id=feedback.trace_id,
@@ -428,10 +441,14 @@ def legacy_chat(
 
 @app.get("/api/v1/synthetic-user", tags=["Compatibility"])
 def legacy_synthetic_user(locale: str = "en", seed: int | None = None):
+    import dataclasses
+
     from app.data.synthetic import generate_user
 
     user = generate_user(locale=locale, seed=seed)  # type: ignore[arg-type]
-    return user.model_dump()
+    if hasattr(user, "model_dump"):
+        return user.model_dump()
+    return dataclasses.asdict(user)
 
 
 @app.post("/api/v1/bootstrap-synthetic", tags=["Compatibility"])
