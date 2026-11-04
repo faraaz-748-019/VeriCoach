@@ -36,6 +36,9 @@ qa/newman-reports/
 qa/traces/
 .playwright-browsers/
 qa/.web_server.lock
+.cache/
+.test_cache/
+qa/.cache/
 
 # Ruff / Black
 .ruff_cache/
