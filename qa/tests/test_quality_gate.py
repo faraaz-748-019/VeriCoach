@@ -22,7 +22,6 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 import pytest  # noqa: E402
-
 from scripts.quality_gate import QualityGateRunner  # noqa: E402
 
 
