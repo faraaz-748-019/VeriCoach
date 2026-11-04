@@ -79,6 +79,19 @@ def attach_screenshot(image_bytes: bytes, name: str = "screenshot") -> None:
     )
 
 
+def attach_video(video_bytes: bytes, name: str = "screen_recording") -> None:
+    """Attach MP4 video recording to the current Allure test."""
+    if not HAS_ALLURE or not video_bytes:
+        return
+
+    allure.attach(
+        video_bytes,
+        name=name,
+        attachment_type=AttachmentType.MP4,
+        extension="mp4",
+    )
+
+
 def attach_playwright_trace(
     trace_path: str | Path, name: str = "playwright-trace"
 ) -> None:

@@ -45,8 +45,14 @@ class FrameworkSettings(BaseSettings):
     mobile_platform_name: str = Field(
         default="Android", description="Mobile OS platform"
     )
+    mobile_platform_version: str = Field(
+        default="14.0", description="Android OS version (API 34)"
+    )
     mobile_device_name: str = Field(
-        default="Android Emulator", description="Device or emulator name"
+        default="Pixel 7", description="Device or emulator name"
+    )
+    mobile_avd_name: str = Field(
+        default="Pixel_7_API_34", description="Android virtual device name"
     )
     mobile_app_package: str = Field(
         default="com.vericoach.app", description="Android package name"
@@ -54,8 +60,20 @@ class FrameworkSettings(BaseSettings):
     mobile_app_activity: str = Field(
         default="com.vericoach.app.MainActivity", description="Launch activity"
     )
+    mobile_app_path: str = Field(
+        default="", description="Path to .apk file for automated install"
+    )
     mobile_automation_name: str = Field(
         default="UiAutomator2", description="Appium driver engine"
+    )
+    mobile_auto_grant_permissions: bool = Field(
+        default=True, description="Automatically grant Android runtime permissions"
+    )
+    mobile_no_reset: bool = Field(
+        default=True, description="Preserve app state between sessions"
+    )
+    mobile_new_command_timeout: int = Field(
+        default=120, description="Appium command timeout in seconds"
     )
 
     # Execution & Flakiness Management
@@ -119,15 +137,20 @@ class FrameworkSettings(BaseSettings):
 
     def get_appium_capabilities(self) -> dict[str, Any]:
         """Produce W3C Appium capabilities for mobile testing."""
-        return {
+        caps: dict[str, Any] = {
             "platformName": self.mobile_platform_name,
             "appium:automationName": self.mobile_automation_name,
             "appium:deviceName": self.mobile_device_name,
             "appium:appPackage": self.mobile_app_package,
             "appium:appActivity": self.mobile_app_activity,
-            "appium:noReset": True,
-            "appium:newCommandTimeout": 60,
+            "appium:platformVersion": self.mobile_platform_version,
+            "appium:autoGrantPermissions": self.mobile_auto_grant_permissions,
+            "appium:noReset": self.mobile_no_reset,
+            "appium:newCommandTimeout": self.mobile_new_command_timeout,
         }
+        if self.mobile_app_path:
+            caps["appium:app"] = self.mobile_app_path
+        return caps
 
 
 @lru_cache(maxsize=1)

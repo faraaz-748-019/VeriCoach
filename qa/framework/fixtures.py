@@ -207,6 +207,18 @@ def mobile_driver(framework_settings: FrameworkSettings) -> Generator[Any, None,
                 pass
 
 
+@pytest.fixture(scope="function")
+def mobile_chat_screen(mobile_driver: Any) -> Any:
+    """Pre-initialized MobileChatScreen object with readiness check."""
+    from qa.framework.pages.mobile_chat_screen import MobileChatScreen
+
+    screen = MobileChatScreen(driver=mobile_driver)
+    assert screen.is_chat_ready(
+        timeout_s=10.0
+    ), "Mobile chat interface failed to initialize"
+    return screen
+
+
 # ---------------------------------------------------------------------------
 # Synthetic Test Data Fixtures (Strictly Synthetic Indian PII)
 # ---------------------------------------------------------------------------
