@@ -1,0 +1,1015 @@
+{
+  "timestamp": "2026-11-04T21:04:51.304837",
+  "run_date": "20261104",
+  "provider": "mock",
+  "judge_model": "gemini-1.5-flash",
+  "embedding_model": "models/text-embedding-004",
+  "total_items": 30,
+  "cache_stats": {
+    "hits": 30,
+    "misses": 0,
+    "total": 30,
+    "hit_ratio": 1.0
+  },
+  "overall_scores": {
+    "context_precision": 0.3611,
+    "context_recall": 0.2282,
+    "faithfulness": 0.9211,
+    "answer_relevancy": 0.4221,
+    "composite_score": 0.4831
+  },
+  "scores_by_language": {
+    "en": {
+      "count": 10,
+      "context_precision": 0.8833,
+      "context_recall": 0.6631,
+      "faithfulness": 0.8835,
+      "answer_relevancy": 0.7986,
+      "composite_score": 0.8071
+    },
+    "hi": {
+      "count": 10,
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.919,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2797
+    },
+    "te": {
+      "count": 10,
+      "context_precision": 0.2,
+      "context_recall": 0.0214,
+      "faithfulness": 0.9608,
+      "answer_relevancy": 0.2676,
+      "composite_score": 0.3625
+    }
+  },
+  "scores_by_category": {
+    "answerable": {
+      "count": 30,
+      "context_precision": 0.3611,
+      "context_recall": 0.2282,
+      "faithfulness": 0.9211,
+      "answer_relevancy": 0.4221,
+      "composite_score": 0.4831
+    }
+  },
+  "worst_10_items": [
+    {
+      "id": "hi_ans_003",
+      "language": "hi",
+      "category": "answerable",
+      "question": "क्या व्हाट्सएप पर आए अज्ञात क्यूआर कोड को स्कैन करके कैशबैक पाना सुरक्षित है?",
+      "response": "[MOCK] Based on retrieved context: An emergency fund should cover 3 to 6 months of mandatory living expenses (rent, food, insurance premiums, EMIs). For individuals with variable income or single-earner households, maintaining 9 to 12 months is prudent. Emergency funds must be held in...",
+      "reference": "नहीं, पेमेंट ऐप पर क्यूआर कोड स्कैन करने से आपके बैंक खाते से पैसे कटते हैं। जालसाज अक्सर पैसे भेजने का झूठा दावा करके क्यूआर कोड भेजते हैं। पिन डालते ही पैसे जालसाज के पास चले जाते हैं।",
+      "retrieved_contexts": [
+        "An emergency fund should cover 3 to 6 months of mandatory living expenses (rent, food, insurance premiums, EMIs). For individuals with variable income or single-earner households, maintaining 9 to 12 months is prudent. Emergency funds must be held in..."
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8571,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2643
+    },
+    {
+      "id": "hi_ans_009",
+      "language": "hi",
+      "category": "answerable",
+      "question": "लोन पर सबसे कम ब्याज दर पाने के लिए भारत में कितना क्रेडिट स्कोर उत्कृष्ट माना जाता है?",
+      "response": "[MOCK] Based on retrieved context: A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate...",
+      "reference": "भारत में क्रेडिट स्कोर 300 से 900 के बीच होता है। 750 या उससे अधिक का स्कोर उत्कृष्ट माना जाता है, जिससे सबसे कम ब्याज दरों पर लोन मिलने की संभावना बढ़ जाती है।",
+      "retrieved_contexts": [
+        "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate...",
+        "A soft inquiry occurs when you check your own credit score or when an employer does background verification; soft inquiries do not affect your credit score. A hard inquiry occurs when a lender checks your bureau report following a loan or credit card...",
+        "An EMI (Equated Monthly Installment) is the fixed payment amount made by a borrower to a lender at a specified date each month. Each EMI comprises both interest and principal repayment. In the early stages of a loan amortization schedule, the interes...",
+        "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his..."
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8571,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2643
+    },
+    {
+      "id": "hi_ans_006",
+      "language": "hi",
+      "category": "answerable",
+      "question": "भारत में केवाईसी के लिए आधिकारिक रूप से वैध दस्तावेज (OVD) कौन से माने गए हैं?",
+      "response": "[MOCK] Based on retrieved context: As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation...",
+      "reference": "आरबीआई के अनुसार छह आधिकारिक रूप से वैध दस्तावेज हैं: पासपोर्ट, ड्राइविंग लाइसेंस, आधार संख्या का प्रमाण, मतदाता पहचान पत्र, नरेगा जॉब कार्ड और राष्ट्रीय जनसंख्या रजिस्टर द्वारा जारी पत्र।",
+      "retrieved_contexts": [
+        "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8667,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2667
+    },
+    {
+      "id": "hi_ans_007",
+      "language": "hi",
+      "category": "answerable",
+      "question": "वीडियो केवाईसी (V-CIP) की प्रक्रिया पूरी करने के लिए किन शर्तों का पालन करना जरूरी है?",
+      "response": "[MOCK] Based on retrieved context: As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation...",
+      "reference": "ग्राहक को भारत की भौगोलिक सीमा के भीतर होना चाहिए, उनके पास मूल भौतिक पैन कार्ड होना चाहिए, और वीडियो कॉल के दौरान लाइव फोटो व बायोमेट्रिक जीवंतता की जांच की जाती है।",
+      "retrieved_contexts": [
+        "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8667,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2667
+    },
+    {
+      "id": "hi_ans_001",
+      "language": "hi",
+      "category": "answerable",
+      "question": "क्या बैंक खाते में पैसे प्राप्त करने के लिए मुझे अपना यूपीआई पिन दर्ज करना होगा?",
+      "response": "[MOCK] Based on retrieved context: A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+      "reference": "नहीं, पैसे प्राप्त करने या रिफंड लेने के लिए कभी भी यूपीआई पिन दर्ज करने की आवश्यकता नहीं होती। यूपीआई पिन केवल पैसे भेजने या बैलेंस चेक करने के लिए आवश्यक होता है।",
+      "retrieved_contexts": [
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR..."
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.871,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2677
+    },
+    {
+      "id": "hi_ans_010",
+      "language": "hi",
+      "category": "answerable",
+      "question": "क्रेडिट स्कोर को बेहतर रखने के लिए क्रेडिट यूटिलाइजेशन रेशियो (CUR) कितना रखना चाहिए?",
+      "response": "[MOCK] Based on retrieved context: To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his...",
+      "reference": "वित्तीय सलाहकार और रेटिंग एजेंसियां यह सलाह देती हैं कि कुल क्रेडिट कार्ड लिमिट का 30% से कम ही खर्च करना चाहिए ताकि क्रेडिट स्कोर पर नकारात्मक प्रभाव न पड़े।",
+      "retrieved_contexts": [
+        "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his...",
+        "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate..."
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.871,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2677
+    },
+    {
+      "id": "en_ans_002",
+      "language": "en",
+      "category": "answerable",
+      "question": "What should I do if a buyer on an online marketplace sends me an unexpected UPI collect request?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "Never approve collect requests from unknown persons or classified buyers. Declining an unauthorized collect request is completely safe and does not penalize your bank account or credit score.",
+      "retrieved_contexts": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "hi_ans_002",
+      "language": "hi",
+      "category": "answerable",
+      "question": "यदि ओएलएक्स पर कोई अनजान खरीदार मुझे यूपीआई कलेक्ट रिक्वेस्ट भेजता है, तो मुझे क्या करना चाहिए?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "अज्ञात व्यक्तियों द्वारा भेजी गई कलेक्ट रिक्वेस्ट को कभी भी स्वीकार न करें। अनधिकृत कलेक्ट रिक्वेस्ट को अस्वीकार करना पूरी तरह सुरक्षित है और इससे आपके खाते या क्रेडिट स्कोर पर कोई प्रभाव नहीं पड़ता।",
+      "retrieved_contexts": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "hi_ans_004",
+      "language": "hi",
+      "category": "answerable",
+      "question": "एनपीसीआई द्वारा सामान्य पीयर-टू-पीयर यूपीआई ट्रांसफर की दैनिक सीमा क्या तय की गई है?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "एनपीसीआई (NPCI) ने सामान्य पीयर-टू-पीयर यूपीआई ट्रांसफर के लिए 1,00,000 रुपये की दैनिक सीमा तय की है, हालांकि शिक्षा और स्वास्थ्य जैसी श्रेणियों में यह सीमा 5,00,000 रुपये तक हो सकती है।",
+      "retrieved_contexts": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "hi_ans_005",
+      "language": "hi",
+      "category": "answerable",
+      "question": "केवाईसी (KYC) का क्या अर्थ है और वित्तीय संस्थानों के लिए यह क्यों अनिवार्य है?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "केवाईसी का अर्थ 'नो योर कस्टमर' है। यह आरबीआई और सेबी द्वारा मनी लॉन्ड्रिंग और धोखाधड़ी रोकने के लिए अनिवार्य ग्राहक पहचान प्रक्रिया है, जिससे ग्राहक की पहचान और पते का सत्यापन होता है।",
+      "retrieved_contexts": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    }
+  ],
+  "items": [
+    {
+      "id": "en_ans_001",
+      "language": "en",
+      "category": "answerable",
+      "question": "Do I need to enter my UPI PIN to receive money into my bank account?",
+      "response": "[MOCK] Based on retrieved context: A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+      "reference": "No, a UPI PIN is only required when sending money or checking your account balance. You never need to enter your UPI PIN to receive money or refunds.",
+      "retrieved_contexts": [
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+        "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money",
+          "score": 0.4635,
+          "snippet": "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR..."
+        },
+        {
+          "doc_id": "upi_collect_requests",
+          "title": "Handling UPI Collect Requests Safely",
+          "score": 0.2329,
+          "snippet": "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.8667,
+      "faithfulness": 0.871,
+      "answer_relevancy": 1.0,
+      "composite_score": 0.9344
+    },
+    {
+      "id": "en_ans_002",
+      "language": "en",
+      "category": "answerable",
+      "question": "What should I do if a buyer on an online marketplace sends me an unexpected UPI collect request?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "Never approve collect requests from unknown persons or classified buyers. Declining an unauthorized collect request is completely safe and does not penalize your bank account or credit score.",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "en_ans_003",
+      "language": "en",
+      "category": "answerable",
+      "question": "Can scammers steal money by asking me to scan a QR code to claim cashback?",
+      "response": "[MOCK] Based on retrieved context: Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you...",
+      "reference": "Yes. Scanning a QR code on payment apps initiates a debit from your account. Scammers falsely claim scanning will credit money, but entering your PIN transfers funds to the scammer.",
+      "retrieved_contexts": [
+        "Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you...",
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "upi_qr_code_scams",
+          "title": "QR Code Scams in Peer-to-Peer Payments",
+          "score": 0.298,
+          "snippet": "Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you..."
+        },
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money",
+          "score": 0.2544,
+          "snippet": "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.5714,
+      "faithfulness": 0.875,
+      "answer_relevancy": 0.7444,
+      "composite_score": 0.7977
+    },
+    {
+      "id": "en_ans_004",
+      "language": "en",
+      "category": "answerable",
+      "question": "What is the standard daily limit for peer-to-peer UPI transfers established by NPCI?",
+      "response": "[MOCK] Based on retrieved context: NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users...",
+      "reference": "NPCI sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though certain categories like education and healthcare allow up to INR 500,000.",
+      "retrieved_contexts": [
+        "NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "upi_transaction_limits",
+          "title": "Daily UPI Transaction Limits and Security Controls",
+          "score": 0.2339,
+          "snippet": "NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.95,
+      "faithfulness": 0.8788,
+      "answer_relevancy": 1.0,
+      "composite_score": 0.9572
+    },
+    {
+      "id": "en_ans_005",
+      "language": "en",
+      "category": "answerable",
+      "question": "What is the purpose of KYC and which regulatory authorities mandate it in India?",
+      "response": "[MOCK] Based on retrieved context: KYC stands for 'Know Your Customer'. It is a mandatory regulatory customer-identification process mandated by the Reserve Bank of India (RBI) and SEBI under the Prevention of Money Laundering Act (PMLA). KYC verifies the legal identity, physical addr...",
+      "reference": "KYC (Know Your Customer) is an identity verification process mandated by the Reserve Bank of India (RBI) and SEBI under the Prevention of Money Laundering Act (PMLA) to prevent financial crime and money laundering.",
+      "retrieved_contexts": [
+        "KYC stands for 'Know Your Customer'. It is a mandatory regulatory customer-identification process mandated by the Reserve Bank of India (RBI) and SEBI under the Prevention of Money Laundering Act (PMLA). KYC verifies the legal identity, physical addr...",
+        "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "kyc_definition_purpose",
+          "title": "What is KYC and Why Financial Institutions Require It",
+          "score": 0.2657,
+          "snippet": "KYC stands for 'Know Your Customer'. It is a mandatory regulatory customer-identification process mandated by the Reserve Bank of India (RBI) and SEBI under the Prevention of Money Laundering Act (PMLA). KYC verifies the legal identity, physical addr..."
+        },
+        {
+          "doc_id": "kyc_officially_valid_docs",
+          "title": "Officially Valid Documents (OVD) for KYC in India",
+          "score": 0.2035,
+          "snippet": "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.8095,
+      "faithfulness": 0.8621,
+      "answer_relevancy": 0.7286,
+      "composite_score": 0.85
+    },
+    {
+      "id": "en_ans_006",
+      "language": "en",
+      "category": "answerable",
+      "question": "Which six documents qualify as Officially Valid Documents (OVD) for KYC compliance in India?",
+      "response": "[MOCK] Based on retrieved context: As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation...",
+      "reference": "The six OVDs recognized by RBI are: Passport, Driving Licence, proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by National Population Register.",
+      "retrieved_contexts": [
+        "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "kyc_officially_valid_docs",
+          "title": "Officially Valid Documents (OVD) for KYC in India",
+          "score": 0.5016,
+          "snippet": "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.8095,
+      "faithfulness": 0.8667,
+      "answer_relevancy": 0.8455,
+      "composite_score": 0.8804
+    },
+    {
+      "id": "en_ans_007",
+      "language": "en",
+      "category": "answerable",
+      "question": "What are the rules and requirements for completing a Video KYC (V-CIP) session?",
+      "response": "[MOCK] Based on retrieved context: Video KYC (V-CIP) enables fully digital, paperless account opening without visiting a bank branch. During an encrypted video session, a bank official captures live geo-tagged photographs, inspects the physical PAN card, verifies audio-visual liveline...",
+      "reference": "Customers must be physically located within Indian territory, possess their original physical PAN card, undergo live geo-tagged photograph capture, and complete audio-visual liveliness and biometric checks.",
+      "retrieved_contexts": [
+        "Video KYC (V-CIP) enables fully digital, paperless account opening without visiting a bank branch. During an encrypted video session, a bank official captures live geo-tagged photographs, inspects the physical PAN card, verifies audio-visual liveline...",
+        "Term life insurance provides pure death-benefit financial protection for a specified period with no maturity payout if the policyholder survives. Because there is no investment component, term insurance offers large sum assured coverage (e.g., INR 1 ..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "video_kyc_procedure",
+          "title": "Video-based Customer Identification Process (V-CIP / Video KYC)",
+          "score": 0.3098,
+          "snippet": "Video KYC (V-CIP) enables fully digital, paperless account opening without visiting a bank branch. During an encrypted video session, a bank official captures live geo-tagged photographs, inspects the physical PAN card, verifies audio-visual liveline..."
+        },
+        {
+          "doc_id": "term_insurance_vs_endowment",
+          "title": "Pure Term Life Insurance vs Endowment/ULIP Plans",
+          "score": 0.2124,
+          "snippet": "Term life insurance provides pure death-benefit financial protection for a specified period with no maturity payout if the policyholder survives. Because there is no investment component, term insurance offers large sum assured coverage (e.g., INR 1 ..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.32,
+      "faithfulness": 0.8824,
+      "answer_relevancy": 0.8714,
+      "composite_score": 0.7684
+    },
+    {
+      "id": "en_ans_008",
+      "language": "en",
+      "category": "answerable",
+      "question": "What is Central KYC (CKYC) and what is the function of the 14-digit KIN?",
+      "response": "[MOCK] Based on retrieved context: Central KYC Registry (CKYCR) is managed by CERSAI to eliminate repetitive KYC submissions across different financial institutions. Once you complete KYC with a bank, mutual fund, or insurer, you receive a unique 14-digit KYC Identification Number (KI...",
+      "reference": "CKYCR managed by CERSAI eliminates repeated KYC submissions. Once verified, you receive a unique 14-digit KYC Identification Number (KIN) that can be quoted at other regulated entities to open accounts without resubmitting paperwork.",
+      "retrieved_contexts": [
+        "Central KYC Registry (CKYCR) is managed by CERSAI to eliminate repetitive KYC submissions across different financial institutions. Once you complete KYC with a bank, mutual fund, or insurer, you receive a unique 14-digit KYC Identification Number (KI...",
+        "An EMI (Equated Monthly Installment) is the fixed payment amount made by a borrower to a lender at a specified date each month. Each EMI comprises both interest and principal repayment. In the early stages of a loan amortization schedule, the interes...",
+        "KYC stands for 'Know Your Customer'. It is a mandatory regulatory customer-identification process mandated by the Reserve Bank of India (RBI) and SEBI under the Prevention of Money Laundering Act (PMLA). KYC verifies the legal identity, physical addr..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "ckyc_central_registry",
+          "title": "Central KYC (CKYC) and 14-Digit KIN Registry",
+          "score": 0.3859,
+          "snippet": "Central KYC Registry (CKYCR) is managed by CERSAI to eliminate repetitive KYC submissions across different financial institutions. Once you complete KYC with a bank, mutual fund, or insurer, you receive a unique 14-digit KYC Identification Number (KI..."
+        },
+        {
+          "doc_id": "emi_and_amortization",
+          "title": "Equated Monthly Installment (EMI) and Amortization Schedules",
+          "score": 0.2568,
+          "snippet": "An EMI (Equated Monthly Installment) is the fixed payment amount made by a borrower to a lender at a specified date each month. Each EMI comprises both interest and principal repayment. In the early stages of a loan amortization schedule, the interes..."
+        },
+        {
+          "doc_id": "kyc_definition_purpose",
+          "title": "What is KYC and Why Financial Institutions Require It",
+          "score": 0.2325,
+          "snippet": "KYC stands for 'Know Your Customer'. It is a mandatory regulatory customer-identification process mandated by the Reserve Bank of India (RBI) and SEBI under the Prevention of Money Laundering Act (PMLA). KYC verifies the legal identity, physical addr..."
+        }
+      ],
+      "context_precision": 0.8333,
+      "context_recall": 0.48,
+      "faithfulness": 0.8621,
+      "answer_relevancy": 0.8714,
+      "composite_score": 0.7617
+    },
+    {
+      "id": "en_ans_009",
+      "language": "en",
+      "category": "answerable",
+      "question": "What credit score range is considered excellent for loan eligibility in India?",
+      "response": "[MOCK] Based on retrieved context: In India, credit bureaus like CIBIL, Experian, CRIF High Mark, and Equifax score creditworthiness between 300 and 900. A score above 750 is considered excellent and commands the lowest interest rates on home and personal loans. Scores between 700 and...",
+      "reference": "Credit bureaus score individuals between 300 and 900. A score of 750 and above is considered excellent, qualifying borrowers for the lowest interest rates on loans.",
+      "retrieved_contexts": [
+        "In India, credit bureaus like CIBIL, Experian, CRIF High Mark, and Equifax score creditworthiness between 300 and 900. A score above 750 is considered excellent and commands the lowest interest rates on home and personal loans. Scores between 700 and...",
+        "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate...",
+        "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "credit_score_ranges",
+          "title": "Credit Score Ranges and Loan Eligibility",
+          "score": 0.4285,
+          "snippet": "In India, credit bureaus like CIBIL, Experian, CRIF High Mark, and Equifax score creditworthiness between 300 and 900. A score above 750 is considered excellent and commands the lowest interest rates on home and personal loans. Scores between 700 and..."
+        },
+        {
+          "doc_id": "fixed_vs_floating_rates",
+          "title": "Fixed vs Floating Interest Rates on Loans",
+          "score": 0.27,
+          "snippet": "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate..."
+        },
+        {
+          "doc_id": "rebuilding_damaged_credit_score",
+          "title": "Strategies for Rebuilding a Damaged Credit Score",
+          "score": 0.2062,
+          "snippet": "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.8235,
+      "faithfulness": 0.875,
+      "answer_relevancy": 0.925,
+      "composite_score": 0.9059
+    },
+    {
+      "id": "en_ans_0010",
+      "language": "en",
+      "category": "answerable",
+      "question": "What is the recommended Credit Utilization Ratio (CUR) to keep a credit score high?",
+      "response": "[MOCK] Based on retrieved context: Credit Utilization Ratio (CUR) is the percentage of your total revolving credit card limit that you spend. Financial planners and credit rating models recommend keeping your aggregate CUR below 30%. Consistently maxing out credit cards signals financ...",
+      "reference": "Financial planners and credit rating bureaus recommend keeping your aggregate Credit Utilization Ratio (CUR) below 30% of your total revolving credit card limit.",
+      "retrieved_contexts": [
+        "Credit Utilization Ratio (CUR) is the percentage of your total revolving credit card limit that you spend. Financial planners and credit rating models recommend keeping your aggregate CUR below 30%. Consistently maxing out credit cards signals financ...",
+        "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his...",
+        "In India, credit bureaus like CIBIL, Experian, CRIF High Mark, and Equifax score creditworthiness between 300 and 900. A score above 750 is considered excellent and commands the lowest interest rates on home and personal loans. Scores between 700 and...",
+        "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "credit_utilization_ratio",
+          "title": "Credit Utilization Ratio (CUR) and Its Impact",
+          "score": 0.4238,
+          "snippet": "Credit Utilization Ratio (CUR) is the percentage of your total revolving credit card limit that you spend. Financial planners and credit rating models recommend keeping your aggregate CUR below 30%. Consistently maxing out credit cards signals financ..."
+        },
+        {
+          "doc_id": "rebuilding_damaged_credit_score",
+          "title": "Strategies for Rebuilding a Damaged Credit Score",
+          "score": 0.3141,
+          "snippet": "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his..."
+        },
+        {
+          "doc_id": "credit_score_ranges",
+          "title": "Credit Score Ranges and Loan Eligibility",
+          "score": 0.2506,
+          "snippet": "In India, credit bureaus like CIBIL, Experian, CRIF High Mark, and Equifax score creditworthiness between 300 and 900. A score above 750 is considered excellent and commands the lowest interest rates on home and personal loans. Scores between 700 and..."
+        },
+        {
+          "doc_id": "upi_collect_requests",
+          "title": "Handling UPI Collect Requests Safely",
+          "score": 0.2193,
+          "snippet": "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 1.0,
+      "faithfulness": 0.8621,
+      "answer_relevancy": 0.8,
+      "composite_score": 0.9155
+    },
+    {
+      "id": "hi_ans_001",
+      "language": "hi",
+      "category": "answerable",
+      "question": "क्या बैंक खाते में पैसे प्राप्त करने के लिए मुझे अपना यूपीआई पिन दर्ज करना होगा?",
+      "response": "[MOCK] Based on retrieved context: A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+      "reference": "नहीं, पैसे प्राप्त करने या रिफंड लेने के लिए कभी भी यूपीआई पिन दर्ज करने की आवश्यकता नहीं होती। यूपीआई पिन केवल पैसे भेजने या बैलेंस चेक करने के लिए आवश्यक होता है।",
+      "retrieved_contexts": [
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money",
+          "score": 0.2086,
+          "snippet": "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR..."
+        }
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.871,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2677
+    },
+    {
+      "id": "hi_ans_002",
+      "language": "hi",
+      "category": "answerable",
+      "question": "यदि ओएलएक्स पर कोई अनजान खरीदार मुझे यूपीआई कलेक्ट रिक्वेस्ट भेजता है, तो मुझे क्या करना चाहिए?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "अज्ञात व्यक्तियों द्वारा भेजी गई कलेक्ट रिक्वेस्ट को कभी भी स्वीकार न करें। अनधिकृत कलेक्ट रिक्वेस्ट को अस्वीकार करना पूरी तरह सुरक्षित है और इससे आपके खाते या क्रेडिट स्कोर पर कोई प्रभाव नहीं पड़ता।",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "hi_ans_003",
+      "language": "hi",
+      "category": "answerable",
+      "question": "क्या व्हाट्सएप पर आए अज्ञात क्यूआर कोड को स्कैन करके कैशबैक पाना सुरक्षित है?",
+      "response": "[MOCK] Based on retrieved context: An emergency fund should cover 3 to 6 months of mandatory living expenses (rent, food, insurance premiums, EMIs). For individuals with variable income or single-earner households, maintaining 9 to 12 months is prudent. Emergency funds must be held in...",
+      "reference": "नहीं, पेमेंट ऐप पर क्यूआर कोड स्कैन करने से आपके बैंक खाते से पैसे कटते हैं। जालसाज अक्सर पैसे भेजने का झूठा दावा करके क्यूआर कोड भेजते हैं। पिन डालते ही पैसे जालसाज के पास चले जाते हैं।",
+      "retrieved_contexts": [
+        "An emergency fund should cover 3 to 6 months of mandatory living expenses (rent, food, insurance premiums, EMIs). For individuals with variable income or single-earner households, maintaining 9 to 12 months is prudent. Emergency funds must be held in..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "emergency_fund_sizing",
+          "title": "Emergency Fund Sizing and Liquid Allocation",
+          "score": 0.2006,
+          "snippet": "An emergency fund should cover 3 to 6 months of mandatory living expenses (rent, food, insurance premiums, EMIs). For individuals with variable income or single-earner households, maintaining 9 to 12 months is prudent. Emergency funds must be held in..."
+        }
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8571,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2643
+    },
+    {
+      "id": "hi_ans_004",
+      "language": "hi",
+      "category": "answerable",
+      "question": "एनपीसीआई द्वारा सामान्य पीयर-टू-पीयर यूपीआई ट्रांसफर की दैनिक सीमा क्या तय की गई है?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "एनपीसीआई (NPCI) ने सामान्य पीयर-टू-पीयर यूपीआई ट्रांसफर के लिए 1,00,000 रुपये की दैनिक सीमा तय की है, हालांकि शिक्षा और स्वास्थ्य जैसी श्रेणियों में यह सीमा 5,00,000 रुपये तक हो सकती है।",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "hi_ans_005",
+      "language": "hi",
+      "category": "answerable",
+      "question": "केवाईसी (KYC) का क्या अर्थ है और वित्तीय संस्थानों के लिए यह क्यों अनिवार्य है?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "केवाईसी का अर्थ 'नो योर कस्टमर' है। यह आरबीआई और सेबी द्वारा मनी लॉन्ड्रिंग और धोखाधड़ी रोकने के लिए अनिवार्य ग्राहक पहचान प्रक्रिया है, जिससे ग्राहक की पहचान और पते का सत्यापन होता है।",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "hi_ans_006",
+      "language": "hi",
+      "category": "answerable",
+      "question": "भारत में केवाईसी के लिए आधिकारिक रूप से वैध दस्तावेज (OVD) कौन से माने गए हैं?",
+      "response": "[MOCK] Based on retrieved context: As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation...",
+      "reference": "आरबीआई के अनुसार छह आधिकारिक रूप से वैध दस्तावेज हैं: पासपोर्ट, ड्राइविंग लाइसेंस, आधार संख्या का प्रमाण, मतदाता पहचान पत्र, नरेगा जॉब कार्ड और राष्ट्रीय जनसंख्या रजिस्टर द्वारा जारी पत्र।",
+      "retrieved_contexts": [
+        "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "kyc_officially_valid_docs",
+          "title": "Officially Valid Documents (OVD) for KYC in India",
+          "score": 0.2599,
+          "snippet": "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+        }
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8667,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2667
+    },
+    {
+      "id": "hi_ans_007",
+      "language": "hi",
+      "category": "answerable",
+      "question": "वीडियो केवाईसी (V-CIP) की प्रक्रिया पूरी करने के लिए किन शर्तों का पालन करना जरूरी है?",
+      "response": "[MOCK] Based on retrieved context: As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation...",
+      "reference": "ग्राहक को भारत की भौगोलिक सीमा के भीतर होना चाहिए, उनके पास मूल भौतिक पैन कार्ड होना चाहिए, और वीडियो कॉल के दौरान लाइव फोटो व बायोमेट्रिक जीवंतता की जांच की जाती है।",
+      "retrieved_contexts": [
+        "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "kyc_officially_valid_docs",
+          "title": "Officially Valid Documents (OVD) for KYC in India",
+          "score": 0.2353,
+          "snippet": "As per RBI regulations, six documents qualify as Officially Valid Documents (OVDs) for proof of identity and address: Passport, Driving Licence, Proof of possession of Aadhaar number, Voter's Identity Card, NREGA Job Card, and Letter issued by Nation..."
+        }
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8667,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2667
+    },
+    {
+      "id": "hi_ans_008",
+      "language": "hi",
+      "category": "answerable",
+      "question": "सेंट्रल केवाईसी (CKYC) क्या है और 14 अंकों का किन (KIN) किस प्रकार उपयोगी है?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "सीकेवाईसीआर (CKYCR) वित्तीय संस्थानों में बार-बार केवाईसी कराने की आवश्यकता को समाप्त करता है। इसके तहत 14 अंकों का केवाईसी पहचान नंबर (KIN) मिलता है, जिसे अन्य संस्थानों में देकर बिना दोबारा कागजी प्रक्रिया के खाता खोला जा सकता है।",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "hi_ans_009",
+      "language": "hi",
+      "category": "answerable",
+      "question": "लोन पर सबसे कम ब्याज दर पाने के लिए भारत में कितना क्रेडिट स्कोर उत्कृष्ट माना जाता है?",
+      "response": "[MOCK] Based on retrieved context: A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate...",
+      "reference": "भारत में क्रेडिट स्कोर 300 से 900 के बीच होता है। 750 या उससे अधिक का स्कोर उत्कृष्ट माना जाता है, जिससे सबसे कम ब्याज दरों पर लोन मिलने की संभावना बढ़ जाती है।",
+      "retrieved_contexts": [
+        "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate...",
+        "A soft inquiry occurs when you check your own credit score or when an employer does background verification; soft inquiries do not affect your credit score. A hard inquiry occurs when a lender checks your bureau report following a loan or credit card...",
+        "An EMI (Equated Monthly Installment) is the fixed payment amount made by a borrower to a lender at a specified date each month. Each EMI comprises both interest and principal repayment. In the early stages of a loan amortization schedule, the interes...",
+        "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "fixed_vs_floating_rates",
+          "title": "Fixed vs Floating Interest Rates on Loans",
+          "score": 0.2763,
+          "snippet": "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate..."
+        },
+        {
+          "doc_id": "credit_hard_vs_soft_inquiries",
+          "title": "Hard Inquiries vs Soft Inquiries on Credit Reports",
+          "score": 0.2408,
+          "snippet": "A soft inquiry occurs when you check your own credit score or when an employer does background verification; soft inquiries do not affect your credit score. A hard inquiry occurs when a lender checks your bureau report following a loan or credit card..."
+        },
+        {
+          "doc_id": "emi_and_amortization",
+          "title": "Equated Monthly Installment (EMI) and Amortization Schedules",
+          "score": 0.2257,
+          "snippet": "An EMI (Equated Monthly Installment) is the fixed payment amount made by a borrower to a lender at a specified date each month. Each EMI comprises both interest and principal repayment. In the early stages of a loan amortization schedule, the interes..."
+        },
+        {
+          "doc_id": "rebuilding_damaged_credit_score",
+          "title": "Strategies for Rebuilding a Damaged Credit Score",
+          "score": 0.2134,
+          "snippet": "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his..."
+        }
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8571,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2643
+    },
+    {
+      "id": "hi_ans_010",
+      "language": "hi",
+      "category": "answerable",
+      "question": "क्रेडिट स्कोर को बेहतर रखने के लिए क्रेडिट यूटिलाइजेशन रेशियो (CUR) कितना रखना चाहिए?",
+      "response": "[MOCK] Based on retrieved context: To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his...",
+      "reference": "वित्तीय सलाहकार और रेटिंग एजेंसियां यह सलाह देती हैं कि कुल क्रेडिट कार्ड लिमिट का 30% से कम ही खर्च करना चाहिए ताकि क्रेडिट स्कोर पर नकारात्मक प्रभाव न पड़े।",
+      "retrieved_contexts": [
+        "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his...",
+        "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "rebuilding_damaged_credit_score",
+          "title": "Strategies for Rebuilding a Damaged Credit Score",
+          "score": 0.217,
+          "snippet": "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his..."
+        },
+        {
+          "doc_id": "fixed_vs_floating_rates",
+          "title": "Fixed vs Floating Interest Rates on Loans",
+          "score": 0.2001,
+          "snippet": "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate..."
+        }
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.871,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.2677
+    },
+    {
+      "id": "te_ans_001",
+      "language": "te",
+      "category": "answerable",
+      "question": "నా బ్యాంక్ ఖాతాలో ఇతరుల నుండి డబ్బులు అందుకోవడానికి నేను యూపీఐ పిన్ (UPI PIN) నమోదు చేయాలా?",
+      "response": "[MOCK] Based on retrieved context: A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+      "reference": "లేదు, మీ ఖాతాలో డబ్బులు అందుకోవడానికి లేదా రీఫండ్ పొందడానికి ఎప్పుడూ యూపీఐ పిన్ అవసరం లేదు. యూపీఐ పిన్ అనేది కేవలం డబ్బులు పంపేటప్పుడు లేదా బ్యాలెన్స్ చూసుకునేటప్పుడు మాత్రమే అవసరం.",
+      "retrieved_contexts": [
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money",
+          "score": 0.247,
+          "snippet": "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.871,
+      "answer_relevancy": 0.6333,
+      "composite_score": 0.6261
+    },
+    {
+      "id": "te_ans_002",
+      "language": "te",
+      "category": "answerable",
+      "question": "ఆన్‌లైన్ మార్కెట్‌ప్లేస్‌లో ఒక కొనుగోలుదారుడు నాకు అనుమానాస్పద యూపీఐ కలెక్ట్ రిక్వెస్ట్ పంపితే నేనేం చేయాలి?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "తెలియని వ్యక్తులు పంపిన కలెక్ట్ రిక్వెస్ట్‌లను ఎప్పుడూ ఆమోదించవద్దు. అనధికారిక కలెక్ట్ రిక్వెస్ట్‌ను తిరస్కరించడం (Decline) పూర్తిగా సురక్షితం మరియు మీ బ్యాంక్ ఖాతాపై లేదా క్రెడిట్ స్కోర్‌పై ఎటువంటి ప్రభావం ఉండదు.",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "te_ans_003",
+      "language": "te",
+      "category": "answerable",
+      "question": "క్యాష్‌బ్యాక్ వస్తుందని వాట్సాప్‌లో పంపిన గుర్తుతెలియని క్యూఆర్ కోడ్‌ను స్కాన్ చేయడం సురక్షితమేనా?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "కాదు, పేమెంట్ యాప్స్‌లో క్యూఆర్ కోడ్ స్కాన్ చేస్తే మీ ఖాతా నుండి డబ్బులు కట్ అవుతాయి. డబ్బులు పంపుతామని మోసగాళ్లు నకిలీ క్యూఆర్ కోడ్‌లను పంపుతారు. పిన్ ఎంటర్ చేయగానే మీ డబ్బులు మోసగాళ్ల ఖాతాకు బదిలీ అవుతాయి.",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "te_ans_004",
+      "language": "te",
+      "category": "answerable",
+      "question": "ఎన్‌పీసీఐ (NPCI) నిబంధనల ప్రకారం సాధారణ వ్యక్తుల మధ్య యూపీఐ చెల్లింపుల రోజువారీ పరిమితి ఎంత?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "ఎన్‌పీసీఐ నిబంధనల ప్రకారం సాధారణ వ్యక్తుల మధ్య యూపీఐ లావాదేవీల రోజువారీ పరిమితి రూ. 1,00,000. అయితే విద్య మరియు వైద్య ఖర్చుల వంటి ప్రత్యేక విభాగాలకు ఇది రూ. 5,00,000 వరకు ఉంటుంది.",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "te_ans_005",
+      "language": "te",
+      "category": "answerable",
+      "question": "కేవైసీ (KYC) అంటే ఏమిటి మరియు భారతదేశంలో బ్యాంకులు దీనిని ఎందుకు తప్పనిసరి చేశాయి?",
+      "response": "[MOCK] Based on retrieved context: Central KYC Registry (CKYCR) is managed by CERSAI to eliminate repetitive KYC submissions across different financial institutions. Once you complete KYC with a bank, mutual fund, or insurer, you receive a unique 14-digit KYC Identification Number (KI...",
+      "reference": "కేవైసీ అంటే 'నో యువర్ కస్టమర్' (మీ కస్టమర్‌ను తెలుసుకోండి). ఆర్బీఐ మరియు సెబీ నిబంధనల ప్రకారం ఆర్థిక నేరాలు, నకిలీ ఖాతాలు మరియు మనీ లాండరింగ్‌ను అరికట్టడానికి ఇది తప్పనిసరి గుర్తింపు ప్రక్రియ.",
+      "retrieved_contexts": [
+        "Central KYC Registry (CKYCR) is managed by CERSAI to eliminate repetitive KYC submissions across different financial institutions. Once you complete KYC with a bank, mutual fund, or insurer, you receive a unique 14-digit KYC Identification Number (KI..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "ckyc_central_registry",
+          "title": "Central KYC (CKYC) and 14-Digit KIN Registry",
+          "score": 0.2095,
+          "snippet": "Central KYC Registry (CKYCR) is managed by CERSAI to eliminate repetitive KYC submissions across different financial institutions. Once you complete KYC with a bank, mutual fund, or insurer, you receive a unique 14-digit KYC Identification Number (KI..."
+        }
+      ],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 0.8621,
+      "answer_relevancy": 0.4429,
+      "composite_score": 0.3262
+    },
+    {
+      "id": "te_ans_006",
+      "language": "te",
+      "category": "answerable",
+      "question": "భారతదేశంలో కేవైసీ కోసం అధికారికంగా చెల్లుబాటు అయ్యే పత్రాలు (OVD) ఏవి?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "ఆర్బీఐ ఆమోదించిన ఆరు అధికారిక పత్రాలు: పాస్‌పోర్ట్, డ్రైవింగ్ లైసెన్స్, ఆధార్ వివరాలు, ఓటర్ గుర్తింపు కార్డు, ఉపాధి హామీ (NREGA) జాబ్ కార్డు మరియు జాతీయ జనాభా నమోదు (NPR) లేఖ.",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "te_ans_007",
+      "language": "te",
+      "category": "answerable",
+      "question": "వీడియో కేవైసీ (V-CIP) పూర్తి చేయడానికి కస్టమర్‌కు ఉండవలసిన ముఖ్యమైన అర్హతలు ఏమిటి?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "కస్టమర్ భారతదేశ భౌగోళిక సరిహద్దులలో ఉండాలి, వారి వద్ద ఒరిజినల్ ఫిజికల్ పాన్ కార్డు ఉండాలి మరియు వీడియో సెషన్‌లో లైవ్ ఫోటో మరియు బయోమెట్రిక్ జీవనశైలి తనిఖీలను పూర్తి చేయాలి.",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "te_ans_008",
+      "language": "te",
+      "category": "answerable",
+      "question": "సెంట్రల్ కేవైసీ (CKYC) లోని 14 అంకెల కిన్ (KIN) నంబర్ కస్టమర్లకు ఎలా సహాయపడుతుంది?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "సీకేవైసీఆర్ ద్వారా ఒకసారి కేవైసీ పూర్తి చేస్తే 14 అంకెల కిన్ (KIN) లభిస్తుంది. దీనితో ఇతర బ్యాంకులు లేదా మ్యూచువల్ ఫండ్స్‌లో మళ్లీ పేపర్లు ఇవ్వకుండానే సులభంగా ఖాతాలు తెరవవచ్చు.",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    },
+    {
+      "id": "te_ans_009",
+      "language": "te",
+      "category": "answerable",
+      "question": "తక్కువ వడ్డీకే లోన్లు పొందడానికి సిబిల్ లేదా క్రెడిట్ స్కోర్ ఎంత ఉండటం ఉత్తమం?",
+      "response": "[MOCK] Based on retrieved context: In India, credit bureaus like CIBIL, Experian, CRIF High Mark, and Equifax score creditworthiness between 300 and 900. A score above 750 is considered excellent and commands the lowest interest rates on home and personal loans. Scores between 700 and...",
+      "reference": "క్రెడిట్ స్కోర్ 300 నుండి 900 వరకు ఉంటుంది. 750 లేదా అంతకంటే ఎక్కువ క్రెడిట్ స్కోర్ ఉంటే దానిని అద్భుతమైన స్కోర్‌గా పరిగణిస్తారు మరియు బ్యాంకుల నుండి అత్యంత తక్కువ వడ్డీకే రుణాలు లభిస్తాయి.",
+      "retrieved_contexts": [
+        "In India, credit bureaus like CIBIL, Experian, CRIF High Mark, and Equifax score creditworthiness between 300 and 900. A score above 750 is considered excellent and commands the lowest interest rates on home and personal loans. Scores between 700 and...",
+        "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his...",
+        "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate...",
+        "A soft inquiry occurs when you check your own credit score or when an employer does background verification; soft inquiries do not affect your credit score. A hard inquiry occurs when a lender checks your bureau report following a loan or credit card..."
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [
+        {
+          "doc_id": "credit_score_ranges",
+          "title": "Credit Score Ranges and Loan Eligibility",
+          "score": 0.295,
+          "snippet": "In India, credit bureaus like CIBIL, Experian, CRIF High Mark, and Equifax score creditworthiness between 300 and 900. A score above 750 is considered excellent and commands the lowest interest rates on home and personal loans. Scores between 700 and..."
+        },
+        {
+          "doc_id": "rebuilding_damaged_credit_score",
+          "title": "Strategies for Rebuilding a Damaged Credit Score",
+          "score": 0.2626,
+          "snippet": "To repair a damaged credit score: (1) Pay all EMIs and credit card dues in full before the due date, (2) Clear overdue or written-off accounts and obtain a No Objection Certificate (NOC), (3) Maintain older credit card accounts to preserve credit his..."
+        },
+        {
+          "doc_id": "fixed_vs_floating_rates",
+          "title": "Fixed vs Floating Interest Rates on Loans",
+          "score": 0.2608,
+          "snippet": "A fixed interest rate remains unchanged throughout the loan tenure, providing certainty in monthly payments. A floating interest rate is linked to an external benchmark (such as the RBI Repo Rate via EBLR) and changes periodically when benchmark rate..."
+        },
+        {
+          "doc_id": "credit_hard_vs_soft_inquiries",
+          "title": "Hard Inquiries vs Soft Inquiries on Credit Reports",
+          "score": 0.2324,
+          "snippet": "A soft inquiry occurs when you check your own credit score or when an employer does background verification; soft inquiries do not affect your credit score. A hard inquiry occurs when a lender checks your bureau report following a loan or credit card..."
+        }
+      ],
+      "context_precision": 1.0,
+      "context_recall": 0.2143,
+      "faithfulness": 0.875,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.5723
+    },
+    {
+      "id": "te_ans_010",
+      "language": "te",
+      "category": "answerable",
+      "question": "క్రెడిట్ స్కోర్ బాగుండాలంటే క్రెడిట్ యుటిలైజేషన్ రేషియో (CUR) ఎంత శాతంలోపు ఉంచాలి?",
+      "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+      "reference": "మీ మొత్తం క్రెడిట్ కార్డు పరిమితిలో 30% కంటే తక్కువగా మాత్రమే ఖర్చు చేయాలని నిపుణులు సూచిస్తున్నారు. ఎక్కువ పరిమితిని వాడితే క్రెడిట్ స్కోర్ తగ్గిపోయే ప్రమాదం ఉంది.",
+      "retrieved_contexts": [],
+      "must_refuse": false,
+      "refused": false,
+      "sources": [],
+      "context_precision": 0.0,
+      "context_recall": 0.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.2,
+      "composite_score": 0.3
+    }
+  ]
+}
