@@ -3,7 +3,7 @@
 PYTHON ?= uv run --directory qa --no-sync python
 PYTEST ?= uv run --directory qa --no-sync pytest
 
-.PHONY: test test-smoke test-web test-selenium test-parallel report triage lint format docker-build docker-run help
+.PHONY: test test-smoke test-web test-selenium test-parallel test-security eval-security report triage lint format docker-build docker-run help
 
 help:
 	@echo "VeriCoach QA Framework Targets:"
@@ -12,6 +12,8 @@ help:
 	@echo "  make test-web      - Run Playwright Web UI test suite"
 	@echo "  make test-selenium - Run Selenium cross-browser smoke suite"
 	@echo "  make test-parallel - Run test suite with pytest-xdist parallel execution"
+	@echo "  make test-security - Run deterministic AI security test suite"
+	@echo "  make eval-security - Run promptfoo LLM adversarial evaluation and generate HTML report"
 	@echo "  make report        - Generate Allure HTML report in qa/allure-report"
 	@echo "  make triage        - Display latest triage.json failure summary"
 	@echo "  make lint          - Check code quality with ruff and black"
@@ -33,6 +35,12 @@ test-selenium:
 
 test-parallel:
 	$(PYTEST) qa/tests/sample -n auto -v --alluredir=qa/allure-results
+
+test-security:
+	$(PYTEST) tests/security -v
+
+eval-security:
+	$(PYTHON) ../qa/llm_eval/promptfoo/run_security_eval.py
 
 report:
 	$(PYTHON) -m qa.framework.reporting.allure_report qa/allure-results qa/allure-report
