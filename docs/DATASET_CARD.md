@@ -120,3 +120,4 @@ pytest qa/tests/test_golden_dataset.py -v
 - **Corpus Coverage**: Evaluates retrieval strictly against the 30 educational documents shipped in VeriCoach v1. Advanced topics (derivatives, corporate balance sheets, cross-border taxation, cryptocurrencies) are out of scope and intentionally classified as `unanswerable`.
 - **Static Ground Truth**: Regulatory thresholds (such as Section 80C limits or NPCI transaction caps) reflect current Indian guidelines and may require updates upon future RBI/SEBI policy changes.
 - **Dialectal Variation**: Variations such as Tanglish or Hinglish are not included in `golden_v1.jsonl` and should be addressed in subsequent benchmark iterations (`golden_v2.jsonl`).
+

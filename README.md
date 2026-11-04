@@ -47,6 +47,9 @@ uv pip install -e ../app -e ".[dev]"
 
 # Run full QA test suite (OpenAPI contract, RAG metrics, PII guards, safety)
 .venv/Scripts/pytest.exe tests/ -v
+
+# Run Ragas multilingual evaluation (30 items, disk cached)
+.venv/Scripts/python.exe -m qa.llm_eval.ragas_eval.cli --limit 30 --provider mock
 ```
 
 ### 3. Frontend (`frontend/`)
@@ -57,6 +60,28 @@ npm install
 npm run dev      # Starts UI on http://localhost:3000
 npm run build    # Production build
 ```
+
+## Ragas Multilingual Evaluation (`qa/llm_eval/ragas_eval`)
+
+VeriCoach includes an automated RAG triaging framework using Ragas and disk-cached LLM judges across English, Hindi, and Telugu. See full documentation in [docs/RAGAS_EVALUATION.md](docs/RAGAS_EVALUATION.md).
+
+### Core Metrics
+
+- **`context_precision`**: Signal-to-noise ratio in retrieved context chunks.
+- **`context_recall`**: Completeness of retrieved contexts relative to reference ground truth.
+- **`faithfulness`**: Groundedness of generated answers; penalizes hallucinations.
+- **`answer_relevancy`**: Directness of the response without evasion or topic drift.
+
+### Failure Attribution Workflow
+
+- **Low Precision/Recall**: Retriever failure — adjust chunk size, top-$k$, or multilingual indexing.
+- **Low Faithfulness**: Generator failure — tune system prompt constraints or temperature.
+- **Unanswerable / Refusal**: Safe refusals are scored with 1.0 faithfulness.
+
+### Metric Limits & Evaluation Biases
+
+- **LLM Judge Biases**: Sycophancy toward own output format, length bias favoring verbose answers, and position bias ("lost in the middle").
+- **Non-English Quality**: Indic token fragmentation, code-mixing in financial terms, and semantic drift in multilingual judges (e.g., lower judge sensitivity for Telugu).
 
 ## LLM Providers
 

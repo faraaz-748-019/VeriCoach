@@ -258,3 +258,4 @@ npx allure-commandline open allure-report
 ```
 
 In the generated Allure report, the **Mobile Application** feature displays alongside **Web Interface** and **Core API**, complete with screenshots, recordings, and triage logs.
+

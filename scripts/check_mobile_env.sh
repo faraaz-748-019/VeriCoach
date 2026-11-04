@@ -106,3 +106,4 @@ else
     echo -e "${RED}One or more mobile checks failed. Please see the fixes above.${NC}"
     exit 1
 fi
+
