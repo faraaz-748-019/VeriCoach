@@ -79,6 +79,22 @@ class BaseWebPage:
         except Exception:
             return False
 
+    def press_key(self, selector: str, key: str, timeout_ms: int = 10000) -> None:
+        """Focus on selector and dispatch keyboard key press."""
+        try:
+            self.page.locator(selector).press(key, timeout=timeout_ms)
+        except Exception as exc:
+            self.take_screenshot(f"press_key_error_{key}")
+            raise exc
+
+    def select_option(self, selector: str, value: str, timeout_ms: int = 10000) -> None:
+        """Select option by value in <select> dropdown."""
+        try:
+            self.page.locator(selector).select_option(value, timeout=timeout_ms)
+        except Exception as exc:
+            self.take_screenshot(f"select_option_error_{value}")
+            raise exc
+
     def take_screenshot(self, name: str = "web_screenshot") -> bytes:
         """Capture browser screenshot and attach to Allure report."""
         try:
