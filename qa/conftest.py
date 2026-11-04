@@ -19,6 +19,7 @@ import pytest
 # Ensure mock provider is used for zero-network execution during test runs
 os.environ.setdefault("LLM_PROVIDER", "mock")
 os.environ.setdefault("EMBEDDING_PROVIDER", "mock")
+os.environ.setdefault("DEEPEVAL_TELEMETRY_OPT_OUT", "YES")
 
 from qa.framework.config import get_settings
 from qa.framework.fixtures import *  # noqa: F403
@@ -48,6 +49,14 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         action="store",
         default="triage.json",
         help="Target output file path for failure triage JSON",
+    )
+    group.addoption(
+        "--subset",
+        action="store",
+        nargs="?",
+        const="6",
+        default=None,
+        help="Fast CI evaluation subset: run only N samples (default 6 when flagged)",
     )
 
 

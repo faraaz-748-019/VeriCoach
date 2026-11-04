@@ -26,6 +26,8 @@ dependencies = [
     "jsonschema>=4.20",
     "schemathesis>=4.0",
     "ragas>=0.4.0",
+    "deepeval>=4.3.0",
+    "pyyaml>=6.0",
     "datasets>=2.19.0",
     "diskcache>=5.6.0",
     "langchain-community>=0.3.0,<0.4.0",
@@ -42,7 +44,7 @@ dev = [
 packages = ["qa"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests", "mobile"]
+testpaths = ["tests", "mobile", "llm_eval/deepeval_tests"]
 pythonpath = ["."]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
