@@ -42,6 +42,8 @@ qa/.cache/
 
 # Ruff / Black
 .ruff_cache/
+.mpl_cache/
+results/.mpl_cache/
 
 # Node
 node_modules/

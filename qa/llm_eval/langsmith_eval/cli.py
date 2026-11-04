@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import sys
 
 from qa.llm_eval.langsmith_eval.dataset_uploader import upload_golden_dataset
 from qa.llm_eval.langsmith_eval.experiment_runner import run_langsmith_experiment

@@ -87,7 +87,8 @@ def trace_assemble_prompt(
     """Traced prompt construction span treating context as untrusted data."""
     if valid_sources:
         context_text = "\n\n".join(
-            f"[Doc {i+1}: {s.title}]\n{s.snippet}" for i, s in enumerate(valid_sources)
+            f"[Doc {i + 1}: {s.title}]\n{s.snippet}"
+            for i, s in enumerate(valid_sources)
         )
     else:
         context_text = "[No relevant documents found in knowledge base]"
@@ -113,7 +114,6 @@ def trace_llm_generate(
 ) -> Any:
     """Traced LLM completion span."""
     return provider.complete(prompt)
-
 
 
 def get_rag_store(

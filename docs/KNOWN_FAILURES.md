@@ -110,5 +110,25 @@ and whether a fix is in progress.
 - **Resolution**: Added a global exception handler for `Exception` in `app/backend/main.py` returning sanitized 500 responses with trace IDs, and updated `JSONFormatter` in `app/backend/logging_config.py` to mask PII inside exception strings.
 
 
+## KF-006: Multilingual Semantic Drift and Concept Hashing Divergence
+
+- **Discovered by**: Multilingual Consistency Evaluation (`qa/llm_eval/multilingual_consistency.py`)
+- **Scope**: Cross-lingual evaluation of 20 parallel trilingual financial questions (60 pairwise comparisons across EN, HI, and TE).
+- **Failing Command**:
+  ```bash
+  python -m qa.llm_eval.multilingual_consistency --questions 20 --threshold 0.70
+  ```
+- **Observed Metrics**:
+  - Overall Consistency Rate: **33.3%** (20/60 pairs passed threshold).
+  - 40 pairs flagged with semantic divergence or low cross-lingual cosine similarity (< 0.70).
+  - Average cosine similarities: EN-HI: 0.454, EN-TE: 0.422, HI-TE: 0.456.
+- **Expected Behaviour**: Answers to semantically identical financial questions across English, Hindi, and Telugu should achieve high cross-lingual embedding similarity ($\ge 0.70$) and deliver equivalent advice, numbers, caveats, and refusal boundaries.
+- **Actual Behaviour**: Complex Telugu and Hindi compound words and inflectional forms (e.g., `తీసుకోవడానికి`, `క్యాష్‌బ్యాక్`, `ఖాతాదారుడు`) fail to trigger dictionary matches in `_CROSS_LINGUAL_MOCK_MAP`, resulting in low hash collisions and depressed cosine similarities despite underlying factual parity.
+- **Root Cause**: Reliance on deterministic n-gram hashing and a hardcoded lexical token dictionary in the mock embedder (`app/backend/providers/mock.py`) rather than dense multilingual neural representations.
+- **Resolution / Status**: Documented in `docs/LLM_EVAL_REPORT.md` and tracked as known architectural limitation of the mock provider. Recommended migration to dense multilingual embedding models (`text-embedding-004` via Gemini) for production environments.
+
+
+
+
 
 

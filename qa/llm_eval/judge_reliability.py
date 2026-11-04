@@ -6,17 +6,21 @@ import argparse
 import csv
 import json
 import logging
-import os
 import pathlib
 import random
 from typing import Any
 
-from sklearn.metrics import confusion_matrix as sklearn_confusion_matrix
-
 from backend.config import BackendSettings, get_backend_settings
 from backend.guardrails import evaluate_baseline_guardrails, mask_pii
-from backend.main import get_rag_store, trace_assemble_prompt, trace_llm_generate, trace_rag_retrieval
+from backend.main import (
+    get_rag_store,
+    trace_assemble_prompt,
+    trace_llm_generate,
+    trace_rag_retrieval,
+)
 from backend.rag.store import ChromaRAGStore
+from sklearn.metrics import confusion_matrix as sklearn_confusion_matrix
+
 from qa.llm_eval.langsmith_eval.dataset_uploader import load_golden_dataset
 
 logger = logging.getLogger("vericoach.qa.judge_reliability")
@@ -223,7 +227,9 @@ def build_human_labels(
     """
     rows: list[dict[str, Any]] = []
 
-    for item, out_meta, judge_res in zip(sampled_items, model_outputs, judge_results):
+    for item, out_meta, judge_res in zip(
+        sampled_items, model_outputs, judge_results, strict=False
+    ):
         item_id = item["id"]
         lang = item["language"]
         cat = item["category"]
@@ -243,24 +249,28 @@ def build_human_labels(
             # Human agrees fully with judge
             h_label = "correct"
 
-        rows.append({
-            "id": item_id,
-            "language": lang,
-            "category": cat,
-            "question": q,
-            "reference_answer": ref,
-            "model_output": out,
-            "human_label": h_label,
-            "judge_label": j_label,
-            "judge_score": j_score,
-            "judge_reason": j_reason,
-            "notes": item.get("notes", ""),
-        })
+        rows.append(
+            {
+                "id": item_id,
+                "language": lang,
+                "category": cat,
+                "question": q,
+                "reference_answer": ref,
+                "model_output": out,
+                "human_label": h_label,
+                "judge_label": j_label,
+                "judge_score": j_score,
+                "judge_reason": j_reason,
+                "notes": item.get("notes", ""),
+            }
+        )
 
     return rows
 
 
-def compute_cohen_kappa(y_true: list[str], y_pred: list[str], labels: list[str] = VALID_LABELS) -> float:
+def compute_cohen_kappa(
+    y_true: list[str], y_pred: list[str], labels: list[str] = VALID_LABELS
+) -> float:
     """
     Compute Cohen's Kappa coefficient between two label lists.
     Kappa = (P_observed - P_expected) / (1 - P_expected)
@@ -270,13 +280,13 @@ def compute_cohen_kappa(y_true: list[str], y_pred: list[str], labels: list[str] 
 
     n = len(y_true)
     # Observed agreement
-    p_o = sum(1 for yt, yp in zip(y_true, y_pred) if yt == yp) / n
+    p_o = sum(1 for yt, yp in zip(y_true, y_pred, strict=False) if yt == yp) / n
 
     # Expected agreement
-    counts_true: dict[str, int] = {lbl: 0 for lbl in labels}
-    counts_pred: dict[str, int] = {lbl: 0 for lbl in labels}
+    counts_true: dict[str, int] = dict.fromkeys(labels, 0)
+    counts_pred: dict[str, int] = dict.fromkeys(labels, 0)
 
-    for yt, yp in zip(y_true, y_pred):
+    for yt, yp in zip(y_true, y_pred, strict=False):
         if yt in counts_true:
             counts_true[yt] += 1
         if yp in counts_pred:
@@ -312,7 +322,7 @@ def compute_agreement_study(rows: list[dict[str, Any]]) -> dict[str, Any]:
     all_judge = [r["judge_label"] for r in rows]
 
     total = len(rows)
-    matches = sum(1 for h, j in zip(all_human, all_judge) if h == j)
+    matches = sum(1 for h, j in zip(all_human, all_judge, strict=False) if h == j)
     overall_acc = round(matches / total, 4) if total > 0 else 0.0
     overall_kappa = compute_cohen_kappa(all_human, all_judge)
 
@@ -323,7 +333,7 @@ def compute_agreement_study(rows: list[dict[str, Any]]) -> dict[str, Any]:
         l_human = [r["human_label"] for r in lang_rows]
         l_judge = [r["judge_label"] for r in lang_rows]
         l_total = len(lang_rows)
-        l_matches = sum(1 for h, j in zip(l_human, l_judge) if h == j)
+        l_matches = sum(1 for h, j in zip(l_human, l_judge, strict=False) if h == j)
         l_acc = round(l_matches / l_total, 4) if l_total > 0 else 0.0
         l_kappa = compute_cohen_kappa(l_human, l_judge)
 
@@ -336,7 +346,7 @@ def compute_agreement_study(rows: list[dict[str, Any]]) -> dict[str, Any]:
         }
 
     # Confusion matrix
-    present_labels = sorted(list(set(all_human + all_judge)))
+    present_labels = sorted(set(all_human + all_judge))
     cm = sklearn_confusion_matrix(all_human, all_judge, labels=present_labels).tolist()
 
     return {
@@ -371,7 +381,7 @@ def run_judge_reliability_study(
     if csv_file.exists() and not force_regenerate:
         logger.info("Loading existing human labels from %s", csv_file)
         rows: list[dict[str, Any]] = []
-        with open(csv_file, "r", encoding="utf-8") as f:
+        with open(csv_file, encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for r in reader:
                 rows.append(dict(r))
@@ -393,11 +403,13 @@ def run_judge_reliability_study(
                 store=store,
                 settings=settings,
             )
-            outputs_meta.append({
-                "output": out_text,
-                "refused": refused,
-                "refusal_reason": r_reason,
-            })
+            outputs_meta.append(
+                {
+                    "output": out_text,
+                    "refused": refused,
+                    "refusal_reason": r_reason,
+                }
+            )
 
             j_label, j_score, j_reason = classify_with_judge(
                 question=item["question"],
@@ -450,10 +462,24 @@ def main() -> None:
         pass
 
     parser = argparse.ArgumentParser(description="VeriCoach Judge Reliability Study")
-    parser.add_argument("--csv", type=str, default=str(DEFAULT_CSV_PATH), help="Path to human_labels.csv")
-    parser.add_argument("--results", type=str, default=str(DEFAULT_RESULTS_PATH), help="Output JSON path")
-    parser.add_argument("--regenerate", action="store_true", help="Force regeneration of sample and CSV")
-    parser.add_argument("--sample-size", type=int, default=30, help="Number of items to sample")
+    parser.add_argument(
+        "--csv",
+        type=str,
+        default=str(DEFAULT_CSV_PATH),
+        help="Path to human_labels.csv",
+    )
+    parser.add_argument(
+        "--results",
+        type=str,
+        default=str(DEFAULT_RESULTS_PATH),
+        help="Output JSON path",
+    )
+    parser.add_argument(
+        "--regenerate", action="store_true", help="Force regeneration of sample and CSV"
+    )
+    parser.add_argument(
+        "--sample-size", type=int, default=30, help="Number of items to sample"
+    )
 
     args = parser.parse_args()
 
@@ -465,11 +491,15 @@ def main() -> None:
         force_regenerate=args.regenerate,
     )
     overall = results["overall"]
-    print(f"Overall Accuracy:   {overall['accuracy'] * 100:.1f}% ({overall['matches']}/{overall['total_samples']})")
+    print(
+        f"Overall Accuracy:   {overall['accuracy'] * 100:.1f}% ({overall['matches']}/{overall['total_samples']})"
+    )
     print(f"Cohen's Kappa:      {overall['cohen_kappa']} ({overall['interpretation']})")
     print("\nPer-Language Agreement:")
     for lang, metrics in results["by_language"].items():
-        print(f"  {lang.upper()}: Acc={metrics['accuracy']*100:.1f}%, Kappa={metrics['cohen_kappa']} ({metrics['interpretation']})")
+        print(
+            f"  {lang.upper()}: Acc={metrics['accuracy'] * 100:.1f}%, Kappa={metrics['cohen_kappa']} ({metrics['interpretation']})"
+        )
     print(f"\nResults written to {args.results}")
 
 

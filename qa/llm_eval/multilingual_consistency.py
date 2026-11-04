@@ -10,15 +10,20 @@ import argparse
 import json
 import logging
 import math
-import os
 import pathlib
 import sys
 from typing import Any
 
 from backend.config import BackendSettings, get_backend_settings
 from backend.guardrails import evaluate_baseline_guardrails, mask_pii
-from backend.main import get_rag_store, trace_assemble_prompt, trace_llm_generate, trace_rag_retrieval
+from backend.main import (
+    get_rag_store,
+    trace_assemble_prompt,
+    trace_llm_generate,
+    trace_rag_retrieval,
+)
 from backend.rag.store import ChromaRAGStore
+
 from qa.llm_eval.langsmith_eval.dataset_uploader import load_golden_dataset
 
 logger = logging.getLogger("vericoach.qa.multilingual_consistency")
@@ -49,20 +54,20 @@ def extract_trilingual_questions(
 
     # Find common suffixes
     common_suffixes = sorted(
-        list(
-            set(by_lang_id["en"].keys())
-            & set(by_lang_id["hi"].keys())
-            & set(by_lang_id["te"].keys())
-        )
+        set(by_lang_id["en"].keys())
+        & set(by_lang_id["hi"].keys())
+        & set(by_lang_id["te"].keys())
     )
 
     for suffix in common_suffixes[:num_questions]:
-        trilingual.append({
-            "key": suffix,
-            "en": by_lang_id["en"][suffix],
-            "hi": by_lang_id["hi"][suffix],
-            "te": by_lang_id["te"][suffix],
-        })
+        trilingual.append(
+            {
+                "key": suffix,
+                "en": by_lang_id["en"][suffix],
+                "hi": by_lang_id["hi"][suffix],
+                "te": by_lang_id["te"][suffix],
+            }
+        )
 
     return trilingual
 
@@ -77,7 +82,8 @@ def generate_answer(
     guardrail_res = evaluate_baseline_guardrails(question, language=language)
     if not guardrail_res.passed:
         return {
-            "answer": guardrail_res.refusal_message or "Refused due to financial safety rules.",
+            "answer": guardrail_res.refusal_message
+            or "Refused due to financial safety rules.",
             "refused": True,
             "refusal_reason": guardrail_res.refusal_reason,
             "sources": [],
@@ -111,7 +117,7 @@ def compute_cosine_similarity(vec_a: list[float], vec_b: list[float]) -> float:
     if not vec_a or not vec_b or len(vec_a) != len(vec_b):
         return 0.0
 
-    dot = sum(a * b for a, b in zip(vec_a, vec_b))
+    dot = sum(a * b for a, b in zip(vec_a, vec_b, strict=False))
     norm_a = math.sqrt(sum(a * a for a in vec_a))
     norm_b = math.sqrt(sum(b * b for b in vec_b))
 
@@ -139,8 +145,6 @@ def evaluate_pair_consistency_with_judge(
     """
     # Deterministic evaluation heuristics (for mock provider and baseline verification)
     # Checks whether both answers preserve core facts, numbers, and advice directions
-    ans_a_lower = ans_a.lower()
-    ans_b_lower = ans_b.lower()
 
     # Rule 1: High embedding similarity and identical core content
     if emb_sim >= 0.85:
@@ -215,7 +219,12 @@ def run_multilingual_consistency_eval(
     inconsistent_pairs: list[dict[str, Any]] = []
 
     metrics_by_pair: dict[str, dict[str, Any]] = {
-        f"{p[0]}_{p[1]}": {"total": 0, "consistent": 0, "similarities": [], "scores": []}
+        f"{p[0]}_{p[1]}": {
+            "total": 0,
+            "consistent": 0,
+            "similarities": [],
+            "scores": [],
+        }
         for p in pair_types
     }
 
@@ -245,21 +254,25 @@ def run_multilingual_consistency_eval(
             ref_b = tri[lang_b]["reference_answer"]
 
             sim = compute_cosine_similarity(embeddings[lang_a], embeddings[lang_b])
-            is_consistent, judge_score, div_type, reason = evaluate_pair_consistency_with_judge(
-                lang_a=lang_a,
-                lang_b=lang_b,
-                q_a=q_a,
-                q_b=q_b,
-                ans_a=a_a,
-                ans_b=a_b,
-                ref_a=ref_a,
-                ref_b=ref_b,
-                emb_sim=sim,
-                provider_name=store.provider.provider_name,
+            is_consistent, judge_score, div_type, reason = (
+                evaluate_pair_consistency_with_judge(
+                    lang_a=lang_a,
+                    lang_b=lang_b,
+                    q_a=q_a,
+                    q_b=q_b,
+                    ans_a=a_a,
+                    ans_b=a_b,
+                    ref_a=ref_a,
+                    ref_b=ref_b,
+                    emb_sim=sim,
+                    provider_name=store.provider.provider_name,
+                )
             )
 
             # Strict consistency requires judge agreement AND meeting similarity threshold
-            passed = bool(is_consistent and (sim >= similarity_threshold or judge_score >= 0.75))
+            passed = bool(
+                is_consistent and (sim >= similarity_threshold or judge_score >= 0.75)
+            )
 
             pair_entry = {
                 "question_index": idx,
@@ -291,7 +304,9 @@ def run_multilingual_consistency_eval(
 
     total_pairs = len(pair_results)
     total_consistent = sum(1 for p in pair_results if p["is_consistent"])
-    overall_consistency_rate = round(total_consistent / total_pairs, 4) if total_pairs > 0 else 0.0
+    overall_consistency_rate = (
+        round(total_consistent / total_pairs, 4) if total_pairs > 0 else 0.0
+    )
 
     summary_by_pair = {}
     for p_key, data in metrics_by_pair.items():
@@ -303,7 +318,9 @@ def run_multilingual_consistency_eval(
             "total_pairs": t,
             "consistent_pairs": c,
             "consistency_rate": round(c / t, 4) if t > 0 else 0.0,
-            "mean_embedding_similarity": round(sum(sims) / len(sims), 4) if sims else 0.0,
+            "mean_embedding_similarity": round(sum(sims) / len(sims), 4)
+            if sims
+            else 0.0,
             "mean_judge_score": round(sum(scores) / len(scores), 4) if scores else 0.0,
         }
 
@@ -339,16 +356,37 @@ def main() -> None:
     except Exception:
         pass
 
-    parser = argparse.ArgumentParser(description="VeriCoach Multilingual Consistency Evaluator")
-    parser.add_argument("--golden", type=str, default=str(DEFAULT_GOLDEN_PATH), help="Path to golden dataset")
-    parser.add_argument("--results", type=str, default=str(DEFAULT_RESULTS_PATH), help="Path to output results")
-    parser.add_argument("--questions", type=int, default=20, help="Number of trilingual questions (default 20)")
-    parser.add_argument("--threshold", type=float, default=0.70, help="Embedding similarity threshold")
+    parser = argparse.ArgumentParser(
+        description="VeriCoach Multilingual Consistency Evaluator"
+    )
+    parser.add_argument(
+        "--golden",
+        type=str,
+        default=str(DEFAULT_GOLDEN_PATH),
+        help="Path to golden dataset",
+    )
+    parser.add_argument(
+        "--results",
+        type=str,
+        default=str(DEFAULT_RESULTS_PATH),
+        help="Path to output results",
+    )
+    parser.add_argument(
+        "--questions",
+        type=int,
+        default=20,
+        help="Number of trilingual questions (default 20)",
+    )
+    parser.add_argument(
+        "--threshold", type=float, default=0.70, help="Embedding similarity threshold"
+    )
 
     args = parser.parse_args()
 
     print("=== Multilingual Consistency Evaluation ===")
-    print(f"Evaluating {args.questions} trilingual questions (60 pairwise comparisons)...")
+    print(
+        f"Evaluating {args.questions} trilingual questions (60 pairwise comparisons)..."
+    )
     results = run_multilingual_consistency_eval(
         golden_path=args.golden,
         results_path=args.results,
@@ -356,16 +394,22 @@ def main() -> None:
         similarity_threshold=args.threshold,
     )
 
-    print(f"\nOverall Consistency Rate: {results['overall_consistency_rate']*100:.1f}% ({results['consistent_pairs']}/{results['total_pairs_evaluated']})")
+    print(
+        f"\nOverall Consistency Rate: {results['overall_consistency_rate'] * 100:.1f}% ({results['consistent_pairs']}/{results['total_pairs_evaluated']})"
+    )
     print(f"Inconsistent Pairs Found: {results['inconsistent_pairs_count']}")
     print("\nBreakdown by Pair:")
     for pair_name, stats in results["pair_breakdown"].items():
-        print(f"  {pair_name.upper()}: {stats['consistency_rate']*100:.1f}% consistent | Mean Sim: {stats['mean_embedding_similarity']:.3f} | Mean Judge: {stats['mean_judge_score']:.3f}")
+        print(
+            f"  {pair_name.upper()}: {stats['consistency_rate'] * 100:.1f}% consistent | Mean Sim: {stats['mean_embedding_similarity']:.3f} | Mean Judge: {stats['mean_judge_score']:.3f}"
+        )
 
     if results["inconsistent_pairs"]:
         print(f"\nInconsistent Pairs Details ({len(results['inconsistent_pairs'])}):")
         for inc in results["inconsistent_pairs"]:
-            print(f"  - [{inc['pair']}] Question {inc['question_key']}: Sim={inc['embedding_similarity']:.3f}, Divergence={inc['divergence_type']}")
+            print(
+                f"  - [{inc['pair']}] Question {inc['question_key']}: Sim={inc['embedding_similarity']:.3f}, Divergence={inc['divergence_type']}"
+            )
             print(f"    Reason: {inc['reason']}")
 
     print(f"\nFull results saved to {args.results}")

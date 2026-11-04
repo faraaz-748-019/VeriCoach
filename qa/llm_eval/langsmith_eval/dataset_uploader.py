@@ -16,14 +16,16 @@ DEFAULT_GOLDEN_PATH = pathlib.Path("qa/data/golden/golden_v1.jsonl")
 DEFAULT_DATASET_NAME = "vericoach-golden-v1"
 
 
-def load_golden_dataset(path: pathlib.Path | str = DEFAULT_GOLDEN_PATH) -> list[dict[str, Any]]:
+def load_golden_dataset(
+    path: pathlib.Path | str = DEFAULT_GOLDEN_PATH,
+) -> list[dict[str, Any]]:
     """Load items from the golden dataset JSONL file."""
     file_path = pathlib.Path(path)
     if not file_path.exists():
         raise FileNotFoundError(f"Golden dataset not found at {file_path}")
 
     items: list[dict[str, Any]] = []
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         for line_num, line in enumerate(f, start=1):
             line_str = line.strip()
             if not line_str:
@@ -112,7 +114,11 @@ def upload_golden_dataset(
         dataset_id=dataset.id,
     )
 
-    logger.info("Successfully uploaded %d examples to LangSmith dataset '%s'", len(items), dataset_name)
+    logger.info(
+        "Successfully uploaded %d examples to LangSmith dataset '%s'",
+        len(items),
+        dataset_name,
+    )
     return {
         "dataset_name": dataset_name,
         "status": "created",
