@@ -53,6 +53,68 @@ _metrics_data: dict[str, Any] = {
     "feedbacks": _feedbacks,
 }
 
+# ── LangSmith Tracing Spans ───────────────────────────────────────────────────
+try:
+    from langsmith import traceable
+except ImportError:
+
+    def traceable(*args: Any, **kwargs: Any) -> Any:  # type: ignore[misc]
+        def decorator(fn: Any) -> Any:
+            return fn
+
+        if args and callable(args[0]):
+            return args[0]
+        return decorator
+
+
+@traceable(run_type="retriever", name="rag_retrieval")
+def trace_rag_retrieval(
+    store: ChromaRAGStore,
+    query: str,
+    top_k: int,
+    language: str,
+) -> list[RetrievedSource]:
+    """Traced context retrieval span from Chroma vector store."""
+    return store.retrieve(query=query, top_k=top_k, language=language)
+
+
+@traceable(run_type="prompt", name="assemble_prompt")
+def trace_assemble_prompt(
+    sanitized_question: str,
+    language: str,
+    valid_sources: list[RetrievedSource],
+) -> str:
+    """Traced prompt construction span treating context as untrusted data."""
+    if valid_sources:
+        context_text = "\n\n".join(
+            f"[Doc {i+1}: {s.title}]\n{s.snippet}" for i, s in enumerate(valid_sources)
+        )
+    else:
+        context_text = "[No relevant documents found in knowledge base]"
+
+    lang_display = {
+        "en": "English",
+        "hi": "Hindi",
+        "te": "Telugu",
+        "auto": "the user's language",
+    }.get(language, "English")
+
+    return SYSTEM_PROMPT_TEMPLATE.format(
+        language_name=lang_display,
+        context=context_text,
+        question=sanitized_question,
+    )
+
+
+@traceable(run_type="llm", name="llm_generate")
+def trace_llm_generate(
+    provider: Any,
+    prompt: str,
+) -> Any:
+    """Traced LLM completion span."""
+    return provider.complete(prompt)
+
+
 
 def get_rag_store(
     settings: BackendSettings = Depends(get_backend_settings),
@@ -235,7 +297,8 @@ def chat_v1(
     sanitized_question = mask_pii(raw_question)
 
     # 3. Retrieve relevant context from Chroma vector store (top-k = 4)
-    retrieved_sources: list[RetrievedSource] = store.retrieve(
+    retrieved_sources: list[RetrievedSource] = trace_rag_retrieval(
+        store=store,
         query=sanitized_question,
         top_k=settings.rag_top_k,
         language=request_data.language,
@@ -244,30 +307,18 @@ def chat_v1(
     # Filter sources with sufficient relevance score
     valid_sources = [s for s in retrieved_sources if s.score >= 0.2]
 
-    # Format context for system prompt
-    if valid_sources:
-        context_text = "\n\n".join(
-            f"[Doc {i+1}: {s.title}]\n{s.snippet}" for i, s in enumerate(valid_sources)
-        )
-    else:
-        context_text = "[No relevant documents found in knowledge base]"
-
     # 4. Construct prompt with system instructions treating context as untrusted data
-    lang_display = {
-        "en": "English",
-        "hi": "Hindi",
-        "te": "Telugu",
-        "auto": "the user's language",
-    }.get(request_data.language, "English")
-
-    prompt = SYSTEM_PROMPT_TEMPLATE.format(
-        language_name=lang_display,
-        context=context_text,
-        question=sanitized_question,
+    prompt = trace_assemble_prompt(
+        sanitized_question=sanitized_question,
+        language=request_data.language,
+        valid_sources=valid_sources,
     )
 
     # 5. Call LLM provider
-    llm_resp = store.provider.complete(prompt)
+    llm_resp = trace_llm_generate(
+        provider=store.provider,
+        prompt=prompt,
+    )
 
     # Calculate metrics
     elapsed_ms = (time.time() - start_time) * 1000.0
