@@ -3,13 +3,15 @@
 PYTHON ?= uv run --no-sync python
 PYTEST ?= uv run --no-sync pytest
 
-.PHONY: test test-smoke test-api test-contract test-schemathesis newman export-openapi generate-postman test-parallel report triage lint format help
+.PHONY: test test-smoke test-api test-web test-selenium test-contract test-schemathesis newman export-openapi generate-postman test-parallel report triage lint format help
 
 help:
 	@echo "VeriCoach QA (Subdirectory) Targets:"
 	@echo "  make test              - Run framework sample tests"
 	@echo "  make test-smoke        - Run smoke tests"
 	@echo "  make test-api          - Run API test suite (pytest -m api)"
+	@echo "  make test-web          - Run Playwright Web UI test suite"
+	@echo "  make test-selenium     - Run Selenium cross-browser smoke suite"
 	@echo "  make test-contract     - Run OpenAPI breaking contract test"
 	@echo "  make test-schemathesis - Run Schemathesis property tests"
 	@echo "  make newman            - Run Newman collection suite with htmlextra reporter"
@@ -28,6 +30,12 @@ test-smoke:
 
 test-api:
 	$(PYTEST) tests/api -m api -v --alluredir=allure-results
+
+test-web:
+	$(PYTEST) tests/web -v --alluredir=allure-results
+
+test-selenium:
+	$(PYTEST) tests/web_selenium -v --alluredir=allure-results
 
 test-contract:
 	$(PYTEST) tests/api/test_contract_breaking.py -v --alluredir=allure-results
