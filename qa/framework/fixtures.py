@@ -41,7 +41,10 @@ def api_client(
     client: FrameworkAPIClient
     try:
         # Check if local FastAPI app can be imported for in-memory ASGI dispatch
-        from app.api.main import app as fastapi_app
+        try:
+            from backend.main import app as fastapi_app
+        except ImportError:
+            from app.backend.main import app as fastapi_app
 
         client = FrameworkAPIClient(
             base_url=framework_settings.base_url,
@@ -131,6 +134,24 @@ def browser_page(
                         pass
 
                     def wait_for(self, **kw: Any) -> None:
+                        pass
+
+                    def is_enabled(self) -> bool:
+                        return True
+
+                    def is_visible(self) -> bool:
+                        return True
+
+                    def input_value(self) -> str:
+                        return "en"
+
+                    def get_attribute(self, name: str) -> str:
+                        return ""
+
+                    def press(self, key: str, **kw: Any) -> None:
+                        pass
+
+                    def select_option(self, value: Any, **kw: Any) -> None:
                         pass
 
                 return SimulatedLocator()

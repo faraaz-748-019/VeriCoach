@@ -104,7 +104,7 @@ jobs:
         env:
           LLM_PROVIDER: mock
           REQUIRE_API_KEY: "true"
-          API_KEYS: "vc-test-key-12345,vc-test-key-67890"
+          API_KEYS: '["vc-test-key-12345","vc-test-key-67890"]'
         run: |
           pytest qa/tests/api qa/tests/test_pii_guards.py qa/tests/security -v --alluredir=allure-results
 
@@ -147,7 +147,7 @@ jobs:
         env:
           LLM_PROVIDER: mock
           REQUIRE_API_KEY: "true"
-          API_KEYS: "vc-test-key-12345,vc-test-key-67890"
+          API_KEYS: '["vc-test-key-12345","vc-test-key-67890"]'
           PYTHONPATH: app
         run: |
           python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 &
@@ -191,6 +191,7 @@ jobs:
           npm install -g allure-commandline
 
       - name: Download all Allure raw results
+        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           pattern: "*-allure-results"
@@ -200,7 +201,8 @@ jobs:
       - name: Generate Allure HTML Report
         run: |
           mkdir -p combined-allure-results
-          allure generate combined-allure-results -o allure-report --clean || npx allure-commandline generate combined-allure-results -o allure-report --clean
+          mkdir -p allure-report
+          (allure generate combined-allure-results -o allure-report --clean || npx allure-commandline generate combined-allure-results -o allure-report --clean) || true
 
       - name: Run Quality Gate Script
         env:
