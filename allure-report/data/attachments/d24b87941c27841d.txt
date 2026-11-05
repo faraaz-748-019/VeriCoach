@@ -1,3 +1,0 @@
-{"timestamp": "2026-11-05 13:47:38,736", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 31, "chunks_count": 31}
-{"timestamp": "2026-11-05 13:47:38,743", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.9ms)", "trace_id": "fdf2e29f-cd7c-4e4f-a6b0-ab3be10be132", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.89, "url": "http://testserver/v1/chat"}
-2026-11-05 13:47:38,743 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"

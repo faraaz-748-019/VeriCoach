@@ -1,2 +1,0 @@
-{"timestamp": "2026-11-05 13:47:33,755", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
-{"timestamp": "2026-11-05 13:47:33,759", "level": "INFO", "logger": "vericoach", "message": "GET /v1/documents/invalid_doc_id_9999 -> 404 (1.8ms)", "trace_id": "24bafd4b-2efc-44f1-b6d1-5e7bd3cb2a87", "path": "/v1/documents/invalid_doc_id_9999", "method": "GET", "status_code": 404, "duration_ms": 1.81, "url": "http://testserver/v1/documents/invalid_doc_id_9999"}

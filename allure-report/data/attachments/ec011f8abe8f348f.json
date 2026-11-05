@@ -1,0 +1,18 @@
+{
+  "status_code": 200,
+  "duration_ms": 33.48,
+  "headers": {
+    "content-length": "238",
+    "content-type": "application/json",
+    "vary": "Origin",
+    "x-trace-id": "20fccfd9-79bb-4ad5-a720-a85048d18f3a"
+  },
+  "body": {
+    "response": "I could not find information about that in the knowledge base. I can only provide educational information based on verified documents.",
+    "provider": "mock",
+    "model": "mock",
+    "prompt_tokens": 10,
+    "completion_tokens": 10,
+    "locale": "en"
+  }
+}

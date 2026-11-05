@@ -1,0 +1,1 @@
+{"timestamp": "2026-11-05 14:31:42,470", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}

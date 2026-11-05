@@ -1,0 +1,5 @@
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /v1/chat -> 422 (2.2ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 422 Unprocessable Content"
+INFO     vericoach:main.py:206 POST /v1/feedback -> 422 (1.3ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/feedback "HTTP/1.1 422 Unprocessable Content"

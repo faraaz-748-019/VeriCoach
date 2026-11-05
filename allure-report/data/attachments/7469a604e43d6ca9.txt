@@ -1,3 +1,0 @@
-{"timestamp": "2026-11-05 13:47:33,041", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
-{"timestamp": "2026-11-05 13:47:33,047", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 401 (3.3ms)", "trace_id": "14eb518e-b7df-47ea-bbc8-8e5c88edd0fe", "path": "/v1/chat", "method": "POST", "status_code": 401, "duration_ms": 3.3, "url": "http://testserver/v1/chat"}
-2026-11-05 13:47:33,048 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 401 Unauthorized"

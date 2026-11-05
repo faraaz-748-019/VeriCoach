@@ -1,1 +1,0 @@
-{"timestamp": "2026-11-05 13:47:39,912", "level": "INFO", "logger": "vericoach.qa.fixtures", "message": "Appium server offline ([Errno 111] Connection refused). Using deterministic MockMobileDriver for CI."}

@@ -1,3 +1,0 @@
-INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
-INFO     vericoach:main.py:206 GET /health -> 200 (110.9ms)
-INFO     httpx2:_client.py:1084 HTTP Request: GET http://localhost:8000/health "HTTP/1.1 200 OK"

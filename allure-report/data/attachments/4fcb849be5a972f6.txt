@@ -1,3 +1,0 @@
-INFO     vericoach:main.py:206 DELETE /api/v1/documents -> 200 (6.4ms)
-INFO     vericoach:main.py:206 DELETE /api/v1/documents -> 200 (2.2ms)
-INFO     vericoach:main.py:206 DELETE /api/v1/documents -> 200 (2.1ms)

@@ -1,0 +1,2 @@
+{"timestamp": "2026-11-05 14:31:42,083", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
+{"timestamp": "2026-11-05 14:31:42,087", "level": "INFO", "logger": "vericoach", "message": "GET /v1/documents/upi_pin_rules -> 200 (1.5ms)", "trace_id": "70d88d55-0e6b-4d51-942d-c191ae38afcc", "path": "/v1/documents/upi_pin_rules", "method": "GET", "status_code": 200, "duration_ms": 1.53, "url": "http://testserver/v1/documents/upi_pin_rules"}

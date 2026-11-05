@@ -1,3 +1,0 @@
-{"timestamp": "2026-11-05 13:47:39,445", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
-{"timestamp": "2026-11-05 13:47:39,446", "level": "INFO", "logger": "vericoach", "message": "GET /health -> 200 (110.9ms)", "trace_id": "e15c7d59-b2a4-403a-8a1c-95452a0a7976", "path": "/health", "method": "GET", "status_code": 200, "duration_ms": 110.93, "url": "http://localhost:8000/health"}
-2026-11-05 13:47:39,447 [INFO] httpx2: HTTP Request: GET http://localhost:8000/health "HTTP/1.1 200 OK"

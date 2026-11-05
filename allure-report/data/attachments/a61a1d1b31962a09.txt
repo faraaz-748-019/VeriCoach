@@ -1,2 +1,0 @@
-{"timestamp": "2026-11-05 13:47:33,855", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
-{"timestamp": "2026-11-05 13:47:33,860", "level": "INFO", "logger": "vericoach", "message": "POST /v1/feedback -> 422 (2.3ms)", "trace_id": "64cb6d1b-822c-4d0f-b094-e6db5610ff7b", "path": "/v1/feedback", "method": "POST", "status_code": 422, "duration_ms": 2.31, "url": "http://testserver/v1/feedback"}

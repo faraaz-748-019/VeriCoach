@@ -1,3 +1,0 @@
-INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
-INFO     vericoach:main.py:206 GET /v1/documents/doc_aa473b8fff36 -> 404 (2.8ms)
-INFO     httpx2:_client.py:1084 HTTP Request: GET http://testserver/v1/documents/doc_aa473b8fff36 "HTTP/1.1 404 Not Found"

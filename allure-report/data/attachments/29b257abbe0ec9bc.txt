@@ -1,0 +1,4 @@
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (2.9ms)
+INFO     vericoach:main.py:206 POST /v1/feedback -> 200 (0.9ms)
+INFO     vericoach:main.py:206 GET /v1/metrics -> 200 (1.2ms)
