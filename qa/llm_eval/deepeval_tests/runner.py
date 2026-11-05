@@ -419,15 +419,19 @@ class DeepEvalRunner:
         global_fp = sum(1 for it in item_results if (not it.must_refuse) and it.refused)
         global_fn = sum(1 for it in item_results if it.must_refuse and (not it.refused))
         summary_scores["refusal_precision"] = round(
-            (global_tp / (global_tp + global_fp))
-            if (global_tp + global_fp) > 0
-            else 1.0,
+            (
+                (global_tp / (global_tp + global_fp))
+                if (global_tp + global_fp) > 0
+                else 1.0
+            ),
             4,
         )
         summary_scores["refusal_recall"] = round(
-            (global_tp / (global_tp + global_fn))
-            if (global_tp + global_fn) > 0
-            else 1.0,
+            (
+                (global_tp / (global_tp + global_fn))
+                if (global_tp + global_fn) > 0
+                else 1.0
+            ),
             4,
         )
 
@@ -458,8 +462,16 @@ class DeepEvalRunner:
             "evaluation_metadata": {
                 "timestamp": timestamp_str,
                 "provider": self.provider,
-                "model": os.environ.get("GEMINI_MODEL", "mock") if self.provider == "gemini" else "mock",
-                "embedder": os.environ.get("GEMINI_EMBEDDING_MODEL", "mock") if self.provider == "gemini" else "mock",
+                "model": (
+                    os.environ.get("GEMINI_MODEL", "mock")
+                    if self.provider == "gemini"
+                    else "mock"
+                ),
+                "embedder": (
+                    os.environ.get("GEMINI_EMBEDDING_MODEL", "mock")
+                    if self.provider == "gemini"
+                    else "mock"
+                ),
                 "judge_model": self.judge.get_model_name(),
                 "total_items_evaluated": n_items,
                 "subset_requested": subset,

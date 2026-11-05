@@ -318,9 +318,9 @@ def run_multilingual_consistency_eval(
             "total_pairs": t,
             "consistent_pairs": c,
             "consistency_rate": round(c / t, 4) if t > 0 else 0.0,
-            "mean_embedding_similarity": round(sum(sims) / len(sims), 4)
-            if sims
-            else 0.0,
+            "mean_embedding_similarity": (
+                round(sum(sims) / len(sims), 4) if sims else 0.0
+            ),
             "mean_judge_score": round(sum(scores) / len(scores), 4) if scores else 0.0,
         }
 

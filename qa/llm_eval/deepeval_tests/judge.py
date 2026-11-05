@@ -92,13 +92,21 @@ class DeepEvalGeminiJudge(DeepEvalBaseLLM):
                 if schema is not None or "json" in prompt.lower():
                     generation_config["response_mime_type"] = "application/json"
 
-                response = client.generate_content(prompt, generation_config=generation_config)
+                response = client.generate_content(
+                    prompt, generation_config=generation_config
+                )
                 time.sleep(1.0)
                 return response.text or ""
             except Exception as exc:
                 err_str = str(exc)
-                if any(k in err_str for k in ("503", "429", "UNAVAILABLE", "RESOURCE_EXHAUSTED")) and attempt < 4:
-                    wait_sec = 2 ** attempt + 3
+                if (
+                    any(
+                        k in err_str
+                        for k in ("503", "429", "UNAVAILABLE", "RESOURCE_EXHAUSTED")
+                    )
+                    and attempt < 4
+                ):
+                    wait_sec = 2**attempt + 3
                     logger.warning(
                         "Gemini API rate/capacity issue (%s). Retrying in %ds (attempt %d/5)...",
                         err_str[:80],

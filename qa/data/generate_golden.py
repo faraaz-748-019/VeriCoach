@@ -1256,4 +1256,3 @@ def generate_golden_dataset(output_path: Path) -> None:
 if __name__ == "__main__":
     out_file = Path(__file__).resolve().parent / "golden" / "golden_v1.jsonl"
     generate_golden_dataset(out_file)
-

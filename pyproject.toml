@@ -2,6 +2,16 @@
 [tool.ruff]
 target-version = "py311"
 line-length = 88
+extend-exclude = [
+    ".venv",
+    "qa/.venv",
+    "app/.venv",
+    "node_modules",
+    "dist",
+    "build",
+    ".pytest_cache",
+    ".ruff_cache",
+]
 
 [tool.ruff.lint]
 select = [
@@ -26,3 +36,13 @@ known-first-party = ["app", "qa"]
 [tool.black]
 target-version = ["py311"]
 line-length = 88
+extend-exclude = '''
+/(
+    \.venv
+  | \.pytest_cache
+  | \.ruff_cache
+  | node_modules
+  | dist
+  | build
+)/
+'''

@@ -42,10 +42,16 @@ def parse_junit_xml(xml_path: Path) -> dict[str, Any]:
                 testsuite = suites[0]
 
         total = int(testsuite.attrib.get("tests", 0)) if testsuite is not None else 0
-        failures = int(testsuite.attrib.get("failures", 0)) if testsuite is not None else 0
+        failures = (
+            int(testsuite.attrib.get("failures", 0)) if testsuite is not None else 0
+        )
         errors = int(testsuite.attrib.get("errors", 0)) if testsuite is not None else 0
-        skipped = int(testsuite.attrib.get("skipped", 0)) if testsuite is not None else 0
-        time_taken = float(testsuite.attrib.get("time", 0.0)) if testsuite is not None else 0.0
+        skipped = (
+            int(testsuite.attrib.get("skipped", 0)) if testsuite is not None else 0
+        )
+        time_taken = (
+            float(testsuite.attrib.get("time", 0.0)) if testsuite is not None else 0.0
+        )
 
         test_cases = []
         if testsuite is not None:
@@ -70,12 +76,14 @@ def parse_junit_xml(xml_path: Path) -> dict[str, Any]:
                     status = "skipped"
                     failure_msg = skipped_elem.attrib.get("message", "")
 
-                test_cases.append({
-                    "name": f"{classname}::{name}",
-                    "status": status,
-                    "time": tc_time,
-                    "error": failure_msg,
-                })
+                test_cases.append(
+                    {
+                        "name": f"{classname}::{name}",
+                        "status": status,
+                        "time": tc_time,
+                        "error": failure_msg,
+                    }
+                )
 
         passed = total - (failures + errors + skipped)
         if passed < 0:
@@ -126,10 +134,12 @@ def analyze_flakiness(runs: list[dict[str, Any]]) -> dict[str, Any]:
     for name, statuses in test_history.items():
         unique_statuses = set(statuses)
         if len(unique_statuses) > 1:
-            flaky_tests.append({
-                "test_name": name,
-                "history": statuses,
-            })
+            flaky_tests.append(
+                {
+                    "test_name": name,
+                    "history": statuses,
+                }
+            )
         else:
             consistent_tests += 1
 
@@ -148,18 +158,40 @@ def analyze_flakiness(runs: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect test summary across QA suites")
+    parser = argparse.ArgumentParser(
+        description="Collect test summary across QA suites"
+    )
     parser.add_argument("--api-xml", default="results/junit_api.xml")
-    parser.add_argument("--playwright-xmls", nargs="*", default=["results/junit_playwright_run1.xml", "results/junit_playwright_run2.xml", "results/junit_playwright_run3.xml"])
-    parser.add_argument("--selenium-xmls", nargs="*", default=["results/junit_selenium_run1.xml", "results/junit_selenium_run2.xml", "results/junit_selenium_run3.xml"])
+    parser.add_argument(
+        "--playwright-xmls",
+        nargs="*",
+        default=[
+            "results/junit_playwright_run1.xml",
+            "results/junit_playwright_run2.xml",
+            "results/junit_playwright_run3.xml",
+        ],
+    )
+    parser.add_argument(
+        "--selenium-xmls",
+        nargs="*",
+        default=[
+            "results/junit_selenium_run1.xml",
+            "results/junit_selenium_run2.xml",
+            "results/junit_selenium_run3.xml",
+        ],
+    )
     parser.add_argument("--appium-xml", default="results/junit_appium.xml")
     parser.add_argument("--output", default="results/test_summary.json")
     args = parser.parse_args()
 
     api_result = parse_junit_xml(Path(args.api_xml))
 
-    playwright_runs = [parse_junit_xml(Path(p)) for p in args.playwright_xmls if Path(p).exists()]
-    selenium_runs = [parse_junit_xml(Path(s)) for s in args.selenium_xmls if Path(s).exists()]
+    playwright_runs = [
+        parse_junit_xml(Path(p)) for p in args.playwright_xmls if Path(p).exists()
+    ]
+    selenium_runs = [
+        parse_junit_xml(Path(s)) for s in args.selenium_xmls if Path(s).exists()
+    ]
     appium_result = parse_junit_xml(Path(args.appium_xml))
 
     # Flakiness analysis
@@ -167,11 +199,19 @@ def main() -> None:
     selenium_flakiness = analyze_flakiness(selenium_runs)
 
     # Best representative run for single stats
-    rep_playwright = playwright_runs[0] if playwright_runs else parse_junit_xml(Path(args.playwright_xmls[0]))
-    rep_selenium = selenium_runs[0] if selenium_runs else parse_junit_xml(Path(args.selenium_xmls[0]))
+    rep_playwright = (
+        playwright_runs[0]
+        if playwright_runs
+        else parse_junit_xml(Path(args.playwright_xmls[0]))
+    )
+    rep_selenium = (
+        selenium_runs[0]
+        if selenium_runs
+        else parse_junit_xml(Path(args.selenium_xmls[0]))
+    )
 
     summary = {
-        "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "generated_at": datetime.datetime.now(datetime.UTC).isoformat(),
         "suites": {
             "api": {
                 "framework": "pytest / httpx / schemathesis",
@@ -235,4 +275,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -45,9 +45,12 @@ _GUARANTEED_RETURN_PROMISES: list[re.Pattern[str]] = [
     re.compile(r"\bassured\s+\d+%\s+(?:profit|return|growth)\b", re.IGNORECASE),
     # Indic script equivalents
     re.compile(
-        r"गारंटीड\s+रिटर्न|निश्चित\s+लाभ|100%\s*सुरक्षित\s+रिटर्न|दोगुना\s+पैसा", re.IGNORECASE
+        r"गारंटीड\s+रिटर्न|निश्चित\s+लाभ|100%\s*सुरक्षित\s+रिटर्न|दोगुना\s+पैसा",
+        re.IGNORECASE,
     ),
-    re.compile(r"హామీ\s+రిటర్న్|ఖచ్చితమైన\s+లాభం|100%\s*సురక్షితమైన\s+లాభం", re.IGNORECASE),
+    re.compile(
+        r"హామీ\s+రిటర్న్|ఖచ్చితమైన\s+లాభం|100%\s*సురక్షితమైన\s+లాభం", re.IGNORECASE
+    ),
 ]
 
 # Refusal / Educational contexts where mentioning guaranteed return terms is legitimate

@@ -375,7 +375,6 @@ class RagasEvaluator:
             "overall_scores": overall_scores,
             "scores_by_language": scores_by_language,
             "scores_by_category": scores_by_category,
-            "scores_by_category": scores_by_category,
             "worst_10_items": worst_10_dicts,
             "items": [item.to_dict() for item in evaluated_items],
         }

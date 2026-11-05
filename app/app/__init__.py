@@ -4,7 +4,7 @@ import sys
 
 try:
     import backend
+
     sys.modules["app.backend"] = backend
 except ImportError:
     pass
-

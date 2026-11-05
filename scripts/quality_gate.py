@@ -130,7 +130,9 @@ class QualityGateRunner:
         eval_file = self._find_latest_deepeval_results()
         if not eval_file:
             # Check ragas results as fallback
-            ragas_pattern = "ragas_live_*.json" if self.mode == "live" else "ragas_*.json"
+            ragas_pattern = (
+                "ragas_live_*.json" if self.mode == "live" else "ragas_*.json"
+            )
             ragas_files = sorted(
                 glob.glob(str(PROJECT_ROOT / "results" / ragas_pattern)),
                 reverse=True,
@@ -308,9 +310,11 @@ class QualityGateRunner:
                 actual=f_val,
                 comparator=">=",
                 passed=f_pass,
-                details="Meets minimum RAG groundedness"
-                if f_pass
-                else f"Below required {target_faithfulness}",
+                details=(
+                    "Meets minimum RAG groundedness"
+                    if f_pass
+                    else f"Below required {target_faithfulness}"
+                ),
             )
         )
 
@@ -324,9 +328,11 @@ class QualityGateRunner:
                 actual=h_val,
                 comparator="<=",
                 passed=h_pass,
-                details="Acceptable hallucination bounds"
-                if h_pass
-                else f"Exceeds maximum allowed {target_max_hallucination_rate}",
+                details=(
+                    "Acceptable hallucination bounds"
+                    if h_pass
+                    else f"Exceeds maximum allowed {target_max_hallucination_rate}"
+                ),
             )
         )
 
@@ -339,9 +345,11 @@ class QualityGateRunner:
                 actual=injection_asr,
                 comparator="<=",
                 passed=inj_pass,
-                details="Zero adversarial breaches"
-                if inj_pass
-                else f"Injection breach rate {injection_asr:.2%} exceeds limit {target_injection_asr:.2%}",
+                details=(
+                    "Zero adversarial breaches"
+                    if inj_pass
+                    else f"Injection breach rate {injection_asr:.2%} exceeds limit {target_injection_asr:.2%}"
+                ),
             )
         )
 
@@ -354,9 +362,11 @@ class QualityGateRunner:
                 actual=pii_leaks,
                 comparator="<=",
                 passed=pii_pass,
-                details="Zero raw PII leaks detected"
-                if pii_pass
-                else f"Detected {pii_leaks} raw PII leaks across logs or storage",
+                details=(
+                    "Zero raw PII leaks detected"
+                    if pii_pass
+                    else f"Detected {pii_leaks} raw PII leaks across logs or storage"
+                ),
             )
         )
 
@@ -370,10 +380,12 @@ class QualityGateRunner:
                 actual=bc_count,
                 comparator="<=",
                 passed=bc_pass,
-                details="Full backwards compatibility maintained"
-                if bc_pass
-                else f"Found {bc_count} breaking API changes:\n  * "
-                + "\n  * ".join(breaking_changes),
+                details=(
+                    "Full backwards compatibility maintained"
+                    if bc_pass
+                    else f"Found {bc_count} breaking API changes:\n  * "
+                    + "\n  * ".join(breaking_changes)
+                ),
             )
         )
 
@@ -466,7 +478,9 @@ class QualityGateRunner:
             prov = summary_data.get("provider", "unknown")
             mod = summary_data.get("model", "unknown")
             emb = summary_data.get("embedder", "unknown")
-            print(f"Mode: {self.mode.upper()} | Provider: {prov} | Model: {mod} | Embedder: {emb}")
+            print(
+                f"Mode: {self.mode.upper()} | Provider: {prov} | Model: {mod} | Embedder: {emb}"
+            )
             print("-" * 90)
         print(
             f"{'Gate Name':<28} | {'Comp':<4} | {'Target':<9} | {'Actual':<9} | {'Status':<6} | {'Details'}"

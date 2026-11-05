@@ -35,14 +35,21 @@ jobs:
           pip install -e "./app[dev]"
           pip install -e "./qa[dev]"
 
+      - name: Build Web Application Frontend
+        run: |
+          cd app/frontend
+          npm ci || npm install
+          npm run build
+
       - name: Install Playwright Browsers and System Dependencies
         run: |
           python -m playwright install --with-deps chromium firefox
 
       - name: Install Chrome and ChromeDriver for Selenium
+        continue-on-error: true
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable chromium-chromedriver
+          sudo apt-get install -y google-chrome-stable chromium-chromedriver || true
 
       - name: Start Mock Backend Server
         env:

@@ -147,7 +147,9 @@ async def lifespan(app: FastAPI):
     """Initialize Chroma corpus and provider on startup."""
     global _rag_store
     if _rag_store is None:
-        settings_fn = app.dependency_overrides.get(get_backend_settings, get_backend_settings)
+        settings_fn = app.dependency_overrides.get(
+            get_backend_settings, get_backend_settings
+        )
         settings = settings_fn()
         store_fn = app.dependency_overrides.get(get_rag_store)
         if store_fn:
@@ -598,10 +600,16 @@ def legacy_clear_documents(store: ChromaRAGStore = Depends(get_rag_store)):
 
 
 # Mount static frontend build if present
-frontend_dist = pathlib.Path(__file__).resolve().parent.parent / "frontend" / "dist"
-if frontend_dist.is_dir():
+app_frontend_dist = pathlib.Path(__file__).resolve().parent.parent / "frontend" / "dist"
+root_frontend_dist = (
+    pathlib.Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
+)
+target_dist = (
+    app_frontend_dist
+    if app_frontend_dist.is_dir()
+    else (root_frontend_dist if root_frontend_dist.is_dir() else None)
+)
+if target_dist and target_dist.is_dir():
     from fastapi.staticfiles import StaticFiles
 
-    app.mount(
-        "/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend"
-    )
+    app.mount("/", StaticFiles(directory=str(target_dist), html=True), name="frontend")

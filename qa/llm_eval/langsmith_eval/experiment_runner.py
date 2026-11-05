@@ -258,12 +258,16 @@ def run_langsmith_experiment(
             {
                 "run_id": str(getattr(run_obj, "id", "")),
                 "example_id": str(getattr(example_obj, "id", "")),
-                "question": inputs_dict.get("question", "")
-                if isinstance(inputs_dict, dict)
-                else "",
-                "language": inputs_dict.get("language", "")
-                if isinstance(inputs_dict, dict)
-                else "",
+                "question": (
+                    inputs_dict.get("question", "")
+                    if isinstance(inputs_dict, dict)
+                    else ""
+                ),
+                "language": (
+                    inputs_dict.get("language", "")
+                    if isinstance(inputs_dict, dict)
+                    else ""
+                ),
                 "scores": eval_dict,
             }
         )

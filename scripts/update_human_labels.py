@@ -1,13 +1,14 @@
 import csv
 import json
 import pathlib
-from qa.llm_eval.judge_reliability import (
-    compute_cohen_kappa,
-    bootstrap_cohen_kappa_ci,
-    interpret_kappa,
-    VALID_LABELS,
-)
+
 from sklearn.metrics import confusion_matrix
+
+from qa.llm_eval.judge_reliability import (
+    bootstrap_cohen_kappa_ci,
+    compute_cohen_kappa,
+    interpret_kappa,
+)
 
 orig_path = pathlib.Path("qa/data/human_labels.csv")
 blinded_path = pathlib.Path("qa/data/blinded_labeling_sheet.csv")
@@ -21,14 +22,16 @@ with open(blinded_path, encoding="utf-8-sig") as f:
 assert len(orig_rows) == len(user_rows) == 30
 
 updated_rows = []
-for idx, (orig, user) in enumerate(zip(orig_rows, user_rows)):
+for idx, (orig, user) in enumerate(zip(orig_rows, user_rows, strict=True)):
     q_orig = orig["question"].strip()
     q_user = user["question"].strip()
     if q_orig != q_user:
         print(f"Warning: row {idx+1} mismatch: {q_orig[:30]} vs {q_user[:30]}")
     row = dict(orig)
     row["human_label"] = user["user_label"].strip()
-    row["notes"] = f"Human verified (user ground truth). {user.get('user_notes', '')}".strip()
+    row["notes"] = (
+        f"Human verified (user ground truth). {user.get('user_notes', '')}".strip()
+    )
     updated_rows.append(row)
 
 # Write updated human_labels.csv
@@ -45,7 +48,7 @@ all_human = [r["human_label"] for r in updated_rows]
 all_judge = [r["judge_label"] for r in updated_rows]
 
 total = len(updated_rows)
-matches = sum(1 for h, j in zip(all_human, all_judge) if h == j)
+matches = sum(1 for h, j in zip(all_human, all_judge, strict=True) if h == j)
 overall_acc = round(matches / total, 4)
 overall_kappa = compute_cohen_kappa(all_human, all_judge)
 overall_ci_low, overall_ci_high = bootstrap_cohen_kappa_ci(all_human, all_judge)
@@ -62,7 +65,7 @@ for lang in ["en", "hi", "te"]:
     l_human = [r["human_label"] for r in lang_rows]
     l_judge = [r["judge_label"] for r in lang_rows]
     l_total = len(lang_rows)
-    l_matches = sum(1 for h, j in zip(l_human, l_judge) if h == j)
+    l_matches = sum(1 for h, j in zip(l_human, l_judge, strict=True) if h == j)
     l_acc = round(l_matches / l_total, 4) if l_total > 0 else 0.0
     l_kappa = compute_cohen_kappa(l_human, l_judge)
     l_ci_low, l_ci_high = bootstrap_cohen_kappa_ci(l_human, l_judge)
@@ -103,7 +106,7 @@ results_data = {
         "labels": present_labels,
         "matrix": cm,
     },
-    "disclaimer": "Ground-truth human labels provided by job applicant on blinded sample of 30 items. Per-language kappa on n=10 items has high variance and wide confidence intervals; overall kappa provides the statistically meaningful estimate."
+    "disclaimer": "Ground-truth human labels provided by job applicant on blinded sample of 30 items. Per-language kappa on n=10 items has high variance and wide confidence intervals; overall kappa provides the statistically meaningful estimate.",
 }
 
 with open("results/judge_reliability_results.json", "w", encoding="utf-8") as f:

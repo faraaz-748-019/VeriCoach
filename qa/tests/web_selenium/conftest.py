@@ -72,6 +72,12 @@ def web_server_url() -> str:
 
 def _find_firefox_binary() -> str | None:
     """Locate Firefox executable from system PATH or Playwright cache."""
+    import shutil
+
+    which_ff = shutil.which("firefox")
+    if which_ff:
+        return which_ff
+
     candidates = [
         Path(os.environ.get("FIREFOX_BIN", "")),
         Path(
@@ -79,6 +85,8 @@ def _find_firefox_binary() -> str | None:
         ),
         Path(r"C:\Program Files\Mozilla Firefox\firefox.exe"),
         Path(r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"),
+        Path("/usr/bin/firefox"),
+        Path("/usr/local/bin/firefox"),
     ]
     for p in candidates:
         if p and p.exists():
@@ -91,6 +99,12 @@ def _find_firefox_binary() -> str | None:
             matches = list(pw_dir.glob("firefox-*/firefox/firefox.exe"))
             if matches:
                 return str(matches[0])
+    # Search Linux / macOS ms-playwright cache
+    linux_pw = Path.home() / ".cache" / "ms-playwright"
+    if linux_pw.exists():
+        matches = list(linux_pw.glob("firefox-*/firefox/firefox"))
+        if matches:
+            return str(matches[0])
     return None
 
 

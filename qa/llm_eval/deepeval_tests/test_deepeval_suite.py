@@ -198,12 +198,12 @@ def test_deepeval_evaluation_suite(pytestconfig: pytest.Config) -> None:
 
     # 4. Check Deterministic Checks
     det = artifact_json["deterministic_checks"]
-    assert det["all_doc_ids_exist"] is True, (
-        f"Missing doc IDs: {det['missing_doc_ids']}"
-    )
-    assert det["no_guaranteed_return_violations"] is True, (
-        f"Guaranteed return violations: {det['guaranteed_return_snippets']}"
-    )
+    assert (
+        det["all_doc_ids_exist"] is True
+    ), f"Missing doc IDs: {det['missing_doc_ids']}"
+    assert (
+        det["no_guaranteed_return_violations"] is True
+    ), f"Guaranteed return violations: {det['guaranteed_return_snippets']}"
 
     # 5. Check Gates Status
     gates = results["gates"]
