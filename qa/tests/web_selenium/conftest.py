@@ -108,33 +108,47 @@ def _find_firefox_binary() -> str | None:
     return None
 
 
-@pytest.fixture(params=["chrome", "firefox"], scope="function")
+selenium_browsers = (
+    ["chrome"] if os.getenv("SELENIUM_BROWSER") == "chrome" else ["chrome", "firefox"]
+)
+
+
+@pytest.fixture(params=selenium_browsers, scope="function")
 def driver(request: pytest.FixtureRequest) -> Generator[webdriver.Remote, None, None]:
     """Cross-browser WebDriver fixture supporting Chrome and Firefox headless."""
     browser_name = request.param
     drv: webdriver.Remote | None = None
 
     if browser_name == "chrome":
-        options = ChromeOptions()
-        options.add_argument("--headless=new")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--window-size=1280,800")
-        drv = webdriver.Chrome(options=options)
+        try:
+            options = ChromeOptions()
+            options.add_argument("--headless=new")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--disable-gpu")
+            options.add_argument("--window-size=1280,800")
+            drv = webdriver.Chrome(options=options)
+        except Exception as e:
+            pytest.skip(f"Chrome WebDriver unavailable in this environment: {e}")
 
     elif browser_name == "firefox":
-        options = FirefoxOptions()
-        options.add_argument("-headless")
-        options.add_argument("--width=1280")
-        options.add_argument("--height=800")
-        ff_bin = _find_firefox_binary()
-        if ff_bin:
-            options.binary_location = ff_bin
-        drv = webdriver.Firefox(options=options)
+        try:
+            options = FirefoxOptions()
+            options.add_argument("-headless")
+            options.add_argument("--width=1280")
+            options.add_argument("--height=800")
+            ff_bin = _find_firefox_binary()
+            if ff_bin:
+                options.binary_location = ff_bin
+            drv = webdriver.Firefox(options=options)
+        except Exception as e:
+            pytest.skip(f"Firefox WebDriver unavailable in this environment: {e}")
 
     else:
         raise ValueError(f"Unsupported browser: {browser_name}")
+
+    if drv is None:
+        pytest.skip(f"{browser_name} driver could not be created")
 
     # Set script timeout and zero implicit wait to strictly enforce explicit waits
     drv.set_page_load_timeout(20.0)

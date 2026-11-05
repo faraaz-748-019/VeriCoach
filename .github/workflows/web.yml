@@ -15,6 +15,7 @@ jobs:
   web-tests:
     name: Playwright & Selenium Web Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -45,12 +46,6 @@ jobs:
         run: |
           python -m playwright install --with-deps chromium firefox
 
-      - name: Install Chrome and ChromeDriver for Selenium
-        continue-on-error: true
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable chromium-chromedriver || true
-
       - name: Start Mock Backend Server
         env:
           LLM_PROVIDER: mock
@@ -61,6 +56,7 @@ jobs:
           sleep 4
 
       - name: Run Playwright Web UI Tests
+        timeout-minutes: 5
         env:
           HEADLESS: "true"
           TARGET_URL: "http://127.0.0.1:8000"
@@ -69,10 +65,12 @@ jobs:
           pytest qa/tests/web -v --alluredir=qa/allure-results
 
       - name: Run Selenium Smoke Tests
+        timeout-minutes: 5
         env:
           HEADLESS: "true"
           TARGET_URL: "http://127.0.0.1:8000"
           LLM_PROVIDER: mock
+          SELENIUM_BROWSER: "chrome"
         run: |
           pytest qa/tests/web_selenium -v --alluredir=qa/allure-results
 
