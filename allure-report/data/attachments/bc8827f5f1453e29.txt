@@ -1,3 +1,0 @@
-{"timestamp": "2026-11-05 13:21:45,717", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
-{"timestamp": "2026-11-05 13:21:45,721", "level": "INFO", "logger": "vericoach", "message": "POST /v1/feedback -> 422 (1.6ms)", "trace_id": "8d0f0686-189f-4196-8814-bba264a21091", "path": "/v1/feedback", "method": "POST", "status_code": 422, "duration_ms": 1.63, "url": "http://testserver/v1/feedback"}
-2026-11-05 13:21:45,721 [INFO] httpx2: HTTP Request: POST http://testserver/v1/feedback "HTTP/1.1 422 Unprocessable Content"

@@ -1,0 +1,11 @@
+{"timestamp": "2026-11-05 13:47:33,842", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
+{"timestamp": "2026-11-05 13:47:33,847", "level": "INFO", "logger": "vericoach", "message": "GET /v1/metrics -> 200 (2.1ms)", "trace_id": "1542fd39-5c7c-48c1-b24c-7e158c3d332b", "path": "/v1/metrics", "method": "GET", "status_code": 200, "duration_ms": 2.12, "url": "http://testserver/v1/metrics"}
+2026-11-05 13:47:33,847 [INFO] httpx2: HTTP Request: GET http://testserver/v1/metrics "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:47:33,851", "level": "INFO", "logger": "vericoach", "message": "POST /v1/feedback -> 200 (1.6ms)", "trace_id": "584ff73e-e321-4505-ba1e-d8c3e684a6d8", "path": "/v1/feedback", "method": "POST", "status_code": 200, "duration_ms": 1.57, "url": "http://testserver/v1/feedback"}
+2026-11-05 13:47:33,852 [INFO] httpx2: HTTP Request: POST http://testserver/v1/feedback "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:47:33,855", "level": "INFO", "logger": "vericoach", "message": "GET /v1/metrics -> 200 (1.5ms)", "trace_id": "c4ea4042-3050-48e3-8ed7-30cd8c66b2bc", "path": "/v1/metrics", "method": "GET", "status_code": 200, "duration_ms": 1.49, "url": "http://testserver/v1/metrics"}
+2026-11-05 13:47:33,856 [INFO] httpx2: HTTP Request: GET http://testserver/v1/metrics "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:47:33,859", "level": "INFO", "logger": "vericoach", "message": "POST /v1/feedback -> 200 (1.4ms)", "trace_id": "6cb39d49-977f-4ef9-9512-0aa37e16e453", "path": "/v1/feedback", "method": "POST", "status_code": 200, "duration_ms": 1.39, "url": "http://testserver/v1/feedback"}
+2026-11-05 13:47:33,860 [INFO] httpx2: HTTP Request: POST http://testserver/v1/feedback "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:47:33,863", "level": "INFO", "logger": "vericoach", "message": "GET /v1/metrics -> 200 (1.4ms)", "trace_id": "ef8bff2a-869a-45a3-b070-63e334fe5b99", "path": "/v1/metrics", "method": "GET", "status_code": 200, "duration_ms": 1.4, "url": "http://testserver/v1/metrics"}
+2026-11-05 13:47:33,863 [INFO] httpx2: HTTP Request: GET http://testserver/v1/metrics "HTTP/1.1 200 OK"

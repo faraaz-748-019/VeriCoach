@@ -1,0 +1,2 @@
+{"timestamp": "2026-11-05 13:47:33,518", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
+{"timestamp": "2026-11-05 13:47:33,523", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (2.4ms)", "trace_id": "26b6e618-7fae-42e5-b77d-b49dd133179f", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 2.43, "url": "http://testserver/v1/chat"}

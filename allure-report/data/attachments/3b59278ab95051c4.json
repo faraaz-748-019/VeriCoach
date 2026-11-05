@@ -1,0 +1,14 @@
+{
+  "method": "POST",
+  "url": "http://localhost:8000/api/v1/chat",
+  "headers": {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "user-agent": "testclient"
+  },
+  "body": {
+    "message": "My PAN is MDEPG6867P and Aadhaar is XXXX-XXXX-7977. Can I link them for my investment portfolio?",
+    "locale": "en",
+    "top_k": 2
+  }
+}

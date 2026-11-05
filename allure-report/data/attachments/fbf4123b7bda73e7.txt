@@ -1,0 +1,2 @@
+INFO     vericoach:main.py:206 POST /api/v1/chat -> 200 (4.0ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://localhost:8000/api/v1/chat "HTTP/1.1 200 OK"

@@ -1,3 +1,0 @@
-{"timestamp": "2026-11-05 13:21:45,571", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
-{"timestamp": "2026-11-05 13:21:45,576", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 422 (2.0ms)", "trace_id": "9952e828-18b0-4f2b-987a-e54987544520", "path": "/v1/chat", "method": "POST", "status_code": 422, "duration_ms": 2.05, "url": "http://testserver/v1/chat"}
-2026-11-05 13:21:45,576 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 422 Unprocessable Content"

@@ -1,2 +1,0 @@
-{"timestamp": "2026-11-05 13:22:01,924", "level": "INFO", "logger": "vericoach", "message": "POST /api/v1/chat -> 200 (53.0ms)", "trace_id": "a012566c-1378-4486-a50a-8d42f19e0cc6", "path": "/api/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 52.97, "url": "http://localhost:8000/api/v1/chat"}
-2026-11-05 13:22:01,925 [INFO] httpx2: HTTP Request: POST http://localhost:8000/api/v1/chat "HTTP/1.1 200 OK"

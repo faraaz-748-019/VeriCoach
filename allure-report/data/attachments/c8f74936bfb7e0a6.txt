@@ -1,0 +1,11 @@
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 TRACE /v1/health -> 405 (0.3ms)
+INFO     vericoach:main.py:206 QUERY /v1/health -> 405 (0.2ms)
+INFO     vericoach:main.py:206 PUT /v1/health -> 405 (0.1ms)
+INFO     vericoach:main.py:206 POST /v1/health -> 405 (0.2ms)
+INFO     vericoach:main.py:206 PATCH /v1/health -> 405 (0.2ms)
+INFO     vericoach:main.py:206 OPTIONS /v1/health -> 405 (0.2ms)
+INFO     vericoach:main.py:206 DELETE /v1/health -> 405 (0.2ms)
+INFO     vericoach:main.py:206 GET /v1/health -> 200 (1.3ms)
+INFO     vericoach:main.py:206 GET /v1/health -> 200 (0.8ms)
+INFO     vericoach:main.py:206 GET /v1/health -> 200 (1.0ms)
