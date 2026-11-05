@@ -5,8 +5,13 @@
 [![LLM Quality & Safety](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/eval.yml/badge.svg)](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/eval.yml)
 [![Mobile Automation](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/mobile.yml/badge.svg)](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/mobile.yml)
 [![Quality Gate](https://img.shields.io/badge/Quality_Gate-Passing-10b981?style=flat&logo=checkmarx)](scripts/quality_gate.py)
+[![Release](https://img.shields.io/badge/Release-v1.0.0-blue?style=flat&logo=github)](https://github.com/faraaz-748-019/VeriCoach/releases)
+[![Automated Tests](https://img.shields.io/badge/Automated_Tests-48%20Passing-success?style=flat&logo=pytest)](results/test_summary.json)
+[![Judge Agreement](https://img.shields.io/badge/Cohen's_%CE%BA-0.8446_(Almost_Perfect)-teal?style=flat)](results/judge_reliability_results.json)
+[![Security Defense](https://img.shields.io/badge/Prompt_Injection_ASR-0.0%25-brightgreen?style=flat)](qa/data/adversarial)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-3776ab?style=flat&logo=python)](pyproject.toml)
 [![Node 20](https://img.shields.io/badge/Node-20_LTS-339933?style=flat&logo=node.js)](frontend/package.json)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A multilingual (**English · हिन्दी · తెలుగు**) personal-finance assistant powered by Retrieval-Augmented Generation (RAG) and an automated quality engineering platform validating API contracts, accessibility, safety boundaries, and retrieval faithfulness.
 
@@ -109,7 +114,17 @@ See [`docs/RESUME_BULLETS.md`](docs/RESUME_BULLETS.md) for 7 verified bullets wi
 
 ## How to Run Everything
 
-### Prerequisites
+### Quick Start: 1-Command Docker Run (Zero Configuration)
+```bash
+git clone https://github.com/faraaz-748-019/VeriCoach.git
+cd VeriCoach
+docker compose up --build
+```
+Open **`http://localhost:8000`** in your browser. The multilingual assistant (English, Hindi, Telugu) and interactive chat interface run in offline deterministic mock mode without requiring API keys.
+
+---
+
+### Prerequisites (For Local Development)
 - **Python**: 3.11 with `uv` or `pip`
 - **Node.js**: v20+ LTS with `npm`
 - **Java**: JDK 17+ (required for Appium / Android builds)

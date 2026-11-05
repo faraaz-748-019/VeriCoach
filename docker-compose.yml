@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  vericoach:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vericoach-app
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_PROVIDER=mock
+      - REQUIRE_API_KEY=false
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
