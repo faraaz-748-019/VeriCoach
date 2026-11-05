@@ -1,0 +1,2 @@
+Metrics successfully recorded to history: /tmp/pytest-of-runner/pytest-0/test_quality_gate_records_hist0/history.csv
+Trend chart successfully saved to: /tmp/pytest-of-runner/pytest-0/test_quality_gate_records_hist0/trend.png

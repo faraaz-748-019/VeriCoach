@@ -1,0 +1,1 @@
+INFO     vericoach.qa.fixtures:fixtures.py:214 Appium server offline ([Errno 111] Connection refused). Using deterministic MockMobileDriver for CI.

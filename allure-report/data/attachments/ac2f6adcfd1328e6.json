@@ -1,0 +1,16 @@
+{
+  "status_code": 200,
+  "duration_ms": 107.74,
+  "headers": {
+    "content-length": "78",
+    "content-type": "application/json",
+    "vary": "Origin",
+    "x-trace-id": "156d1fd8-d0cf-477c-aed8-f40be8771605"
+  },
+  "body": {
+    "status": "healthy",
+    "version": "0.1.0",
+    "provider": "mock",
+    "default_locale": "en"
+  }
+}

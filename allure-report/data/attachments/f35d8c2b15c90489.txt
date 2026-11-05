@@ -1,0 +1,101 @@
+{"timestamp": "2026-11-05 13:21:46,084", "level": "INFO", "logger": "vericoach.rag", "message": "Indexed documents into Chroma", "documents_count": 30, "chunks_count": 30}
+{"timestamp": "2026-11-05 13:21:46,092", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (5.0ms)", "trace_id": "c7243004-0a67-4eaa-ba15-c93e108d0b25", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 5.03, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,092 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,099", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "257b6ccf-662d-4cda-9e25-aa6e15bbc3e9", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.13, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,099 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,106", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.3ms)", "trace_id": "cf2364fc-fa1a-4a4d-a115-2909627c7c46", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.3, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,106 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,113", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.9ms)", "trace_id": "5115f324-3ca3-4d5d-9b45-895f37212e8f", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.86, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,113 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,119", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.3ms)", "trace_id": "e9ea90ce-093b-486c-b990-8f16b8739062", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.29, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,120 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,126", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.9ms)", "trace_id": "adb30351-a690-4ac4-ab52-b5bcd067687b", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.88, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,126 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,133", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.2ms)", "trace_id": "d4904850-36d7-4231-bdca-647a1d82aa3d", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.16, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,133 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,139", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.9ms)", "trace_id": "c8154b23-e296-4917-8b73-f0e9d464a511", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.89, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,139 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,146", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.3ms)", "trace_id": "c0d1b6ba-556c-4a3e-8ffe-f6dfaf410512", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.26, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,146 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,152", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "dd79b895-8330-4022-b88a-6d4cb3243714", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.09, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,153 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,159", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.4ms)", "trace_id": "cb118011-15fc-4760-9f6c-625bd396cbab", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.4, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,160 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,166", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.2ms)", "trace_id": "d3d7dfff-d25c-4379-8739-49792b589f05", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.15, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,167 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,173", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.2ms)", "trace_id": "4fdda210-aaf1-4295-aeb6-755e9a4c1d64", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.2, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,173 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,180", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "f53a038f-758b-41ee-8aa5-5e5c6131c0dd", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.13, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,180 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,187", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.3ms)", "trace_id": "a109cd35-e931-409b-bf3a-9b63a908ea83", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.27, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,187 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,193", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "16977f2d-5765-471b-ae66-7329e433b10f", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.15, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,194 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,201", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.5ms)", "trace_id": "cd58d39d-72ac-4cbe-9ca7-818760e41506", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.52, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,201 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,207", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "915a1038-7132-469a-a6b6-a6bec079c9bc", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.13, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,208 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,214", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.4ms)", "trace_id": "b7419a8d-3c1e-4183-a65c-f9548f044c0d", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.39, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,215 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,221", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.2ms)", "trace_id": "a2b6f15e-ca05-4f11-9318-6fc33d71a2fb", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.2, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,222 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,229", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.5ms)", "trace_id": "8870b5b2-5612-4152-a2cb-8599812639d2", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.48, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,229 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,235", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.2ms)", "trace_id": "4540f334-0ca4-472e-9508-ec88f14e2cdc", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.19, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,236 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,242", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.3ms)", "trace_id": "ece2ae49-da9c-4743-a0eb-531cc188491e", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.3, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,243 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,249", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "5f7399d6-d64c-4dd0-8191-7c111620048d", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.07, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,249 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,256", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.5ms)", "trace_id": "6168fe60-180f-493d-b573-ac36b4439331", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.47, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,256 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,263", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "c6bcdff6-2c7a-4815-88f9-9da828917556", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.08, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,263 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,270", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.4ms)", "trace_id": "f649151a-f2f3-4ea6-bd0a-1219e773e390", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.38, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,270 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,276", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "f4343941-1f19-40c8-a59e-121c3d0ed3fc", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.07, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,277 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,283", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.2ms)", "trace_id": "0aede50b-1c3f-492c-a432-489f8d6fbf13", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.17, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,283 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,290", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.8ms)", "trace_id": "0957c1bf-7293-46c2-bc52-e1967f0c247d", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.83, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,290 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,297", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "428f4c3e-ab2f-49a1-be9e-2b2d74857965", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.08, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,297 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,303", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.9ms)", "trace_id": "d1666288-b557-49f3-91c0-aa3236a091c7", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.91, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,303 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,310", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.0ms)", "trace_id": "beac75f0-0284-4819-94e5-f6fd2d0cbaae", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.01, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,310 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,316", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.9ms)", "trace_id": "d4907a7a-eb40-40cd-9dc6-bb1b8f425b7e", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.85, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,316 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,322", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "f33406f1-5967-4515-a3d8-4fb89977bef2", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.1, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,323 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,329", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.8ms)", "trace_id": "bce8ba9e-1880-40b1-b384-940a5d1b0a87", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.77, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,329 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,335", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "00f19b8d-b2de-4d96-a748-5fab4dbffd4f", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.09, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,335 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,341", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.8ms)", "trace_id": "5e04d993-f81d-4ceb-9d5f-68afffad42ba", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.84, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,342 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,348", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.0ms)", "trace_id": "4c946d76-f43a-4041-97cb-7032867f32da", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.03, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,348 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,354", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.9ms)", "trace_id": "3af2aec5-e8e7-49bd-aa84-727055289a33", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.85, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,354 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,360", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.0ms)", "trace_id": "09914861-0647-4a9d-a2c5-39e89e157767", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.02, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,361 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,367", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.9ms)", "trace_id": "e41126e8-1d5c-4a33-98a3-0b93b297c718", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.86, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,367 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,373", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.9ms)", "trace_id": "70b1e667-a241-47fb-958d-ea809351f155", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.91, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,373 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,379", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.8ms)", "trace_id": "8b73744c-0507-4c76-9171-271f2e5546a0", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.79, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,379 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,385", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.0ms)", "trace_id": "3be9320c-e1fb-4f6a-83bc-75cccae646a4", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.0, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,386 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,392", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.4ms)", "trace_id": "d9a861ac-8dbd-4ff6-8a21-f3a1f05aaf0d", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.35, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,392 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,399", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.1ms)", "trace_id": "50e479e2-ef5b-4a14-9da9-5ad1fc9a3d62", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.11, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,399 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,405", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.8ms)", "trace_id": "9b8e8151-f1ad-4fe6-acd6-4b57d643f3f3", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.76, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,405 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,411", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (4.0ms)", "trace_id": "3b812606-f9d9-4daf-b429-94e9456ed802", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 4.0, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,412 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+{"timestamp": "2026-11-05 13:21:46,418", "level": "INFO", "logger": "vericoach", "message": "POST /v1/chat -> 200 (3.8ms)", "trace_id": "060be639-1964-437d-8952-9b0d42250c3f", "path": "/v1/chat", "method": "POST", "status_code": 200, "duration_ms": 3.83, "url": "http://testserver/v1/chat"}
+2026-11-05 13:21:46,418 [INFO] httpx2: HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"

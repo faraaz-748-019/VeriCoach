@@ -1,0 +1,101 @@
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (5.0ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.3ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.9ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.3ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.9ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.2ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.9ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.3ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.4ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.2ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.2ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.3ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.5ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.4ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.2ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.5ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.2ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.3ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.5ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.4ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.2ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.8ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.9ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.0ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.9ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.8ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.8ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.0ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.9ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.0ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.9ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.9ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.8ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.0ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.4ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.1ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.8ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (4.0ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"
+INFO     vericoach:main.py:206 POST /v1/chat -> 200 (3.8ms)
+INFO     httpx2:_client.py:1084 HTTP Request: POST http://testserver/v1/chat "HTTP/1.1 200 OK"

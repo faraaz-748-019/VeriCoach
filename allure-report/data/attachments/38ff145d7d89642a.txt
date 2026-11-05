@@ -1,0 +1,2 @@
+
+[Latency Benchmark - 50 Requests] p50: 6.64ms | p90: 7.02ms | p95: 7.11ms | p99: 7.93ms | max: 8.60ms

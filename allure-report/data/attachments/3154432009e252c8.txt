@@ -1,0 +1,2 @@
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 GET /v1/health -> 200 (2.7ms)

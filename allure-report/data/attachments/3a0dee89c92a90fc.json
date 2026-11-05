@@ -1,0 +1,9 @@
+{
+  "method": "GET",
+  "url": "http://localhost:8000/health",
+  "headers": {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "user-agent": "testclient"
+  }
+}

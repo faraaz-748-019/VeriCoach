@@ -1,0 +1,43 @@
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (1.2ms)
+INFO     vericoach:main.py:206 TRACE /api/v1/bootstrap-synthetic -> 405 (0.2ms)
+INFO     vericoach:main.py:206 QUERY /api/v1/bootstrap-synthetic -> 405 (0.2ms)
+INFO     vericoach:main.py:206 PUT /api/v1/bootstrap-synthetic -> 405 (0.2ms)
+INFO     vericoach:main.py:206 PATCH /api/v1/bootstrap-synthetic -> 405 (0.2ms)
+INFO     vericoach:main.py:206 OPTIONS /api/v1/bootstrap-synthetic -> 405 (0.2ms)
+INFO     vericoach:main.py:206 GET /api/v1/bootstrap-synthetic -> 405 (0.2ms)
+INFO     vericoach:main.py:206 DELETE /api/v1/bootstrap-synthetic -> 405 (0.1ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.8ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 200 (47.1ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.8ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 200 (47.1ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 200 (46.0ms)
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 200 (48.6ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.8ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 400 (0.4ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 200 (45.3ms)
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 200 (45.5ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.8ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)
+INFO     vericoach:main.py:206 POST /api/v1/bootstrap-synthetic -> 422 (0.7ms)

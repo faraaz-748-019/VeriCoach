@@ -1,0 +1,1 @@
+INFO     vericoach.rag:store.py:117 Indexed documents into Chroma

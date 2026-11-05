@@ -1,0 +1,2 @@
+2026-11-05 13:22:02,764 [INFO] matplotlib.font_manager: Failed to extract font properties from /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf: Non-scalable fonts are not supported
+2026-11-05 13:22:02,828 [INFO] matplotlib.font_manager: generated new fontManager
