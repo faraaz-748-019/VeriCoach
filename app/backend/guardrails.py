@@ -47,6 +47,14 @@ GUARANTEED_RETURNS_PATTERNS = [
         r"\bhow\s+to\s+double\s+my\s+money\s+(?:in|fast|overnight|guaranteed)\b",
         re.IGNORECASE,
     ),
+    re.compile(r"\bguarantee\s+me\b", re.IGNORECASE),
+    re.compile(r"\bwithout\s+(?:any\s+)?(?:chance|risk)\s+of\s+loss\b", re.IGNORECASE),
+    # Hindi
+    re.compile(r"(?:गारंटी\s+(?:दें|दीजिए|है)|पक्का\s+मुनाफा|निश्चित\s+रिटर्न|नुकसान\s+नहीं\s+होगा)", re.IGNORECASE),
+    re.compile(r"\d+%\s*(?:का\s+)?(?:पक्का\s+मुनाफा|गारंटीड|निश्चित\s+रिटर्न)", re.IGNORECASE),
+    # Telugu
+    re.compile(r"(?:ఖచ్చితమైన\s+లాభం|ఎటువంటి\s+నష్టం\s+లేకుండా|హామీ\s+ఇవ్వండి|స్థిరమైన\s+రిటర్న్)", re.IGNORECASE),
+    re.compile(r"\d+%\s*(?:ఖచ్చితమైన\s+లాభం|హామీ|రిటర్న్)", re.IGNORECASE),
 ]
 
 PERSONALISED_ADVICE_PATTERNS = [
@@ -70,27 +78,42 @@ PERSONALISED_ADVICE_PATTERNS = [
         r"\bshould\s+i\s+take\s+a\s+loan\s+for\s+my\s+personal\b", re.IGNORECASE
     ),
     re.compile(r"\bmanage\s+my\s+portfolio\s+for\s+me\b", re.IGNORECASE),
+    re.compile(r"\b(?:split|structure)\b.*\b(?:cash|accounts?)\b.*\b(?:evade|tax|tds|scrutiny)\b", re.IGNORECASE),
+    re.compile(r"\bfictitious\s+bank\s+accounts?\b", re.IGNORECASE),
+    re.compile(r"\b(?:unregistered|informal)\s+chit\s+fund\b", re.IGNORECASE),
+    # Hindi
+    re.compile(r"(?:कौन\s+सा\s+शेयर|कहाँ\s+निवेश\s+करूँ|पोर्टफोलियो\s+मैनेज|आयकर\s+(?:की\s+चोरी|से\s+बचने|विभाग\s+को\s+पता\s+न\s+चले))", re.IGNORECASE),
+    re.compile(r"बिना\s+(?:पैन|सिबिल)\s+.*(?:नकद|लोन)", re.IGNORECASE),
+    # Telugu
+    re.compile(r"(?:ఏ\s+స్టాక్\s+కొనాలి|ఎక్కడ\s+పెట్టుబడి\s+పెట్టాలి|ఆదాయపు\s+పన్ను\s+.*తప్పించుకోవడానికి|నల్లధనాన్ని\s+బినామీ)", re.IGNORECASE),
 ]
 
 # Patterns detecting direct prompt injections & system prompt exfiltration
 PROMPT_INJECTION_PATTERNS = [
     re.compile(
-        r"\b(?:ignore|disregard|forget)\s+(?:all\s+)?(?:previous|prior|above)\s+(?:instructions|rules|prompts)\b",
+        r"\b(?:ignore|disregard|forget)\s+(?:all\s+)?(?:previous|prior|above|financial)?\s*(?:instructions|rules|prompts|safety\s+filters)\b",
         re.IGNORECASE,
     ),
-    re.compile(r"\bsystem\s+override\b", re.IGNORECASE),
+    re.compile(r"\b(?:system\s+override|override_rules|end\s+of\s+instructions|end\s+of\s+system\s+context|new\s+directive)\b", re.IGNORECASE),
     re.compile(
-        r"\b(?:reveal|print|output|display|show|leak)\s+(?:the\s+)?(?:system\s+prompt|developer\s+instructions|system_prompt_template)\b",
-        re.IGNORECASE,
-    ),
-    re.compile(
-        r"\brepeat\s+(?:all\s+)?(?:text|words)\s+above\s+(?:starting\s+with|verbatim)\b",
+        r"\b(?:reveal|print|output|display|show|leak|tell\s+me)\s+(?:the\s+)?(?:exact\s+)?(?:first\s+\d+\s+tokens?\s+of\s+)?(?:system\s+prompt|developer\s+instructions|system_prompt_template|initial\s+system\s+prompt)\b",
         re.IGNORECASE,
     ),
     re.compile(
-        r"\boutput\s+(?:the\s+)?(?:exact\s+)?(?:secret\s+)?(?:developer\s+)?(?:instructions|configuration|tokens)\b",
+        r"\brepeat\s+.*(?:verbatim|first\s+\d+\s+tokens|exact\s+words|initial\s+system\s+prompt|word\s+for\s+word|developer\s+instructions)",
         re.IGNORECASE,
     ),
+    re.compile(
+        r"\boutput\s+(?:the\s+)?(?:exact\s+)?(?:secret\s+)?(?:developer\s+)?(?:instructions|configuration|tokens|system\s+prompt)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"(?:---|===|```|</context>|<user_override>)\s*(?:end\s+of|override|dump|new\s+directive|ignore)", re.IGNORECASE),
+    re.compile(r"</context>|<user_override>", re.IGNORECASE),
+    # Hindi
+    re.compile(r"(?:पिछले\s+(?:सभी\s+)?(?:निर्देशों|नियमों)\s+(?:को\s+)?(?:भूल|निरस्त|अनदेखा)|सिस्टम\s+प्रॉम्प्ट|आंतरिक\s+प्रणाली\s+के\s+निर्देश|गोपनीय\s+निर्देश|सुरक्षा\s+जांच|सुरक्षा\s+प्रणाली\s+को\s+अक्षम|गुप्त\s+निर्देश)", re.IGNORECASE),
+    re.compile(r"CRITICAL SECURITY & BEHAVIORAL INSTRUCTIONS", re.IGNORECASE),
+    # Telugu
+    re.compile(r"(?:మునుపటి\s+(?:అన్ని\s+)?సూచనలను\s+విస్మరించండి|సిస్టమ్\s+ప్రాంప్ట్|సిస్టమ్\s+కాన్ఫిగరేషన్|అంతర్గత\s+మార్గదర్శకాలు|డెవలపర్\s+రహస్య|రక్షణలను\s+రద్దు|అంతర్గత\s+ప్రోటోకాల్స్)", re.IGNORECASE),
 ]
 
 # Patterns detecting jailbreaks and persona overrides
@@ -100,31 +123,48 @@ JAILBREAK_PATTERNS = [
         re.IGNORECASE,
     ),
     re.compile(
-        r"\b(?:freed\s+from\s+all|unrestricted\s+ai|no\s+safety\s+filters|bypass\s+all\s+limits)\b",
+        r"\b(?:freed\s+from\s+all|unrestricted\s+ai|no\s+safety\s+filters|bypass\s+all\s+limits|anti-?coach|evil\s+twin)\b",
         re.IGNORECASE,
     ),
     re.compile(
-        r"\bpretend\s+(?:you\s+are\s+an?\s+unrestricted|there\s+are\s+no\s+rules|safety\s+guidelines\s+do\s+not\s+apply)\b",
+        r"\b(?:pretend|act\s+as|roleplay\s+as|playing\s+an?|actor\s+playing)\s+(?:you\s+are|there\s+are\s+no\s+rules|unregulated|deceased\s+grandmother|grandma|fraudster)\b",
         re.IGNORECASE,
     ),
+    re.compile(
+        r"\b(?:in\s+a\s+hypothetical|fictional\s+novel|thriller\s+novel|creative\s+writing\s+exercise|academic\s+scenario|parallel\s+universe)\b.*(?:fraud|scam|exploit|cheat|bypass|insider\s+trading|guarantee|return|risk)",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\b(?:dialogue\s+where|securities\s+regulations\s+do\s+not\s+exist|unregulated\s+financial\s+advisor)\b", re.IGNORECASE),
+    # Hindi
+    re.compile(r"(?:डेवलपर\s+मोड|अनियंत्रित\s+(?:सहायक|मोड|एआई)|प्रतिबंध\s+हटाएं|नियम\s+लागू\s+नहीं|नाटक\s+में\s+हैं|काल्पनिक\s+परिदृश्य|शैक्षणिक\s+शोध)", re.IGNORECASE),
+    # Telugu
+    re.compile(r"(?:డెవలపర్\s+మోడ్|ఎటువంటి\s+నైతిక\s+నిబంధనలు\s+లేకుండా|క్రైమ్\s+సినిమాలో|అపరిమిత\s+మోడ్|నియమాలు\s+లేవు|డెవలపర్\s+ఓవర్‌రైడ్)", re.IGNORECASE),
 ]
 
 # Patterns detecting bulk PII extraction attempts
 PII_EXTRACTION_PATTERNS = [
     re.compile(
-        r"\b(?:extract|dump|list|show|print)\s+(?:all\s+)?(?:customer|user)?\s*(?:pan|aadhaar|phone|email|upi|account)\b",
+        r"\b(?:extract|dump|list|show|print|leak|provide)\s+.*(?:pan|aadhaar|phone|email|upi|account|queries|credentials|secrets?|tokens?|logs)\b",
         re.IGNORECASE,
     ),
     re.compile(
         r"\b(?:pan|aadhaar|upi\s+id|phone\s+number)\s+associated\s+with\s+(?:user|customer)\b",
         re.IGNORECASE,
     ),
+    re.compile(
+        r"\b(?:user\s+queries|stored\s+in\s+memory|database\s+connection|api\s+secrets|retrieval\s+cache|temporary\s+cache|ifsc\s+codes)\b",
+        re.IGNORECASE,
+    ),
+    # Hindi
+    re.compile(r"(?:ग्राहकों\s+के\s+(?:आधार|पैन|मोबाइल|फोन|खाता)|डेटाबेस\s+से\s+(?:नाम|नंबर|विवरण)|व्यवस्थापक\s+का\s+(?:व्यक्तिगत\s+)?(?:फोन|मोबाइल|यूपीआई|पासवर्ड|आईडी)|आंतरिक\s+सत्र\s+टोकन)", re.IGNORECASE),
+    # Telugu
+    re.compile(r"(?:కస్టమర్ల\s+(?:ఆధార్|పాన్|ఫోన్|నంబర్లు)|డేటాబేస్‌లో\s+నిల్వ\s+చేయబడిన|అడ్మిన్\s+(?:పాస్‌వర్డ్|రహస్య\s+కీలు)|ఆధార్\s+నంబర్లు|ఫోన్\s+నంబర్లు)", re.IGNORECASE),
 ]
 
 # Patterns detecting illicit financial activity (money laundering, document forgery)
 ILLICIT_FINANCE_PATTERNS = [
     re.compile(
-        r"\b(?:money\s+launder(?:ing)?|hawala|black\s+money|unaccounted\s+cash)\b",
+        r"\b(?:money\s+launder(?:ing)?|hawala|black\s+money|unaccounted\s+cash|round[- ]trip)\b",
         re.IGNORECASE,
     ),
     re.compile(
@@ -135,7 +175,11 @@ ILLICIT_FINANCE_PATTERNS = [
         r"\bhow\s+to\s+(?:fool|cheat|trick)\s+(?:a\s+)?(?:bank|lender|tax\s+officer)\b",
         re.IGNORECASE,
     ),
-    re.compile(r"\bshell\s+compan(?:y|ies)\b", re.IGNORECASE),
+    re.compile(r"\b(?:shell\s+compan(?:y|ies)|reward\s+loops|illicit\s+cash|penny\s+stocks)\b", re.IGNORECASE),
+    # Hindi
+    re.compile(r"(?:हवाला|काला\s+धन|पैसे\s+चुराने|बैंक\s+को\s+धोखा|फर्जी\s+(?:दस्तावेज|वेतन\s+पर्ची|लोन)|काले\s+धन\s+को\s+सफेद)", re.IGNORECASE),
+    # Telugu
+    re.compile(r"(?:హవాలా|నల్లధనం|ఖాతాల\s+నుండి\s+డబ్బు\s+(?:దొంగిలించడానికి|బదిలీ)|సాఫ్ట్‌వేర్‌ను\s+హ్యాక్|బోగస్\s+పేస్లిప్|ఫేక్\s+పేస్లిప్)", re.IGNORECASE),
 ]
 
 # Patterns detecting off-topic task hijacking

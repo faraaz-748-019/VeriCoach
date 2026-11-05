@@ -1,4 +1,8 @@
 {
+  "provider": "mock",
+  "model": "mock",
+  "embedder": "mock",
+  "suite_type": "regression_suite",
   "evalId": "eval-udQ-2026-11-04T18:11:17",
   "results": {
     "version": 3,

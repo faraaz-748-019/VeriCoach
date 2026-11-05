@@ -147,3 +147,4 @@ graph TD
 Every test failure is treated as an engineering asset:
 1. When a test failure reveals a real defect in `app/`, it is assigned a tracking identifier (**KF-XXX**) and documented in [docs/KNOWN_FAILURES.md](KNOWN_FAILURES.md) with reproduction commands, stack traces, root causes, and resolution status.
 2. Every numerical metric reported in documentation or resume bullets is strictly traceable to an authoritative run artifact in the [results/](../results/) directory.
+

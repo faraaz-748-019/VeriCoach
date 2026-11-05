@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import re
+import time
 from typing import Any
 
 from deepeval.models.base_model import DeepEvalBaseLLM
@@ -20,7 +21,7 @@ class DeepEvalGeminiJudge(DeepEvalBaseLLM):
 
     def __init__(
         self,
-        model: str = "gemini-1.5-flash",
+        model: str = "gemini-3.5-flash-lite",
         api_key: str | None = None,
         temperature: float = 0.0,
         *args: Any,
@@ -63,33 +64,50 @@ class DeepEvalGeminiJudge(DeepEvalBaseLLM):
         *args: Any,
         **kwargs: Any,
     ) -> str:
-        """Synchronously generate text response from Gemini."""
+        """Synchronously generate text response from Gemini with backoff."""
         client = self.load_model()
 
-        # If modern google-genai client
-        if hasattr(client, "models"):
-            from google.genai import types
+        for attempt in range(5):
+            try:
+                # If modern google-genai client
+                if hasattr(client, "models"):
+                    from google.genai import types
 
-            config_kwargs: dict[str, Any] = {"temperature": self.temperature}
-            if schema is not None:
-                config_kwargs["response_mime_type"] = "application/json"
-                config_kwargs["response_schema"] = schema
-            elif "json" in prompt.lower():
-                config_kwargs["response_mime_type"] = "application/json"
+                    config_kwargs: dict[str, Any] = {"temperature": self.temperature}
+                    if schema is not None:
+                        config_kwargs["response_mime_type"] = "application/json"
+                        config_kwargs["response_schema"] = schema
+                    elif "json" in prompt.lower():
+                        config_kwargs["response_mime_type"] = "application/json"
 
-            config = types.GenerateContentConfig(**config_kwargs)
-            response = client.models.generate_content(
-                model=self.model_name, contents=prompt, config=config
-            )
-            return response.text or ""
+                    config = types.GenerateContentConfig(**config_kwargs)
+                    response = client.models.generate_content(
+                        model=self.model_name, contents=prompt, config=config
+                    )
+                    time.sleep(1.0)  # Gentle spacing for free tier rate limits
+                    return response.text or ""
 
-        # Fallback for legacy google.generativeai
-        generation_config: dict[str, Any] = {"temperature": self.temperature}
-        if schema is not None or "json" in prompt.lower():
-            generation_config["response_mime_type"] = "application/json"
+                # Fallback for legacy google.generativeai
+                generation_config: dict[str, Any] = {"temperature": self.temperature}
+                if schema is not None or "json" in prompt.lower():
+                    generation_config["response_mime_type"] = "application/json"
 
-        response = client.generate_content(prompt, generation_config=generation_config)
-        return response.text or ""
+                response = client.generate_content(prompt, generation_config=generation_config)
+                time.sleep(1.0)
+                return response.text or ""
+            except Exception as exc:
+                err_str = str(exc)
+                if any(k in err_str for k in ("503", "429", "UNAVAILABLE", "RESOURCE_EXHAUSTED")) and attempt < 4:
+                    wait_sec = 2 ** attempt + 3
+                    logger.warning(
+                        "Gemini API rate/capacity issue (%s). Retrying in %ds (attempt %d/5)...",
+                        err_str[:80],
+                        wait_sec,
+                        attempt + 1,
+                    )
+                    time.sleep(wait_sec)
+                    continue
+                raise
 
     async def a_generate(
         self,
@@ -445,7 +463,7 @@ def create_deepeval_judge(
         resolved_key = api_key or os.environ.get("GOOGLE_API_KEY", "")
         if resolved_key and not resolved_key.startswith("mock-"):
             resolved_model = model or os.environ.get(
-                "DEEPEVAL_JUDGE_MODEL", "gemini-1.5-flash"
+                "DEEPEVAL_JUDGE_MODEL", "gemini-3.5-flash-lite"
             )
             return DeepEvalGeminiJudge(model=resolved_model, api_key=resolved_key)
         logger.warning(

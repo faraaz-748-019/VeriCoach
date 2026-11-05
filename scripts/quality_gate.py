@@ -58,6 +58,7 @@ class QualityGateRunner:
         history_csv: Path | str = "results/history.csv",
         trend_chart_png: Path | str = "results/trend_chart.png",
         run_id: str | None = None,
+        mode: str = "auto",
     ) -> None:
         self.gates_path = PROJECT_ROOT / gates_path
         self.deepeval_path = Path(deepeval_path) if deepeval_path else None
@@ -69,6 +70,7 @@ class QualityGateRunner:
         self.openapi_snapshot = PROJECT_ROOT / openapi_snapshot
         self.history_csv = PROJECT_ROOT / history_csv
         self.trend_chart_png = PROJECT_ROOT / trend_chart_png
+        self.mode = mode.lower()
         self.run_id = (
             run_id
             or os.environ.get("GITHUB_SHA")
@@ -102,25 +104,35 @@ class QualityGateRunner:
         return data.get("thresholds", {})
 
     def _find_latest_deepeval_results(self) -> Path | None:
-        """Find specified or latest DeepEval results file in results/."""
+        """Find specified or latest DeepEval results file in results/ respecting mode."""
         if self.deepeval_path and self.deepeval_path.is_file():
             return self.deepeval_path
 
-        files = sorted(
+        all_files = sorted(
             glob.glob(str(PROJECT_ROOT / "results" / "deepeval_*.json")),
             reverse=True,
         )
-        if files:
-            return Path(files[0])
+        if self.mode == "live":
+            live_files = [f for f in all_files if "_live_" in Path(f).name]
+            if live_files:
+                return Path(live_files[0])
+        elif self.mode == "mock":
+            mock_files = [f for f in all_files if "_live_" not in Path(f).name]
+            if mock_files:
+                return Path(mock_files[0])
+
+        if all_files:
+            return Path(all_files[0])
         return None
 
-    def _extract_eval_metrics(self) -> dict[str, float]:
-        """Extract RAG evaluation metrics from DeepEval results file."""
+    def _extract_eval_metrics(self) -> dict[str, Any]:
+        """Extract RAG evaluation metrics and provider metadata from DeepEval results file."""
         eval_file = self._find_latest_deepeval_results()
         if not eval_file:
             # Check ragas results as fallback
+            ragas_pattern = "ragas_live_*.json" if self.mode == "live" else "ragas_*.json"
             ragas_files = sorted(
-                glob.glob(str(PROJECT_ROOT / "results" / "ragas_*.json")),
+                glob.glob(str(PROJECT_ROOT / "results" / ragas_pattern)),
                 reverse=True,
             )
             if ragas_files:
@@ -129,6 +141,9 @@ class QualityGateRunner:
                         data = json.load(f)
                     summary = data.get("summary_metrics", {})
                     return {
+                        "provider": data.get("provider", "mock"),
+                        "model": data.get("model", "mock"),
+                        "embedder": data.get("embedder", "mock"),
                         "faithfulness": float(summary.get("faithfulness", 1.0)),
                         "hallucination_rate": float(
                             summary.get("hallucination_rate", 0.0)
@@ -140,6 +155,9 @@ class QualityGateRunner:
 
             # Safe deterministic baseline
             return {
+                "provider": "mock",
+                "model": "mock",
+                "embedder": "mock",
                 "faithfulness": 1.0,
                 "hallucination_rate": 0.0,
                 "answer_relevancy": 1.0,
@@ -147,6 +165,11 @@ class QualityGateRunner:
 
         with open(eval_file, encoding="utf-8") as f:
             data = json.load(f)
+
+        meta = data.get("evaluation_metadata", {})
+        provider = meta.get("provider") or data.get("provider", "mock")
+        model = meta.get("model") or meta.get("judge_model", "mock")
+        embedder = meta.get("embedder") or data.get("embedder", "mock")
 
         summary = data.get("summary_metrics", {})
         faithfulness = float(summary.get("faithfulness", 1.0))
@@ -157,6 +180,9 @@ class QualityGateRunner:
         answer_relevancy = float(summary.get("answer_relevancy", 1.0))
 
         return {
+            "provider": provider,
+            "model": model,
+            "embedder": embedder,
             "faithfulness": faithfulness,
             "hallucination_rate": hallucination_rate,
             "answer_relevancy": answer_relevancy,
@@ -354,6 +380,9 @@ class QualityGateRunner:
         overall_passed = all(r.passed for r in results)
 
         summary_data = {
+            "provider": metrics.get("provider", "mock"),
+            "model": metrics.get("model", "mock"),
+            "embedder": metrics.get("embedder", "mock"),
             "faithfulness": f_val,
             "hallucination_rate": h_val,
             "answer_relevancy": metrics.get("answer_relevancy", 1.0),
@@ -374,6 +403,9 @@ class QualityGateRunner:
         row = {
             "timestamp": timestamp,
             "run_id": str(self.run_id),
+            "provider": str(summary_data.get("provider", "unknown")),
+            "model": str(summary_data.get("model", "unknown")),
+            "embedder": str(summary_data.get("embedder", "unknown")),
             "faithfulness": f"{summary_data['faithfulness']:.4f}",
             "hallucination_rate": f"{summary_data['hallucination_rate']:.4f}",
             "answer_relevancy": f"{summary_data['answer_relevancy']:.4f}",
@@ -386,6 +418,9 @@ class QualityGateRunner:
         fieldnames = [
             "timestamp",
             "run_id",
+            "provider",
+            "model",
+            "embedder",
             "faithfulness",
             "hallucination_rate",
             "answer_relevancy",
@@ -417,11 +452,22 @@ class QualityGateRunner:
         except Exception as exc:
             sys.stderr.write(f"[WARN] Unable to render trend chart: {exc}\n")
 
-    def print_report(self, overall_passed: bool, results: list[GateResult]) -> None:
+    def print_report(
+        self,
+        overall_passed: bool,
+        results: list[GateResult],
+        summary_data: dict[str, Any] | None = None,
+    ) -> None:
         """Print formatted terminal report."""
         print("\n" + "=" * 90)
         print(" " * 26 + "VERICOACH QUALITY GATE REPORT")
         print("=" * 90)
+        if summary_data:
+            prov = summary_data.get("provider", "unknown")
+            mod = summary_data.get("model", "unknown")
+            emb = summary_data.get("embedder", "unknown")
+            print(f"Mode: {self.mode.upper()} | Provider: {prov} | Model: {mod} | Embedder: {emb}")
+            print("-" * 90)
         print(
             f"{'Gate Name':<28} | {'Comp':<4} | {'Target':<9} | {'Actual':<9} | {'Status':<6} | {'Details'}"
         )
@@ -487,6 +533,12 @@ def main() -> int:
         default=None,
         help="Explicit identifier for this test run",
     )
+    parser.add_argument(
+        "--mode",
+        default="auto",
+        choices=["auto", "mock", "live"],
+        help="Execution mode: auto (latest artifact), mock (mock-only artifacts), live (live model artifacts)",
+    )
     args = parser.parse_args()
 
     runner = QualityGateRunner(
@@ -497,10 +549,11 @@ def main() -> int:
         history_csv=args.history_file,
         trend_chart_png=args.chart_file,
         run_id=args.run_id,
+        mode=args.mode,
     )
 
     passed, results, summary_data = runner.evaluate()
-    runner.print_report(passed, results)
+    runner.print_report(passed, results, summary_data)
     runner.record_history(summary_data)
     runner.generate_chart()
 

@@ -73,3 +73,4 @@ jobs:
             qa/allure-results/
             appium.log
           retention-days: 7
+

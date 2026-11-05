@@ -145,8 +145,15 @@ def reset_rag_store(store: ChromaRAGStore | None = None) -> None:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Initialize Chroma corpus and provider on startup."""
-    settings = get_backend_settings()
-    get_rag_store(settings)
+    global _rag_store
+    if _rag_store is None:
+        settings_fn = app.dependency_overrides.get(get_backend_settings, get_backend_settings)
+        settings = settings_fn()
+        store_fn = app.dependency_overrides.get(get_rag_store)
+        if store_fn:
+            _rag_store = store_fn()
+        else:
+            get_rag_store(settings)
     yield
 
 
@@ -489,6 +496,7 @@ def legacy_health(store: ChromaRAGStore = Depends(get_rag_store)):
 def legacy_chat(
     payload: dict[str, Any],
     request: Request,
+    settings: BackendSettings = Depends(get_backend_settings),
     store: ChromaRAGStore = Depends(get_rag_store),
 ):
     msg = payload.get("message") or payload.get("question")
@@ -504,11 +512,12 @@ def legacy_chat(
         raise HTTPException(status_code=422, detail="top_k out of bounds")
 
     chat_req = ChatRequestV1(question=str(msg), language=locale)
-    res = chat_v1(chat_req, request=request, store=store)
+    res = chat_v1(chat_req, request=request, settings=settings, store=store)
+    model_name = getattr(store.provider, "_model_name", store.provider.provider_name)
     return {
         "response": res.answer,
         "provider": store.provider.provider_name,
-        "model": "mock",
+        "model": model_name,
         "prompt_tokens": 10,
         "completion_tokens": 10,
         "locale": locale,

@@ -29,12 +29,12 @@ class RagasEvalSettings(BaseSettings):
         description="Judge and embedding provider: gemini, mock, or ollama.",
     )
     judge_model: str = Field(
-        default="gemini-1.5-flash",
+        default="gemini-3.5-flash-lite",
         validation_alias="RAGAS_JUDGE_MODEL",
         description="Gemini LLM judge model name.",
     )
     embedding_model: str = Field(
-        default="models/text-embedding-004",
+        default="models/gemini-embedding-001",
         validation_alias="RAGAS_EMBEDDING_MODEL",
         description="Multilingual embedding model name.",
     )

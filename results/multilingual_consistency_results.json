@@ -1,4 +1,7 @@
 {
+  "provider": "mock",
+  "model": "mock",
+  "embedder": "mock (deterministic vocabulary hash)",
   "num_questions": 20,
   "total_pairs_evaluated": 60,
   "consistent_pairs": 20,

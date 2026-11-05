@@ -17,9 +17,9 @@ from pathlib import Path
 import pytest
 
 # Ensure mock provider is used for zero-network execution during test runs
-os.environ.setdefault("LLM_PROVIDER", "mock")
-os.environ.setdefault("EMBEDDING_PROVIDER", "mock")
-os.environ.setdefault("DEEPEVAL_TELEMETRY_OPT_OUT", "YES")
+os.environ["LLM_PROVIDER"] = "mock"
+os.environ["EMBEDDING_PROVIDER"] = "mock"
+os.environ["DEEPEVAL_TELEMETRY_OPT_OUT"] = "YES"
 
 from qa.framework.config import get_settings
 from qa.framework.fixtures import *  # noqa: F403

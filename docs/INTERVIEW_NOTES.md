@@ -188,3 +188,4 @@ If any metric fails, the script exits with code 1, failing the GitHub Actions wo
    - **Production Roadmap**: Transition from in-memory Chroma to managed Qdrant or pgvector with persistent HNSW indexes and read replicas.
 3. **Tradeoff**: Mobile testing via mock driver in standard CI runners vs physical device farms.
    - **Production Roadmap**: Run nightly Appium test pipelines on AWS Device Farm or BrowserBase cloud emulators for real-hardware battery and network throttling tests.
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="10" time="57.184" timestamp="2026-11-05T16:06:16.376939+05:30" hostname="DESKTOP-GP2V30S"><testcase classname="tests.web.test_playwright_chat" name="test_chat_happy_path_english" time="17.186" /><testcase classname="tests.web.test_playwright_chat" name="test_chat_happy_path_hindi" time="3.926" /><testcase classname="tests.web.test_playwright_chat" name="test_chat_happy_path_telugu" time="15.954"><failure message="playwright._impl._errors.TimeoutError: Locator.wait_for: Timeout 15000ms exceeded.&#10;Call log:&#10;  - waiting for locator(&quot;[data-testid='message-assistant']&quot;).last to be visible">qa\tests\web\test_playwright_chat.py:83: in test_chat_happy_path_telugu
+    response = chat_page.wait_for_assistant_response(timeout_ms=15000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+qa\framework\pages\web_chat_page.py:91: in wait_for_assistant_response
+    loc.wait_for(state="visible", timeout=timeout_ms)
+qa\.venv\Lib\site-packages\playwright\sync_api\_generated.py:13635: in wait_for
+    self._sync(
+qa\.venv\Lib\site-packages\playwright\_impl\_locator.py:767: in wait_for
+    await self._frame.wait_for_selector(
+qa\.venv\Lib\site-packages\playwright\_impl\_frame.py:395: in wait_for_selector
+    await self._channel.send(
+qa\.venv\Lib\site-packages\playwright\_impl\_connection.py:78: in send
+    return await self._connection.wrap_api_call(
+qa\.venv\Lib\site-packages\playwright\_impl\_connection.py:636: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Locator.wait_for: Timeout 15000ms exceeded.
+E   Call log:
+E     - waiting for locator("[data-testid='message-assistant']").last to be visible</failure></testcase><testcase classname="tests.web.test_playwright_chat" name="test_citations_visibility" time="0.708" /><testcase classname="tests.web.test_playwright_chat" name="test_feedback_submission" time="0.542" /><testcase classname="tests.web.test_playwright_chat" name="test_error_banner_on_500_route_interception" time="3.591" /><testcase classname="tests.web.test_playwright_chat" name="test_loading_indicator_state" time="1.501" /><testcase classname="tests.web.test_playwright_chat" name="test_keyboard_only_navigation" time="11.545" /><testcase classname="tests.web.test_playwright_chat" name="test_accessibility_scan_with_axe" time="0.670" /><testcase classname="tests.web.test_playwright_chat" name="test_visual_snapshot_main_screen" time="0.657" /></testsuite></testsuites>

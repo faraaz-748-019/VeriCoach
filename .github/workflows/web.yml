@@ -78,3 +78,4 @@ jobs:
             qa/allure-results/
             qa/traces/
           retention-days: 7
+

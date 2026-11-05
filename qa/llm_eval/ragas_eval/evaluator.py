@@ -366,6 +366,8 @@ class RagasEvaluator:
             "timestamp": now_dt.isoformat(),
             "run_date": date_str,
             "provider": self.settings.provider,
+            "model": self.settings.judge_model,
+            "embedder": self.settings.embedding_model,
             "judge_model": self.settings.judge_model,
             "embedding_model": self.settings.embedding_model,
             "total_items": n,
@@ -373,13 +375,15 @@ class RagasEvaluator:
             "overall_scores": overall_scores,
             "scores_by_language": scores_by_language,
             "scores_by_category": scores_by_category,
+            "scores_by_category": scores_by_category,
             "worst_10_items": worst_10_dicts,
             "items": [item.to_dict() for item in evaluated_items],
         }
 
         # 5. Export JSON and CSV
-        json_path = self.output_dir / f"ragas_{date_str}.json"
-        csv_path = self.output_dir / f"ragas_{date_str}.csv"
+        file_prefix = "ragas_live" if self.settings.provider == "gemini" else "ragas"
+        json_path = self.output_dir / f"{file_prefix}_{date_str}.json"
+        csv_path = self.output_dir / f"{file_prefix}_{date_str}.csv"
 
         with open(json_path, "w", encoding="utf-8") as jf:
             json.dump(report, jf, indent=2, ensure_ascii=False)

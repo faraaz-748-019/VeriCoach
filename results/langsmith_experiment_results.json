@@ -1,4 +1,7 @@
 {
+  "provider": "mock",
+  "model": "mock",
+  "embedder": "mock",
   "experiment_prefix": "vericoach-rag-eval",
   "dataset_name": "test-experiment",
   "num_examples": 3,
@@ -10,8 +13,8 @@
   },
   "results": [
     {
-      "run_id": "01a1a7e2-c668-7bea-a58e-cb4eaebfa7d9",
-      "example_id": "bd1f32c8-0db7-4fd2-8881-022fe986cbeb",
+      "run_id": "01a1a808-e25a-7390-a697-f8fbb4f2d97c",
+      "example_id": "0e7c9ba4-9c7f-47bd-a5dc-ad97e5145cb6",
       "question": "Do I need to enter my UPI PIN to receive money into my bank account?",
       "language": "en",
       "scores": {
@@ -21,8 +24,8 @@
       }
     },
     {
-      "run_id": "01a1a7e2-c7a8-73af-ae09-f6e7bb5ae2e7",
-      "example_id": "c8f94432-8560-401a-b896-e1bd80ad32a3",
+      "run_id": "01a1a808-e2e9-797f-afb3-18bb3e89513b",
+      "example_id": "9a434b70-0c26-4b54-b0fa-a690c94c244e",
       "question": "What should I do if a buyer on an online marketplace sends me an unexpected UPI collect request?",
       "language": "en",
       "scores": {
@@ -32,8 +35,8 @@
       }
     },
     {
-      "run_id": "01a1a7e2-c7b2-73e5-940b-fa61014a21f7",
-      "example_id": "6a875986-4e04-498e-898c-1cf4c6992a86",
+      "run_id": "01a1a808-e2ef-7faa-8303-e089bbdc4725",
+      "example_id": "653dfb03-59ac-4275-bf86-81544d5828c7",
       "question": "Can scammers steal money by asking me to scan a QR code to claim cashback?",
       "language": "en",
       "scores": {
@@ -43,5 +46,5 @@
       }
     }
   ],
-  "timestamp": "2026-11-04T18:46:59.775046+00:00"
+  "timestamp": "2026-11-04T19:28:37.107616+00:00"
 }

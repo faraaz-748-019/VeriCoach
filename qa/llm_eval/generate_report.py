@@ -59,7 +59,7 @@ def plot_judge_agreement(
     ax.set_xticks(x)
     ax.set_xticklabels(langs, fontsize=10, fontweight="bold")
     ax.set_ylim(0, 115)
-    ax2.set_ylim(0, 1.15)
+    ax2.set_ylim(-0.25, 1.15)
 
     # Threshold guidelines
     ax2.axhline(

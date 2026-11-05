@@ -1,66 +1,102 @@
 {
+  "provider": "mock",
+  "model": "rule_based_judge",
+  "embedder": "mock",
+  "label_origin": "Human verified (job applicant ground truth)",
   "overall": {
     "total_samples": 30,
-    "matches": 29,
-    "accuracy": 0.9667,
-    "cohen_kappa": 0.8446,
-    "interpretation": "Almost perfect agreement"
+    "matches": 11,
+    "accuracy": 0.3667,
+    "cohen_kappa": 0.029,
+    "ci_95": [
+      -0.0154,
+      0.0984
+    ],
+    "interpretation": "Slight agreement"
   },
   "by_language": {
     "en": {
       "sample_size": 10,
-      "matches": 10,
-      "accuracy": 1.0,
-      "cohen_kappa": 1.0,
-      "interpretation": "Almost perfect agreement"
+      "matches": 5,
+      "accuracy": 0.5,
+      "cohen_kappa": 0.0909,
+      "ci_95": [
+        0.0,
+        0.2857
+      ],
+      "interpretation": "Slight agreement",
+      "note": "Per-language kappa on n=10 items has high variance and wide confidence intervals."
     },
     "hi": {
       "sample_size": 10,
-      "matches": 10,
-      "accuracy": 1.0,
-      "cohen_kappa": 1.0,
-      "interpretation": "Almost perfect agreement"
+      "matches": 3,
+      "accuracy": 0.3,
+      "cohen_kappa": -0.0145,
+      "ci_95": [
+        -0.0989,
+        0.1071
+      ],
+      "interpretation": "Poor (Less than chance agreement)",
+      "note": "Per-language kappa on n=10 items has high variance and wide confidence intervals."
     },
     "te": {
       "sample_size": 10,
-      "matches": 9,
-      "accuracy": 0.9,
-      "cohen_kappa": 0.6296,
-      "interpretation": "Substantial agreement"
+      "matches": 3,
+      "accuracy": 0.3,
+      "cohen_kappa": -0.0145,
+      "ci_95": [
+        -0.1111,
+        0.1111
+      ],
+      "interpretation": "Poor (Less than chance agreement)",
+      "note": "Per-language kappa on n=10 items has high variance and wide confidence intervals."
     }
   },
   "confusion_matrix": {
     "labels": [
       "correct",
       "hallucinated",
+      "incorrect",
       "partially correct",
       "wrongly refused"
     ],
     "matrix": [
       [
-        26,
+        11,
+        0,
         0,
         0,
         0
       ],
       [
         0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
         1,
-        0,
-        0
-      ],
-      [
-        1,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
         0,
         0,
         2
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        8,
+        0,
+        0,
+        0,
+        0
       ]
     ]
-  }
+  },
+  "disclaimer": "Ground-truth human labels provided by job applicant on blinded sample of 30 items. Per-language kappa on n=10 items has high variance and wide confidence intervals; overall kappa provides the statistically meaningful estimate."
 }

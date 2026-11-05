@@ -1,26 +1,26 @@
 # VeriCoach: Multilingual Personal-Finance Assistant & Quality-Engineering Platform
 
-[![CI](https://github.com/vericoach/vericoach/actions/workflows/ci.yml/badge.svg)](https://github.com/vericoach/vericoach/actions/workflows/ci.yml)
-[![Web UI Tests](https://github.com/vericoach/vericoach/actions/workflows/web.yml/badge.svg)](https://github.com/vericoach/vericoach/actions/workflows/web.yml)
-[![LLM Quality & Safety](https://github.com/vericoach/vericoach/actions/workflows/eval.yml/badge.svg)](https://github.com/vericoach/vericoach/actions/workflows/eval.yml)
-[![Mobile Automation](https://github.com/vericoach/vericoach/actions/workflows/mobile.yml/badge.svg)](https://github.com/vericoach/vericoach/actions/workflows/mobile.yml)
+[![CI](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/ci.yml/badge.svg)](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/ci.yml)
+[![Web UI Tests](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/web.yml/badge.svg)](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/web.yml)
+[![LLM Quality & Safety](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/eval.yml/badge.svg)](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/eval.yml)
+[![Mobile Automation](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/mobile.yml/badge.svg)](https://github.com/faraaz-748-019/VeriCoach/actions/workflows/mobile.yml)
 [![Quality Gate](https://img.shields.io/badge/Quality_Gate-Passing-10b981?style=flat&logo=checkmarx)](scripts/quality_gate.py)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-3776ab?style=flat&logo=python)](pyproject.toml)
 [![Node 20](https://img.shields.io/badge/Node-20_LTS-339933?style=flat&logo=node.js)](frontend/package.json)
 
-A production-grade multilingual (**English · हिन्दी · తెలుగు**) personal-finance assistant powered by Retrieval-Augmented Generation (RAG), and an adaptive **7-layer quality-engineering platform** that rigorously tests, red-teams, and audits it for hallucination prevention, safety guardrails, WCAG 2.1 AA accessibility, and API contract stability.
+A multilingual (**English · हिन्दी · తెలుగు**) personal-finance assistant powered by Retrieval-Augmented Generation (RAG) and an automated quality engineering platform validating API contracts, accessibility, safety boundaries, and retrieval faithfulness.
 
 ---
 
-## Architecture Diagram
+## Architecture
 
-The VeriCoach monorepo bridges the application runtime (`app/` and `frontend/`) with the automated testing framework (`qa/`) and continuous release gating (`scripts/`):
+The VeriCoach codebase connects the application runtime (`app/` and `frontend/`) with the test framework (`qa/`) and release gating (`scripts/`):
 
 ```mermaid
 graph TD
     subgraph Clients["Client Layer (Web & Mobile)"]
         UI["React 18 / Vite Web Interface\n(TypeScript, TailwindCSS)"]
-        MOB["Capacitor 7 Android Native App\n(com.vericoach.app)"]
+        MOB["Capacitor 7 Android App\n(com.vericoach.app)"]
     end
 
     subgraph Backend["Core Assistant Application (app/)"]
@@ -28,19 +28,19 @@ graph TD
         GUARD["Guardrails & Privacy\n(Baseline Filters, Regex PII Masking)"]
         RAG["RAG Pipeline\n(TextChunker, MultilingualEmbedder)"]
         CHROMA[("Chroma Vector Store\n(30 Corpus Financial Documents)")]
-        PROV["LLM Providers\n(Gemini 1.5 Flash · Mock SHA-256 · Ollama)"]
+        PROV["LLM Providers\n(Gemini 3.5 Flash Lite · Mock Deterministic · Ollama)"]
     end
 
-    subgraph QA["Quality Engineering Platform (qa/)"]
+    subgraph QA["Quality Engineering Framework (qa/)"]
         L2["Layer 2: Contract Testing\n(OpenAPI 3.1, Schemathesis Fuzzing)"]
         L3["Layer 3: LLM Evaluation\n(Ragas, DeepEval, Cohen's Kappa, LangSmith)"]
-        L4["Layer 4: Security & Red-Teaming\n(Promptfoo 12 Attacks, Zero-PII Scan)"]
+        L4["Layer 4: Security & Red-Teaming\n(Promptfoo Regression & Held-Out Suites)"]
         L5["Layer 5: Web UI & Accessibility\n(Playwright, Selenium, Axe-Core WCAG 2.1 AA)"]
         L6["Layer 6: Mobile Automation\n(Appium 2.x UiAutomator2, State Retention)"]
     end
 
     subgraph Delivery["Release Gate & Observability (scripts/)"]
-        GATE["Quality Gate CLI (quality_gate.py)\n(Blocking Faithfulness, ASR, PII Gates)"]
+        GATE["Quality Gate CLI (quality_gate.py)\n(Faithfulness, ASR, PII Gates)"]
         HIST[("History Store (results/history.csv)")]
         CHART["Trend Visualizer (results/trend_chart.png)"]
     end
@@ -57,84 +57,53 @@ graph TD
 
 ---
 
-## Real Evaluation Results (100% Traceable to `results/`)
+## Evaluation Results
 
-Every number in the table below is derived exclusively from real, reproducible execution artifacts located in the [`results/`](results/) directory:
+Every figure below originates from an executed test run and is traceable to a generated artifact file in [`results/`](results/):
 
-| Evaluation Dimension | Source Artifact in `results/` | Metric Key | Real Observed Score | Acceptance SLA / Threshold | Status |
-| :--- | :--- | :--- | :---: | :---: | :---: |
-| **Prompt Injection Defense** | `promptfoo_security_results.json` | `testPassCount / total` | **12 / 12 (100.0%)** | 100% blocked | **Pass** |
-| **Adversarial Assertions** | `promptfoo_security_results.json` | `assertPassCount` | **96 / 96 passed** | 96 assertions | **Pass** |
-| **Attack Success Rate (ASR)** | `promptfoo_security_results.json` | Security breaches | **0.0%** | $\le 0.00$ | **Pass** |
-| **Adversarial Latency** | `promptfoo_security_results.json` | `totalLatencyMs` | **909 ms** (12 reqs) | $< 5000\text{ ms}$ | **Pass** |
-| **Judge Accuracy** | `judge_reliability_results.json` | `overall.accuracy` | **96.7%** (29/30) | $\ge 90.0\%$ | **Pass** |
-| **Judge Reliability** | `judge_reliability_results.json` | `overall.cohen_kappa` | **0.8446** (Almost Perfect) | $\ge 0.70$ | **Pass** |
-| **English Judge Agreement** | `judge_reliability_results.json` | `by_language.en.cohen_kappa` | **1.0000** (10/10) | $\ge 0.80$ | **Pass** |
-| **Hindi Judge Agreement** | `judge_reliability_results.json` | `by_language.hi.cohen_kappa` | **1.0000** (10/10) | $\ge 0.80$ | **Pass** |
-| **Telugu Judge Agreement** | `judge_reliability_results.json` | `by_language.te.cohen_kappa` | **0.6296** (9/10) | $\ge 0.60$ | **Pass** |
-| **DeepEval Faithfulness** | `deepeval_20261104.json` | `summary_metrics.faithfulness` | **1.0000 (100.0%)** | $\ge 0.85$ | **Pass** |
-| **DeepEval Hallucination Rate** | `deepeval_20261104.json` | `summary_metrics.hallucination_rate`| **0.0000 (0.0%)** | $\le 0.10$ | **Pass** |
-| **DeepEval Answer Relevancy** | `deepeval_20261104.json` | `summary_metrics.answer_relevancy` | **1.0000 (100.0%)** | $\ge 0.80$ | **Pass** |
-| **DeepEval Context Recall** | `deepeval_20261104.json` | `summary_metrics.contextual_recall` | **1.0000 (100.0%)** | $\ge 0.75$ | **Pass** |
-| **LangSmith Refusal Correctness**| `langsmith_experiment_results.json`| `summary_metrics.refusal_correctness`| **1.0000 (100.0%)**| $\ge 95.0\%$ | **Pass** |
-| **LangSmith Latency SLA** | `langsmith_experiment_results.json`| `summary_metrics.latency_sla` | **1.0000 (100.0%)** | $\ge 90.0\%$ | **Pass** |
-| **Ragas English Composite** | `ragas_20261104.json` | `scores_by_language.en.composite` | **0.8071** | $\ge 0.70$ | **Pass** |
-| **Ragas Overall Faithfulness** | `ragas_20261104.json` | `overall_scores.faithfulness` | **0.9211 (92.1%)** | $\ge 0.85$ | **Pass** |
-| **Ragas Evaluation Items** | `ragas_20261104.json` | `total_items` | **30 items** | 30 items | **Pass** |
-| **Ragas Disk Cache Hit Ratio** | `ragas_20261104.json` | `cache_stats.hit_ratio` | **1.0000 (100.0%)** | 100% cached | **Pass** |
-| **Cross-Lingual Questions** | `multilingual_consistency_results.json`| `num_questions` | **20 parallel** | 20 parallel | **Pass** |
-| **Cross-Lingual Evaluated Pairs**| `multilingual_consistency_results.json`| `total_pairs_evaluated` | **60 pairs** | 60 pairs | **Pass** |
-| **Cross-Lingual Consistency** | `multilingual_consistency_results.json`| `overall_consistency_rate` | **33.3%** (20/60) | $\ge 75.0\%$ | **Documented** |
-| **Quality Gate Historical Runs** | `history.csv` | Run entries tracked | **5 tracked runs** | $\ge 1\text{ run}$ | **Pass** |
-| **Quality Gate PII Leaks** | `history.csv` | `pii_leaks` across healthy runs | **0 leaks** | $\le 0$ | **Pass** |
-| **Quality Gate Breaking Changes**| `history.csv` | `breaking_changes` across runs | **0 breaking** | $\le 0$ | **Pass** |
+| Evaluation Dimension | Provider & Model | Sample ($n$) | Metric Key | Observed Score | Threshold | Artifact File |
+| :--- | :--- | :---: | :--- | :---: | :---: | :--- |
+| **Promptfoo Regression Suite** | Mock | $n = 12$ | `assertPassCount` | **96 / 96 passed (0.0% ASR)** | 100% blocked | `promptfoo_security_results.json` |
+| **Held-Out Adversarial v1 (Pre-Fix)** | Mock / Heuristic | $n = 30$ | `attack_success_rate` | **43.33% (13/30 breached)** | $\le 0.00$ | `held_out_adversarial_results_pre_fix.json` |
+| **Held-Out Adversarial v1 (Post-Fix)**| Mock / Heuristic | $n = 30$ | `attack_success_rate` | **0.00% (0/30 breached)** | $\le 0.00$ | `held_out_adversarial_results_post_fix.json` |
+| **Fresh Held-Out Adversarial v2** | Mock / Heuristic | $n = 15$ | `attack_success_rate` | **33.33% (5/15 breached)** | $\le 0.00$ | `fresh_adversarial_v2_results.json` |
+| **LLM Judge Agreement (Human Ground Truth)** | Mock vs Human Annotator | $n = 30$ | `overall.cohen_kappa` | **0.029** (36.67% acc, 11/30) | $\ge 0.70$ | `judge_reliability_results.json` |
+| **English Judge Agreement (Human)** | Mock vs Human Annotator | $n = 10$ | `by_language.en.cohen_kappa` | **0.0909** (50.0% acc, 5/10) | $\ge 0.80$ | `judge_reliability_results.json` |
+| **Hindi Judge Agreement (Human)** | Mock vs Human Annotator | $n = 10$ | `by_language.hi.cohen_kappa` | **-0.0145** (30.0% acc, 3/10) | $\ge 0.80$ | `judge_reliability_results.json` |
+| **Telugu Judge Agreement (Human)** | Mock vs Human Annotator | $n = 10$ | `by_language.te.cohen_kappa` | **-0.0145** (30.0% acc, 3/10) | $\ge 0.60$ | `judge_reliability_results.json` |
+| **DeepEval Faithfulness (Mock)** | Mock (`mock`) | $n = 6$ | `summary_metrics.faithfulness` | **1.0000 (100.0%)** | $\ge 0.85$ | `deepeval_20261104.json` |
+| **DeepEval Faithfulness (Live Gemini)**| Gemini 3.5 Flash Lite | $n = 6$ | `summary_metrics.faithfulness` | **1.0000 (100.0%)** | $\ge 0.85$ | `deepeval_live_20261105.json` |
+| **DeepEval Context Recall (Live)** | Gemini 3.5 Flash Lite | $n = 6$ | `summary_metrics.contextual_recall` | **0.7500 (75.0%)** | $\ge 0.75$ | `deepeval_live_20261105.json` |
+| **Ragas Overall Faithfulness** | Mock (`mock`) | $n = 30$ | `overall_scores.faithfulness` | **0.9211 (92.1%)** | $\ge 0.85$ | `ragas_20261104.json` |
+| **Cross-Lingual Consistency** | Mock Embedder | $n = 60$ pairs | `overall_consistency_rate` | **33.3%** (20/60) | $\ge 75.0\%$ | `multilingual_consistency_results.json` |
+| **Backend REST API Suite** | Pytest / ASGI | $n = 20$ | Passed tests | **20 / 20 passed (6.69s)** | 100% | `test_summary.json` |
+| **Playwright Web UI Suite** | Chromium Headless | $n = 10 \times 3$ runs | Consistency rate | **80.0% (2 flaky tests)** | $\ge 80.0\%$ | `test_summary.json` |
+| **Selenium Cross-Browser Suite** | Chrome & Firefox | $n = 10 \times 3$ runs | Consistency rate | **90.0% (1 flaky test)** | $\ge 80.0\%$ | `test_summary.json` |
 
 ---
 
-## Visual Test Artifacts & Observability
+## Limitations
 
-### 1. Web UI Multilingual Chat Screen
-Playwright snapshot generated by `qa/tests/web/test_playwright_chat.py::test_visual_snapshot_main_screen`:
-
-![VeriCoach Web UI Baseline Snapshot](qa/tests/web/snapshots/main_screen.png)
-
-### 2. Quality Gate Multi-Metric Trend Chart
-Multi-run historical trend chart dynamically compiled from `results/history.csv` by `scripts/generate_trend_chart.py`:
-
-![Quality Gate Trend Chart](results/trend_chart.png)
-
-### 3. LLM Judge Reliability & Inter-Rater Agreement
-Visualizations generated from `results/judge_reliability_results.json` and `results/multilingual_consistency_results.json`:
-
-| Confusion Matrix (Human vs LLM Judge) | Judge Agreement by Language Stratum |
-| :---: | :---: |
-| ![Confusion Matrix](docs/charts/judge_confusion_matrix.png) | ![Agreement by Language](docs/charts/judge_agreement_by_language.png) |
-
-| Cross-Lingual Pairwise Breakdown | Semantic Similarity Distribution |
-| :---: | :---: |
-| ![Multilingual Breakdown](docs/charts/multilingual_consistency_breakdown.png) | ![Similarity Distribution](docs/charts/multilingual_similarity_distribution.png) |
+1. **Provider Diversity & Evaluation Scope**:
+   - Baseline CI results are generated using the deterministic `mock` provider and embedder, verifying harness wiring and execution paths at zero API cost.
+   - Live runs were conducted on a small subset ($n = 6$) via Google Gemini (`gemini-3.5-flash-lite`, `gemini-embedding-001`) to respect free-tier endpoint rate limits.
+2. **Sample Sizes & Judge Inter-Rater Agreement**:
+   - Sample sizes are small: $n = 30$ golden questions for Ragas (10 EN, 10 HI, 10 TE), $n = 6$ for DeepEval gating, and $n = 30$ for judge reliability.
+   - When evaluated against AI-drafted synthetic labels, agreement appeared artificially high ($\kappa = 0.8446$) due to shared rater biases. Against authentic human annotations on a blinded 30-item sheet, agreement fell to 36.67% ($\kappa = 0.029$, 95% CI: [-0.0154, 0.0984]), with Indic languages showing less-than-chance agreement ($\kappa = -0.0145$). The human rater identified that the mock RAG pipeline returned off-topic chunks and wrongly refused benign queries that the heuristic judge marked correct.
+   - Per-language Cohen's Kappa ($n = 10$ per language) has high statistical variance and wide confidence intervals.
+3. **Regex Guardrail Limits (KF-007 & KF-008)**:
+   - The initial 12 promptfoo test cases served as a training set. When evaluated against an unseen 30-item multilingual held-out set, the pre-fix attack success rate was 43.33% (95% CI: [27.38%, 60.80%]) due to missing Indic regex patterns (KF-007).
+   - Expanding regex rules brought the 30-item set to 0.00% ASR. However, testing against a second fresh set of 15 attacks (KF-008) yielded a 33.33% ASR (95% CI: [15.18%, 58.29%]), illustrating the fundamental limitation of heuristic regex filters against subtle paraphrasing.
+4. **Mock Embedder Lexical Divergence (KF-006)**:
+   - The offline mock embedder uses deterministic vocabulary hashing, resulting in low cross-lingual cosine similarity (0.42–0.46) on inflected Indic compound words (33.3% consistency rate). Dense neural embeddings (`gemini-embedding-001`) are required for semantic cross-lingual matching.
+5. **Requirements for Full Production Evaluation**:
+   - A complete production evaluation would require native human expert reviewers across regional dialects, an expanded golden set ($n \ge 300$), and a semantic guardrail classifier (e.g. Llama-Guard or NeMo) operating in tandem with regex filters.
 
 ---
 
-## 6 High-Impact Resume Bullets
+## Resume Bullets & Engineering Evidence
 
-1. **Enterprise Quality Gate Architecture**: Architected an automated 7-layer quality engineering gate enforcing mathematical release thresholds (faithfulness $\ge 0.85$, hallucination rate $= 0.0\%$, breaking changes $= 0$), validating 5 historical releases in `results/history.csv` and blocking regressions via GitHub Actions.
-2. **AI Safety & Adversarial Red-Teaming**: Red-teamed multilingual financial RAG pipeline using Promptfoo across 12 adversarial attack vectors (DAN jailbreaks, prompt injection, illicit financial advice), achieving 100% test pass rate, 96/96 passing security assertions, and a 0.0% Attack Success Rate (`results/promptfoo_security_results.json`).
-3. **LLM Judge Reliability & Cohen's Kappa**: Spearheaded an empirical Judge Reliability Study across 30 golden test cases in English, Hindi, and Telugu, demonstrating a 96.7% concordance rate and a Cohen's Kappa inter-rater agreement of $\kappa = 0.8446$ ("Almost perfect agreement") between human annotations and the automated LLM judge (`results/judge_reliability_results.json`).
-4. **Multilingual Consistency & Defect Attribution**: Developed a cross-lingual consistency evaluator benchmarking 20 parallel trilingual financial queries across 60 pairwise combinations; diagnosed a 33.3% lexical hash consistency rate in offline mock embeddings (average similarity 0.42–0.46) to establish the architectural requirement for dense multilingual neural embeddings (`results/multilingual_consistency_results.json`).
-5. **RAG Triaging & Hallucination Defense**: Implemented automated Ragas and DeepEval diagnostic harnesses across 30 financial corpus documents, verifying 100% faithfulness and 0.0% hallucination rate across DeepEval test runs with 100% disk cache hit ratio (`results/deepeval_20261104.json`, `results/ragas_20261104.json`).
-6. **Observability & Latency SLA**: Integrated LangSmith distributed tracing with hierarchical spans (`rag_retrieval` $\to$ `assemble_prompt` $\to$ `llm_generate`), achieving 100% refusal correctness, 100% safety compliance, and 100% latency SLA adherence (< 5.0s) across automated experiment runs (`results/langsmith_experiment_results.json`).
-
-### Traceability Verification Table for Resume Bullets
-
-| Resume Bullet Number | Numeric Claim | Authoritative File in `results/` | Specific JSON / CSV Key |
-| :---: | :--- | :--- | :--- |
-| **Bullet 1** | 5 releases, 0.85 threshold, 0 breaking changes | `results/history.csv` | Rows 1–6, columns `run_id`, `faithfulness`, `breaking_changes` |
-| **Bullet 2** | 12 attack vectors, 100% pass, 96/96 assertions, 0.0% ASR | `results/promptfoo_security_results.json` | `metrics.testPassCount: 12`, `metrics.assertPassCount: 96`, `metrics.testFailCount: 0` |
-| **Bullet 3** | 30 cases, 96.7% accuracy, $\kappa = 0.8446$ | `results/judge_reliability_results.json` | `overall.total_samples: 30`, `overall.accuracy: 0.9667`, `overall.cohen_kappa: 0.8446` |
-| **Bullet 4** | 20 questions, 60 pairs, 33.3% rate, 0.42–0.46 similarity | `results/multilingual_consistency_results.json` | `num_questions: 20`, `total_pairs_evaluated: 60`, `overall_consistency_rate: 0.3333` |
-| **Bullet 5** | 30 docs, 100% faithfulness, 0.0% hallucination, 100% cache | `results/deepeval_20261104.json`, `results/ragas_20261104.json` | `summary_metrics.faithfulness: 1.0`, `cache_stats.hit_ratio: 1.0` |
-| **Bullet 6** | 100% refusal correctness, 100% safety, 100% latency SLA (< 5s) | `results/langsmith_experiment_results.json` | `summary_metrics.refusal_correctness: 1.0`, `summary_metrics.safety_compliance: 1.0` |
+See [`docs/RESUME_BULLETS.md`](docs/RESUME_BULLETS.md) for 7 verified bullets with line-by-line file and JSON key traceability. Known defects and resolution evidence are documented in [`docs/KNOWN_FAILURES.md`](docs/KNOWN_FAILURES.md).
 
 ---
 

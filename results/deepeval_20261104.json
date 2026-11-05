@@ -2,6 +2,8 @@
   "evaluation_metadata": {
     "timestamp": "2026-11-04T21:58:45.381251",
     "provider": "mock",
+    "model": "mock",
+    "embedder": "mock",
     "judge_model": "mock-judge-v1 (Mock)",
     "total_items_evaluated": 6,
     "subset_requested": 6,

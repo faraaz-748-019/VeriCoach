@@ -2,6 +2,8 @@
   "timestamp": "2026-11-04T21:04:51.304837",
   "run_date": "20261104",
   "provider": "mock",
+  "model": "mock",
+  "embedder": "mock",
   "judge_model": "gemini-1.5-flash",
   "embedding_model": "models/text-embedding-004",
   "total_items": 30,

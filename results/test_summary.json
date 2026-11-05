@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-11-05T10:47:32.713577+00:00",
+  "suites": {
+    "api": {
+      "framework": "pytest / httpx / schemathesis",
+      "summary": {
+        "total": 20,
+        "passed": 20,
+        "failed": 0,
+        "skipped": 0,
+        "duration_seconds": 6.685
+      },
+      "status": "available",
+      "file": "results/junit_api.xml"
+    },
+    "web_playwright": {
+      "framework": "pytest-playwright (Chromium headless)",
+      "runs_conducted": 3,
+      "representative_run": {
+        "total": 10,
+        "passed": 9,
+        "failed": 1,
+        "skipped": 0,
+        "duration_seconds": 57.184
+      },
+      "flakiness": {
+        "runs_analyzed": 3,
+        "total_unique_tests": 10,
+        "flaky_tests_count": 2,
+        "flaky_tests": [
+          {
+            "test_name": "tests.web.test_playwright_chat::test_chat_happy_path_hindi",
+            "history": [
+              "passed",
+              "failed",
+              "passed"
+            ]
+          },
+          {
+            "test_name": "tests.web.test_playwright_chat::test_chat_happy_path_telugu",
+            "history": [
+              "failed",
+              "passed",
+              "passed"
+            ]
+          }
+        ],
+        "consistency_rate": 0.8
+      }
+    },
+    "web_selenium": {
+      "framework": "selenium 4 (Chrome headless)",
+      "runs_conducted": 3,
+      "representative_run": {
+        "total": 10,
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "duration_seconds": 116.677
+      },
+      "flakiness": {
+        "runs_analyzed": 3,
+        "total_unique_tests": 10,
+        "flaky_tests_count": 1,
+        "flaky_tests": [
+          {
+            "test_name": "tests.web_selenium.test_selenium_smoke::test_smoke_citations_disclosure[firefox]",
+            "history": [
+              "passed",
+              "failed",
+              "passed"
+            ]
+          }
+        ],
+        "consistency_rate": 0.9
+      }
+    },
+    "mobile_appium": {
+      "framework": "appium 2.x / uiautomator2 (Android)",
+      "summary": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "duration_seconds": 0.0
+      },
+      "status": "missing_artifact",
+      "file": "results/junit_appium.xml",
+      "note": "Requires live emulator execution; live metrics populated when user runs emulator suite."
+    }
+  }
+}

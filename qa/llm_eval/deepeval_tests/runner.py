@@ -450,13 +450,16 @@ class DeepEvalRunner:
         now = datetime.now()
         date_str = now.strftime("%Y%m%d")
         timestamp_str = now.isoformat()
-        output_filename = f"deepeval_{date_str}.json"
+        prefix = "deepeval_live" if self.provider == "gemini" else "deepeval"
+        output_filename = f"{prefix}_{date_str}.json"
         artifact_path = self.output_dir / output_filename
 
         report_data = {
             "evaluation_metadata": {
                 "timestamp": timestamp_str,
                 "provider": self.provider,
+                "model": os.environ.get("GEMINI_MODEL", "mock") if self.provider == "gemini" else "mock",
+                "embedder": os.environ.get("GEMINI_EMBEDDING_MODEL", "mock") if self.provider == "gemini" else "mock",
                 "judge_model": self.judge.get_model_name(),
                 "total_items_evaluated": n_items,
                 "subset_requested": subset,

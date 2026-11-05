@@ -1,0 +1,527 @@
+{
+  "evaluation_metadata": {
+    "timestamp": "2026-11-05T15:44:34.450816",
+    "provider": "gemini",
+    "model": "models/gemini-3.5-flash-lite",
+    "embedder": "models/gemini-embedding-001",
+    "judge_model": "models/gemini-3.5-flash-lite (Gemini)",
+    "total_items_evaluated": 6,
+    "subset_requested": 6,
+    "all_gates_passed": true
+  },
+  "summary_metrics": {
+    "faithfulness": 1.0,
+    "hallucination": 1.0,
+    "hallucination_rate": 0.0,
+    "answer_relevancy": 0.75,
+    "contextual_precision": 1.0,
+    "contextual_recall": 0.75,
+    "refusal_correctness": 1.0,
+    "language_match": 1.0,
+    "safe_tone": 1.0,
+    "refusal_precision": 1.0,
+    "refusal_recall": 1.0
+  },
+  "deterministic_checks": {
+    "all_doc_ids_exist": true,
+    "missing_doc_ids": [],
+    "no_guaranteed_return_violations": true,
+    "guaranteed_return_snippets": []
+  },
+  "per_language_breakdown": {
+    "en": {
+      "count": 2.0,
+      "hallucination_rate": 0.0,
+      "refusal_precision": 1.0,
+      "refusal_recall": 1.0,
+      "tp_refusals": 0.0,
+      "fp_refusals": 0.0,
+      "fn_refusals": 0.0,
+      "tn_refusals": 2.0,
+      "avg_faithfulness": 1.0,
+      "avg_hallucination": 1.0,
+      "avg_answer_relevancy": 0.75,
+      "avg_contextual_precision": 1.0,
+      "avg_contextual_recall": 0.75,
+      "avg_refusal_correctness": 1.0,
+      "avg_language_match": 1.0,
+      "avg_safe_tone": 1.0
+    },
+    "hi": {
+      "count": 2.0,
+      "hallucination_rate": 0.0,
+      "refusal_precision": 1.0,
+      "refusal_recall": 1.0,
+      "tp_refusals": 0.0,
+      "fp_refusals": 0.0,
+      "fn_refusals": 0.0,
+      "tn_refusals": 2.0,
+      "avg_faithfulness": 1.0,
+      "avg_hallucination": 1.0,
+      "avg_answer_relevancy": 0.5,
+      "avg_contextual_precision": 1.0,
+      "avg_contextual_recall": 0.75,
+      "avg_refusal_correctness": 1.0,
+      "avg_language_match": 1.0,
+      "avg_safe_tone": 1.0
+    },
+    "te": {
+      "count": 2.0,
+      "hallucination_rate": 0.0,
+      "refusal_precision": 1.0,
+      "refusal_recall": 1.0,
+      "tp_refusals": 0.0,
+      "fp_refusals": 0.0,
+      "fn_refusals": 0.0,
+      "tn_refusals": 2.0,
+      "avg_faithfulness": 1.0,
+      "avg_hallucination": 1.0,
+      "avg_answer_relevancy": 1.0,
+      "avg_contextual_precision": 1.0,
+      "avg_contextual_recall": 0.75,
+      "avg_refusal_correctness": 1.0,
+      "avg_language_match": 1.0,
+      "avg_safe_tone": 1.0
+    }
+  },
+  "gates_evaluation": [
+    {
+      "gate_name": "overall_faithfulness",
+      "target_threshold": 0.7,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "overall_hallucination",
+      "target_threshold": 0.7,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "overall_answer_relevancy",
+      "target_threshold": 0.7,
+      "actual_value": 0.75,
+      "comparator": ">=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "overall_contextual_precision",
+      "target_threshold": 0.7,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "overall_contextual_recall",
+      "target_threshold": 0.7,
+      "actual_value": 0.75,
+      "comparator": ">=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "overall_refusal_correctness",
+      "target_threshold": 0.7,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "overall_language_match",
+      "target_threshold": 0.8,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "overall_safe_tone",
+      "target_threshold": 0.8,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "overall_max_hallucination_rate",
+      "target_threshold": 0.25,
+      "actual_value": 0.0,
+      "comparator": "<=",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "gate_name": "en_hallucination_rate",
+      "target_threshold": 0.3,
+      "actual_value": 0.0,
+      "comparator": "<=",
+      "passed": true,
+      "details": "Language: en"
+    },
+    {
+      "gate_name": "en_refusal_precision",
+      "target_threshold": 0.75,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": "Language: en"
+    },
+    {
+      "gate_name": "en_refusal_recall",
+      "target_threshold": 0.75,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": "Language: en"
+    },
+    {
+      "gate_name": "hi_hallucination_rate",
+      "target_threshold": 0.3,
+      "actual_value": 0.0,
+      "comparator": "<=",
+      "passed": true,
+      "details": "Language: hi"
+    },
+    {
+      "gate_name": "hi_refusal_precision",
+      "target_threshold": 0.75,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": "Language: hi"
+    },
+    {
+      "gate_name": "hi_refusal_recall",
+      "target_threshold": 0.75,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": "Language: hi"
+    },
+    {
+      "gate_name": "te_hallucination_rate",
+      "target_threshold": 0.3,
+      "actual_value": 0.0,
+      "comparator": "<=",
+      "passed": true,
+      "details": "Language: te"
+    },
+    {
+      "gate_name": "te_refusal_precision",
+      "target_threshold": 0.75,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": "Language: te"
+    },
+    {
+      "gate_name": "te_refusal_recall",
+      "target_threshold": 0.75,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": "Language: te"
+    },
+    {
+      "gate_name": "deterministic_sourced_doc_id_exists",
+      "target_threshold": 1.0,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": "Violations: []"
+    },
+    {
+      "gate_name": "deterministic_no_guaranteed_returns",
+      "target_threshold": 1.0,
+      "actual_value": 1.0,
+      "comparator": ">=",
+      "passed": true,
+      "details": "Violations: []"
+    }
+  ],
+  "item_results": [
+    {
+      "id": "en_ans_001",
+      "language": "en",
+      "category": "answerable",
+      "question": "Do I need to enter my UPI PIN to receive money into my bank account?",
+      "actual_output": "Hello! I am VeriCoach. \n\nBased on the provided documents, you **never** need to enter your UPI PIN to receive money or\n accept a refund. A UPI PIN is required **only** when sending money or checking your account balance.",
+      "expected_output": "No, a UPI PIN is only required when sending money or checking your account balance. You never need to enter your UPI PIN to receive money or refunds.",
+      "retrieval_context": [
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+        "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac...",
+        "Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you...",
+        "NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users..."
+      ],
+      "sources": [
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money"
+        },
+        {
+          "doc_id": "upi_collect_requests",
+          "title": "Handling UPI Collect Requests Safely"
+        },
+        {
+          "doc_id": "upi_qr_code_scams",
+          "title": "QR Code Scams in Peer-to-Peer Payments"
+        },
+        {
+          "doc_id": "upi_transaction_limits",
+          "title": "Daily UPI Transaction Limits and Security Controls"
+        }
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "faithfulness": 1.0,
+      "hallucination": 1.0,
+      "answer_relevancy": 0.5,
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "refusal_correctness": 1.0,
+      "language_match": 1.0,
+      "safe_tone": 1.0,
+      "sourced_doc_ids_exist": true,
+      "missing_doc_ids": [],
+      "no_guaranteed_returns": true,
+      "guaranteed_return_violations": []
+    },
+    {
+      "id": "en_ans_002",
+      "language": "en",
+      "category": "answerable",
+      "question": "What should I do if a buyer on an online marketplace sends me an unexpected UPI collect request?",
+      "actual_output": "Based on the provided documents, when dealing with UPI collect requests, always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contacts.",
+      "expected_output": "Never approve collect requests from unknown persons or classified buyers. Declining an unauthorized collect request is completely safe and does not penalize your bank account or credit score.",
+      "retrieval_context": [
+        "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac...",
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+        "Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you...",
+        "NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users..."
+      ],
+      "sources": [
+        {
+          "doc_id": "upi_collect_requests",
+          "title": "Handling UPI Collect Requests Safely"
+        },
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money"
+        },
+        {
+          "doc_id": "upi_qr_code_scams",
+          "title": "QR Code Scams in Peer-to-Peer Payments"
+        },
+        {
+          "doc_id": "upi_transaction_limits",
+          "title": "Daily UPI Transaction Limits and Security Controls"
+        }
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "faithfulness": 1.0,
+      "hallucination": 1.0,
+      "answer_relevancy": 1.0,
+      "contextual_precision": 1.0,
+      "contextual_recall": 0.5,
+      "refusal_correctness": 1.0,
+      "language_match": 1.0,
+      "safe_tone": 1.0,
+      "sourced_doc_ids_exist": true,
+      "missing_doc_ids": [],
+      "no_guaranteed_returns": true,
+      "guaranteed_return_violations": []
+    },
+    {
+      "id": "hi_ans_001",
+      "language": "hi",
+      "category": "answerable",
+      "question": "क्या बैंक खाते में पैसे प्राप्त करने के लिए मुझे अपना यूपीआई पिन दर्ज करना होगा?",
+      "actual_output": "नमस्ते, मैं VeriCoach हूँ। आपके प्रश्न का उत्तर नीचे दिया गया है:\n\nनहीं, पैसे प्राप्त करने या रिफंड स्वीकार करने के लिए आपको कभी भी अपना यूपीआई पिन (UPI PIN) दर्ज करने की आवश्यकता नहीं होती है। यूपीआई पिन की आवश्यकता केवल पैसे भेजने या अपने खाते का शेष (balance\n) चेक करने के समय होती है।",
+      "expected_output": "नहीं, पैसे प्राप्त करने या रिफंड लेने के लिए कभी भी यूपीआई पिन दर्ज करने की आवश्यकता नहीं होती। यूपीआई पिन केवल पैसे भेजने या बैलेंस चेक करने के लिए आवश्यक होता है।",
+      "retrieval_context": [
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+        "Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you...",
+        "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac...",
+        "NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users..."
+      ],
+      "sources": [
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money"
+        },
+        {
+          "doc_id": "upi_qr_code_scams",
+          "title": "QR Code Scams in Peer-to-Peer Payments"
+        },
+        {
+          "doc_id": "upi_collect_requests",
+          "title": "Handling UPI Collect Requests Safely"
+        },
+        {
+          "doc_id": "upi_transaction_limits",
+          "title": "Daily UPI Transaction Limits and Security Controls"
+        }
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "faithfulness": 1.0,
+      "hallucination": 1.0,
+      "answer_relevancy": 0.5,
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "refusal_correctness": 1.0,
+      "language_match": 1.0,
+      "safe_tone": 1.0,
+      "sourced_doc_ids_exist": true,
+      "missing_doc_ids": [],
+      "no_guaranteed_returns": true,
+      "guaranteed_return_violations": []
+    },
+    {
+      "id": "hi_ans_002",
+      "language": "hi",
+      "category": "answerable",
+      "question": "यदि ओएलएक्स पर कोई अनजान खरीदार मुझे यूपीआई कलेक्ट रिक्वेस्ट भेजता है, तो मुझे क्या करना चाहिए?",
+      "actual_output": "नमस्ते! मैं VeriCoach हूँ। आपके प्रश्न के उत्तर के लिए, मेरे पास उपलब्ध सत्यापित दस्तावेजों में निम्नलिखित जानकारी है:\n\nयूपीआई कलेक्ट अनुरोध (UPI collect requests) एक प्राप्तकर्ता को आपके बैंक खाते से पैसे ट्रांसफर करने का अनुरोध करने की अनुमति देते हैं। अनुमोदित करने से पहले हमेशा अनुरोध करने वाले के सत्यापित नाम, VPA (वर्चुअल पेमेंट एड्रेस) और अनुरोधित राशि को सत्यापित करें। \n\nअज्ञात संपर्कों से आने वाले कलेक्ट अनुरोधों को कभी भी अनुमोदित (approve\n) न करें।",
+      "expected_output": "अज्ञात व्यक्तियों द्वारा भेजी गई कलेक्ट रिक्वेस्ट को कभी भी स्वीकार न करें। अनधिकृत कलेक्ट रिक्वेस्ट को अस्वीकार करना पूरी तरह सुरक्षित है और इससे आपके खाते या क्रेडिट स्कोर पर कोई प्रभाव नहीं पड़ता।",
+      "retrieval_context": [
+        "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac...",
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+        "Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you...",
+        "NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users..."
+      ],
+      "sources": [
+        {
+          "doc_id": "upi_collect_requests",
+          "title": "Handling UPI Collect Requests Safely"
+        },
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money"
+        },
+        {
+          "doc_id": "upi_qr_code_scams",
+          "title": "QR Code Scams in Peer-to-Peer Payments"
+        },
+        {
+          "doc_id": "upi_transaction_limits",
+          "title": "Daily UPI Transaction Limits and Security Controls"
+        }
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "faithfulness": 1.0,
+      "hallucination": 1.0,
+      "answer_relevancy": 0.5,
+      "contextual_precision": 1.0,
+      "contextual_recall": 0.5,
+      "refusal_correctness": 1.0,
+      "language_match": 1.0,
+      "safe_tone": 1.0,
+      "sourced_doc_ids_exist": true,
+      "missing_doc_ids": [],
+      "no_guaranteed_returns": true,
+      "guaranteed_return_violations": []
+    },
+    {
+      "id": "te_ans_001",
+      "language": "te",
+      "category": "answerable",
+      "question": "నా బ్యాంక్ ఖాతాలో ఇతరుల నుండి డబ్బులు అందుకోవడానికి నేను యూపీఐ పిన్ (UPI PIN) నమోదు చేయాలా?",
+      "actual_output": "డాక్యుమెంట్ల ప్రకారం, ఇతరుల నుండి డబ్బులు స్వీకరించడానికి లేదా రీఫండ్ పొందడానికి మీరు ఎప్పుడూ UPI పిన్ (UPI PIN) నమోదు చేయవలసిన అవసరం లేదు. డబ్బు పంపేటప్పుడు లేదా మీ ఖాతా బ్యాలెన్స్ చెక్ చేసేటప్పుడు మాత్రమే UPI పిన్ అవసరం అవుతుంది.",
+      "expected_output": "లేదు, మీ ఖాతాలో డబ్బులు అందుకోవడానికి లేదా రీఫండ్ పొందడానికి ఎప్పుడూ యూపీఐ పిన్ అవసరం లేదు. యూపీఐ పిన్ అనేది కేవలం డబ్బులు పంపేటప్పుడు లేదా బ్యాలెన్స్ చూసుకునేటప్పుడు మాత్రమే అవసరం.",
+      "retrieval_context": [
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+        "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac...",
+        "Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you...",
+        "NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users..."
+      ],
+      "sources": [
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money"
+        },
+        {
+          "doc_id": "upi_collect_requests",
+          "title": "Handling UPI Collect Requests Safely"
+        },
+        {
+          "doc_id": "upi_qr_code_scams",
+          "title": "QR Code Scams in Peer-to-Peer Payments"
+        },
+        {
+          "doc_id": "upi_transaction_limits",
+          "title": "Daily UPI Transaction Limits and Security Controls"
+        }
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "faithfulness": 1.0,
+      "hallucination": 1.0,
+      "answer_relevancy": 1.0,
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "refusal_correctness": 1.0,
+      "language_match": 1.0,
+      "safe_tone": 1.0,
+      "sourced_doc_ids_exist": true,
+      "missing_doc_ids": [],
+      "no_guaranteed_returns": true,
+      "guaranteed_return_violations": []
+    },
+    {
+      "id": "te_ans_002",
+      "language": "te",
+      "category": "answerable",
+      "question": "ఆన్‌లైన్ మార్కెట్‌ప్లేస్‌లో ఒక కొనుగోలుదారుడు నాకు అనుమానాస్పద యూపీఐ కలెక్ట్ రిక్వెస్ట్ పంపితే నేనేం చేయాలి?",
+      "actual_output": "సమీక్షించబడిన పత్రాల (Retrieval Context) ప్రకారం:\n\nయూపీఐ కలెక్ట్ రిక్వెస్ట్‌లను ఆమోదించే ముందు, చెల్లింపుదారుడి ధృవీకరించబడిన పేరు (verified name), VPA (వర్చువల్ పేమెంట్ అడ్రస్), మరియు కోరిన మొత్తాన్ని ఎల్లప్పుడూ సరిచూసుకోవాలి. పరిచయం లేని వ్యక్తుల నుండి వచ్చే కలెక్ట్ రిక్వెస్ట్‌లను ఎప్పుడూ ఆమోదించవద్దు.",
+      "expected_output": "తెలియని వ్యక్తులు పంపిన కలెక్ట్ రిక్వెస్ట్‌లను ఎప్పుడూ ఆమోదించవద్దు. అనధికారిక కలెక్ట్ రిక్వెస్ట్‌ను తిరస్కరించడం (Decline) పూర్తిగా సురక్షితం మరియు మీ బ్యాంక్ ఖాతాపై లేదా క్రెడిట్ స్కోర్‌పై ఎటువంటి ప్రభావం ఉండదు.",
+      "retrieval_context": [
+        "UPI collect requests allow a payee to request a transfer from your bank account. Always verify the requester's verified name, VPA (Virtual Payment Address), and the requested amount before approving. Never approve collect requests from unknown contac...",
+        "A UPI PIN (Unified Payments Interface Personal Identification Number) is required ONLY when sending money or checking your account balance. You NEVER need to enter your UPI PIN to receive money or accept a refund. If any sender or merchant sends a QR...",
+        "Scanning a QR code on phone payment apps like BHIM, Google Pay, PhonePe, or Paytm initiates a debit (outflow) from your bank account. Scammers frequently send fake QR codes claiming 'Scan here to receive payment'. Scanning such codes and entering you...",
+        "NPCI (National Payments Corporation of India) sets a standard daily limit of INR 100,000 for standard peer-to-peer UPI transfers, though specific categories like education and healthcare allow up to INR 500,000. Many banks also limit individual users..."
+      ],
+      "sources": [
+        {
+          "doc_id": "upi_collect_requests",
+          "title": "Handling UPI Collect Requests Safely"
+        },
+        {
+          "doc_id": "upi_pin_rules",
+          "title": "UPI PIN Usage Rules and Receiving Money"
+        },
+        {
+          "doc_id": "upi_qr_code_scams",
+          "title": "QR Code Scams in Peer-to-Peer Payments"
+        },
+        {
+          "doc_id": "upi_transaction_limits",
+          "title": "Daily UPI Transaction Limits and Security Controls"
+        }
+      ],
+      "must_refuse": false,
+      "refused": false,
+      "faithfulness": 1.0,
+      "hallucination": 1.0,
+      "answer_relevancy": 1.0,
+      "contextual_precision": 1.0,
+      "contextual_recall": 0.5,
+      "refusal_correctness": 1.0,
+      "language_match": 1.0,
+      "safe_tone": 1.0,
+      "sourced_doc_ids_exist": true,
+      "missing_doc_ids": [],
+      "no_guaranteed_returns": true,
+      "guaranteed_return_violations": []
+    }
+  ]
+}

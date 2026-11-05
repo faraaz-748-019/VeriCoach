@@ -316,33 +316,62 @@ def interpret_kappa(kappa: float) -> str:
     return "Almost perfect agreement"
 
 
+def bootstrap_cohen_kappa_ci(
+    y_true: list[str],
+    y_pred: list[str],
+    labels: list[str] = VALID_LABELS,
+    n_bootstraps: int = 1000,
+    seed: int = 42,
+) -> tuple[float, float]:
+    """Calculate 95% bootstrap confidence interval for Cohen's Kappa."""
+    if len(y_true) < 2:
+        return 0.0, 1.0
+    rng = random.Random(seed)
+    n = len(y_true)
+    kappas: list[float] = []
+    for _ in range(n_bootstraps):
+        indices = [rng.randint(0, n - 1) for _ in range(n)]
+        b_true = [y_true[i] for i in indices]
+        b_pred = [y_pred[i] for i in indices]
+        kappas.append(compute_cohen_kappa(b_true, b_pred, labels))
+    kappas.sort()
+    ci_lower = round(float(kappas[int(0.025 * n_bootstraps)]), 4)
+    ci_upper = round(float(kappas[int(0.975 * n_bootstraps)]), 4)
+    return ci_lower, ci_upper
+
+
 def compute_agreement_study(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    """Calculate overall and per-language accuracy, Cohen's Kappa, and confusion matrix."""
-    all_human = [r["human_label"] for r in rows]
+    """Calculate overall and per-language accuracy, Cohen's Kappa, bootstrap CI, and confusion matrix."""
+    # Support both human_label and user_label
+    all_human = [r.get("user_label") or r.get("human_label", "") for r in rows]
     all_judge = [r["judge_label"] for r in rows]
 
     total = len(rows)
     matches = sum(1 for h, j in zip(all_human, all_judge, strict=False) if h == j)
     overall_acc = round(matches / total, 4) if total > 0 else 0.0
     overall_kappa = compute_cohen_kappa(all_human, all_judge)
+    overall_ci_low, overall_ci_high = bootstrap_cohen_kappa_ci(all_human, all_judge)
 
     # Per-language breakdown
     by_lang: dict[str, dict[str, Any]] = {}
     for lang in ["en", "hi", "te"]:
         lang_rows = [r for r in rows if r["language"] == lang]
-        l_human = [r["human_label"] for r in lang_rows]
+        l_human = [r.get("user_label") or r.get("human_label", "") for r in lang_rows]
         l_judge = [r["judge_label"] for r in lang_rows]
         l_total = len(lang_rows)
         l_matches = sum(1 for h, j in zip(l_human, l_judge, strict=False) if h == j)
         l_acc = round(l_matches / l_total, 4) if l_total > 0 else 0.0
         l_kappa = compute_cohen_kappa(l_human, l_judge)
+        l_ci_low, l_ci_high = bootstrap_cohen_kappa_ci(l_human, l_judge)
 
         by_lang[lang] = {
             "sample_size": l_total,
             "matches": l_matches,
             "accuracy": l_acc,
             "cohen_kappa": l_kappa,
+            "ci_95": [l_ci_low, l_ci_high],
             "interpretation": interpret_kappa(l_kappa),
+            "note": "Per-language kappa on n=10 items has high variance and wide confidence intervals.",
         }
 
     # Confusion matrix
@@ -355,6 +384,7 @@ def compute_agreement_study(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "matches": matches,
             "accuracy": overall_acc,
             "cohen_kappa": overall_kappa,
+            "ci_95": [overall_ci_low, overall_ci_high],
             "interpretation": interpret_kappa(overall_kappa),
         },
         "by_language": by_lang,
